@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { currentPageVar, Pages } from '../../cache';
 import { Transition } from 'react-transition-group';
+import { useRouter } from 'next/router';
 
 const DURATION = 100;
 
@@ -36,20 +37,13 @@ const Button = styled.button<{ active: boolean }>`
     }
 `;
 
-const Underline = styled.div`
+const Underline = styled.div<{ active: boolean }>`
     background-color: ${(props) => props.theme.primary};
-    width: 0;
+    width: ${(props) => (props.active ? 'calc(100% - 32px)' : 0)};
     height: 1px;
     margin: auto;
     border-radius: 0.5px;
-    opacity: 0;
-    transition: width ${DURATION}ms ease-in-out,
-        opacity ${DURATION}ms ease-in-out;
 `;
-
-const transitionStyles: { [id: string]: React.CSSProperties } = {
-    entered: { width: 'calc(100% - 32px)', opacity: 1 }
-};
 
 interface Props {
     page: Pages;
@@ -57,24 +51,20 @@ interface Props {
 }
 
 function Link(props: Props): JSX.Element {
+    const router = useRouter();
+
     return (
         <Wrapper>
             <Button
-                onClick={() => currentPageVar(props.page)}
+                onClick={() => {
+                    router.push('/' + props.page);
+                }}
                 active={props.active}
             >
                 {props.page}
             </Button>
 
-            <Transition in={props.active} timeout={DURATION}>
-                {(state) => (
-                    <Underline
-                        style={{
-                            ...transitionStyles[state]
-                        }}
-                    />
-                )}
-            </Transition>
+            <Underline active={props.active} />
         </Wrapper>
     );
 }

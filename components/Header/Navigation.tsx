@@ -1,7 +1,6 @@
-import { useReactiveVar } from '@apollo/client';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { currentPageVar } from '../../cache';
 import Link from './Link';
 
 const Wrapper = styled.div`
@@ -17,20 +16,21 @@ const Wrapper = styled.div`
 `;
 
 function Navigation(): JSX.Element {
-    const currentPage = useReactiveVar(currentPageVar);
+    const router = useRouter();
+    const currentPage = router.pathname;
 
     return (
         <Wrapper>
-            <Link page="hjem" active={currentPage === 'hjem'} />
+            <Link page="hjem" active={currentPage === '/hjem'} />
             <Link
                 page="fototjenester"
-                active={currentPage === 'fototjenester'}
+                active={currentPage === '/fototjenester'}
             />
             <Link
                 page="kontorrekvisita"
-                active={currentPage === 'kontorrekvisita'}
+                active={currentPage === '/kontorrekvisita'}
             />
-            <Link page="diverse" active={currentPage === 'diverse'} />
+            <Link page="diverse" active={currentPage === '/diverse'} />
         </Wrapper>
     );
 }
