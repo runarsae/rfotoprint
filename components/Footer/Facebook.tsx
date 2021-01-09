@@ -3,18 +3,19 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    justify-self: center;
     width: 280px;
     height: 130px;
     grid-area: facebook;
 
     @media (min-width: 640px) {
-        margin: auto;
+        justify-self: left;
+        align-self: center;
     }
 
     @media (min-width: 1080px) {
         width: 320px;
+        justify-self: right;
     }
 `;
 
