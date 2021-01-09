@@ -16,7 +16,7 @@ body {
     height: 100%;
 }
 
-#root {
+#__next {
     display: flex;
     flex-direction: column;
     width: 100%;

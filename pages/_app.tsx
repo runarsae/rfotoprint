@@ -3,6 +3,7 @@ import Head from 'next/head';
 import '../styles/global.css';
 import { ThemeProvider } from 'styled-components';
 import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 
 const theme = {
     primary: '#AD8226',
@@ -17,15 +18,16 @@ const theme = {
 
 function App({ Component, pageProps }: AppProps) {
     return (
-        <div id="root">
+        <>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <ThemeProvider theme={theme}>
                 <Header />
                 <Component {...pageProps} />
+                <Footer />
             </ThemeProvider>
-        </div>
+        </>
     );
 }
 
