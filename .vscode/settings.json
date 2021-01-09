@@ -8,6 +8,6 @@
     "source.fixAll.eslint": true
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "prettier.configPath": "rfotoprint/.prettierrc.js"
+  "prettier.configPath": "../rfotoprint/.prettierrc.js"
   
 }
