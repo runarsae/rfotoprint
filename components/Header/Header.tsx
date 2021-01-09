@@ -5,7 +5,7 @@ import Navigation from './Navigation';
 
 const Wrapper = styled.div`
     background: ${(props) => props.theme.background.dark};
-    padding: 30px 20px;
+    padding: 40px 20px;
     width: 100%;
 
     @media (min-width: 520px) {

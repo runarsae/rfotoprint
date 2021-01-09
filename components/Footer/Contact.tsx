@@ -3,8 +3,15 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
     display: block;
-    margin: auto;
     grid-area: contact;
+
+    @media (min-width: 640px) {
+        justify-self: right;
+    }
+
+    @media (min-width: 1080px) {
+        justify-self: left;
+    }
 `;
 
 const Title = styled.h3`

@@ -16,9 +16,9 @@ const FooterBar = styled.div`
 `;
 
 const FooterContent = styled.div`
-    padding: 30px 20px;
+    padding: 40px 20px;
     width: 100%;
-    max-width: 1450px;
+    max-width: 1300px;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -38,7 +38,11 @@ const FooterContent = styled.div`
         grid-template-areas:
             'contact facebook'
             'profile profile';
-        gap: 40px 20px;
+        gap: 40px 40px;
+    }
+
+    @media (min-width: 768px) {
+        gap: 40px 100px;
     }
 
     @media (min-width: 1080px) {
