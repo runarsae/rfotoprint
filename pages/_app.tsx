@@ -2,8 +2,8 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/global.css';
 import { ThemeProvider } from 'styled-components';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import Header from '../components/header/Header';
+import Footer from '../components/footer/Footer';
 
 const theme = {
     primary: '#AD8226',
