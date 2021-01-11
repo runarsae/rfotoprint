@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { currentPageVar, Pages } from '../../cache';
 import { Transition } from 'react-transition-group';
 import { useRouter } from 'next/router';
 
@@ -39,11 +38,18 @@ const Button = styled.button<{ active: boolean }>`
 
 const Underline = styled.div<{ active: boolean }>`
     background-color: ${(props) => props.theme.primary};
-    width: ${(props) => (props.active ? 'calc(100% - 32px)' : 0)};
+    width: 0;
     height: 1px;
     margin: auto;
     border-radius: 0.5px;
+    transition: width ${DURATION}ms ease-in-out;
 `;
+
+const transitionStyles: { [id: string]: React.CSSProperties } = {
+    entered: { width: 'calc(100% - 32px)' }
+};
+
+type Pages = 'hjem' | 'fototjenester' | 'kontorrekvisita' | 'diverse';
 
 interface Props {
     page: Pages;
@@ -64,7 +70,16 @@ function Link(props: Props): JSX.Element {
                 {props.page}
             </Button>
 
-            <Underline active={props.active} />
+            <Transition in={props.active} timeout={DURATION}>
+                {(state) => (
+                    <Underline
+                        active={props.active}
+                        style={{
+                            ...transitionStyles[state]
+                        }}
+                    />
+                )}
+            </Transition>
         </Wrapper>
     );
 }
