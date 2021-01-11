@@ -8,11 +8,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    margin-top: 30px;
-
-    @media (min-width: 520px) {
-        margin-top: 40px;
-    }
+    margin-top: 10px;
 `;
 
 function Navigation(): JSX.Element {
