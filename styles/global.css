@@ -1,16 +1,8 @@
-@font-face {
-    font-family: 'Raleway';
-    src: url(/fonts/Raleway-Regular.ttf);
-}
-
-@font-face {
-    font-family: 'Raleway';
-    src: url(/fonts/Raleway-Bold.ttf);
-    font-weight: bold;
-}
+@import url('https://fonts.googleapis.com/css?family=Raleway:400');
+@import url('https://fonts.googleapis.com/css?family=Nunito:300&text=0123456789');
 
 * {
-    font-family: Raleway;
+    font-family: 'Nunito', 'Raleway', sans-serif;
     box-sizing: border-box;
 }
 

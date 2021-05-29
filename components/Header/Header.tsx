@@ -6,12 +6,7 @@ import Navigation from './Navigation';
 
 const Wrapper = styled.div`
     background: ${(props) => props.theme.background.dark};
-    padding: 40px 20px;
     width: 100%;
-
-    @media (min-width: 520px) {
-        padding: 40px;
-    }
 `;
 
 const Content = styled.div`
@@ -22,6 +17,11 @@ const Content = styled.div`
     justify-items: center;
     align-items: center;
     gap: 20px;
+    padding: 40px 20px;
+
+    @media (min-width: 520px) {
+        padding: 40px;
+    }
 
     @media (min-width: 830px) {
         justify-items: left;
@@ -38,11 +38,6 @@ const Logo = styled.div`
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-
-    @media (min-width: 520px) {
-        width: 200px;
-        height: 96.27px;
-    }
 `;
 
 function Header(): JSX.Element {

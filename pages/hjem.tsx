@@ -25,7 +25,6 @@ const Wrapper = styled.div`
     }
 `;
 
-const LandingText = styled.div``;
 
 const LandingImage = styled.div`
     position: relative;
@@ -51,7 +50,7 @@ export default function hjem() {
                 <title>Hjem - R Fotoprint</title>
             </Head>
             <Wrapper>
-                <LandingText>
+                <div>
                     <Title>Bilder, passfoto & kontorrekvisita</Title>
                     <Text>
                         Rossland Fotoprint ble etablert 24. januar 2020. Lorem
@@ -65,7 +64,7 @@ export default function hjem() {
                         <br />
                         <i>Hilsen Ann Elin</i>
                     </Text>
-                </LandingText>
+                </div>
                 <LandingImage>
                     <Image src="/img/landing.svg" layout="fill" quality={100} />
                 </LandingImage>
