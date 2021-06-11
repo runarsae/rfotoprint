@@ -1,13 +1,13 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.wordWrap": "bounded",
-  "editor.wordWrapColumn": 80,
-  "editor.rulers": [80],
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [100],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "prettier.configPath": "../rfotoprint/.prettierrc.js"
+  "prettier.configPath": "rfotoprint/.prettierrc.js"
   
 }
