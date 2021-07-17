@@ -57,7 +57,7 @@ export default function FotoServices() {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
     return (
-        <Section color="main" dense>
+        <Section color="main">
             <>
                 <Title align="center">Fototjenester</Title>
                 <Grid>

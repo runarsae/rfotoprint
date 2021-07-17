@@ -78,7 +78,7 @@ export default function Sidebar(props: Props) {
                 {(state) => (
                     <div ref={sidebarRef}>
                         <SidebarWrapper
-                            dense
+                            size="small"
                             style={{
                                 ...sidebarTransitionStyles[state]
                             }}

@@ -50,7 +50,7 @@ const CopyrightBar = styled.div`
 function Footer(): JSX.Element {
     return (
         <>
-            <Section color="dark" dense>
+            <Section color="dark">
                 <FooterContent>
                     <Contact />
                     <Profile />

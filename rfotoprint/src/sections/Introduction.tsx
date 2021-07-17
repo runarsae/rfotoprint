@@ -56,7 +56,7 @@ const LandingImageBack = styled.img`
 
 export default function Introduction() {
     return (
-        <Section color="light">
+        <Section color="light" size="large">
             <Wrapper>
                 <>
                     <div>
