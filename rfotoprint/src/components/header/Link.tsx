@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
+import { Sections } from '../../constants';
 
 const DURATION = 100;
 
@@ -24,14 +25,10 @@ const Button = styled.button`
     user-select: none;
 
     transition: color ${DURATION}ms ease-in-out;
-    color: #ffffff;
+    color: ${(props) => props.theme.title};
 
     &:hover {
         ${(props) => ({ color: props.theme.primary })};
-    }
-
-    @media (min-width: 520px) {
-        font-size: 18px;
     }
 `;
 
@@ -48,14 +45,14 @@ const transitionStyles: { [id: string]: React.CSSProperties } = {
     entered: { width: 'calc(100% - 32px)' }
 };
 
-type Pages = 'fototjenester' | 'kontorrekvisita' | 'diverse';
-
 interface Props {
-    page: Pages;
+    section: Sections;
 }
 
 function Link(props: Props): JSX.Element {
     const [isHovering, setIsHovering] = useState<boolean>(false);
+
+    const linkRef = useRef(null);
 
     return (
         <Wrapper>
@@ -64,12 +61,13 @@ function Link(props: Props): JSX.Element {
                 onMouseOut={() => setIsHovering(false)}
                 onClick={() => undefined}
             >
-                {props.page}
+                {props.section}
             </Button>
 
-            <Transition in={isHovering} timeout={DURATION}>
+            <Transition nodeRef={linkRef} in={isHovering} timeout={DURATION}>
                 {(state) => (
                     <Underline
+                        ref={linkRef}
                         style={{
                             ...transitionStyles[state]
                         }}

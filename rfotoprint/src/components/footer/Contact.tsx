@@ -63,7 +63,7 @@ const Link = styled.a`
 const Icon = styled.img`
     padding: 8px;
     width: 32px;
-    background-color: ${(props) => props.theme.background.dark};
+    background-color: ${(props) => props.theme.background.darker};
     border-radius: 50%;
     margin-left: auto;
     margin-right: auto;

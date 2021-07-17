@@ -1,25 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Section from '../common/Section';
 import Contact from './Contact';
 import Facebook from './Facebook';
 import Profile from './Profile';
 
-const Wrapper = styled.div`
-    width: 100%;
-    height: auto;
-    margin-top: auto;
-`;
-
-const FooterBar = styled.div`
-    background: ${(props) => props.theme.background.light};
-    width: 100%;
-`;
-
 const FooterContent = styled.div`
-    padding: 40px 20px;
-    width: 100%;
-    max-width: 1300px;
-    margin: auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -28,10 +14,6 @@ const FooterContent = styled.div`
         'facebook';
     gap: 60px;
     color: #ffffff;
-
-    @media (min-width: 520px) {
-        padding: 40px;
-    }
 
     @media (min-width: 640px) {
         grid-template-columns: repeat(2, 1fr);
@@ -55,7 +37,7 @@ const FooterContent = styled.div`
 const CopyrightBar = styled.div`
     width: 100%;
     padding: 10px 30px;
-    background: ${(props) => props.theme.background.dark};
+    background: ${(props) => props.theme.background.darker};
     color: #999999;
     text-align: center;
     font-size: 14px;
@@ -67,16 +49,16 @@ const CopyrightBar = styled.div`
 
 function Footer(): JSX.Element {
     return (
-        <Wrapper>
-            <FooterBar>
+        <>
+            <Section color="dark" dense>
                 <FooterContent>
                     <Contact />
                     <Profile />
                     <Facebook />
                 </FooterContent>
-            </FooterBar>
+            </Section>
             <CopyrightBar>Copyright &copy; {new Date().getFullYear()}, R Fotoprint</CopyrightBar>
-        </Wrapper>
+        </>
     );
 }
 

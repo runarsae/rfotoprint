@@ -1,67 +1,85 @@
 import styled from 'styled-components';
 import Title from '../components/common/Title';
 import Text from '../components/common/Text';
+import Section from '../components/common/Section';
 
 const Wrapper = styled.div`
-    padding: 40px 20px;
-    width: 100%;
-    max-width: 1300px;
-    margin: auto;
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
     gap: 20px;
 
-    @media (min-width: 520px) {
-        padding: max(4%, 100px) 40px;
-    }
-
     @media (min-width: 768px) {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 339px;
-        gap: 40px;
+        gap: 120px;
     }
 `;
 
-const LandingText = styled.div``;
+const LandingText = styled(Text)`
+    line-height: 1.5;
+`;
 
-const LandingImage = styled.img`
+const ImageContainer = styled.div`
     position: relative;
     justify-self: center;
     width: 100%;
-    max-height: 339px;
-    height: 339px;
+    padding-top: calc(339 / 550 * 100%);
 
     @media (min-width: 768px) {
         justify-self: right;
-        max-width: 500px;
-        max-height: 339px;
-        width: 100%;
-        height: 100%;
-        min-width: 350px;
     }
+`;
+
+const LandingImage = styled.img`
+    width: 100%;
+    height: 100%;
+    max-width: 435px;
+    justify-self: center;
+`;
+
+const LandingImageFront = styled.img`
+    position: absolute;
+    width: 60%;
+    height: 50%;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+`;
+
+const LandingImageBack = styled.img`
+    position: absolute;
+    width: 75%;
+    top: 0;
+    right: 0;
 `;
 
 export default function Introduction() {
     return (
-        <>
+        <Section color="light">
             <Wrapper>
-                <LandingText>
-                    <Title>Bilder, passfoto & kontorrekvisita</Title>
-                    <Text>
-                        Rossland Fotoprint ble etablert 24. januar 2020. Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Morbi pellentesque imperdiet purus, iaculis
-                        gravida ex. Duis eu dolor ut lacus interdum tempus vel et mi. In hac
-                        habitasse platea dictumst.
-                        <br />
-                        <br />
-                        Velkommen!
-                        <br />
-                        <i>Hilsen Ann Elin</i>
-                    </Text>
-                </LandingText>
-                <LandingImage src="/img/landing.svg" />
+                <>
+                    <div>
+                        <Title>Bilder, passfoto & kontorrekvisita</Title>
+                        <LandingText>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                            pellentesque imperdiet purus, iaculis gravida ex. Duis eu dolor ut lacus
+                            interdum tempus vel et mi.
+                            <br />
+                            <br />
+                            Velkommen!
+                            <br />
+                            <i>Hilsen Ann Elin</i>
+                        </LandingText>
+                    </div>
+
+                    <LandingImage src="/img/landing2.svg" alt="Rossland Fotoprint" />
+                    {/* <ImageContainer>
+                        <LandingImageBack src="/img/camera.jpg" />
+                        <LandingImageFront src="/img/photos2.jpg" />
+                    </ImageContainer> */}
+                </>
             </Wrapper>
-        </>
+        </Section>
     );
 }

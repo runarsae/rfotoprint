@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Wrapper from './Wrapper';
+import Section from './Section';
 import { Transition } from 'react-transition-group';
 
 const DURATION = 150;
@@ -21,11 +21,11 @@ const overlayTransitionStyles: { [id: string]: React.CSSProperties } = {
     entered: { opacity: 1 }
 };
 
-const SidebarWrapper = styled(Wrapper)`
+const SidebarWrapper = styled(Section)`
     position: fixed;
     top: 0;
     right: -500px;
-    background-color: ${(props) => props.theme.background.dark};
+    background-color: ${(props) => props.theme.background.darker};
     height: 100%;
     width: 100%;
     max-width: 500px !important;
@@ -39,35 +39,55 @@ const sidebarTransitionStyles: { [id: string]: React.CSSProperties } = {
 };
 
 interface Props {
+    children: JSX.Element;
     open: boolean;
     closeSidebar: () => void;
 }
 
-const Sidebar: FunctionComponent<Props> = (props) => (
-    <>
-        <Transition mountOnEnter unmountOnExit in={props.open} timeout={DURATION}>
-            {(state) => (
-                <Overlay
-                    onClick={() => props.closeSidebar()}
-                    style={{
-                        ...overlayTransitionStyles[state]
-                    }}
-                />
-            )}
-        </Transition>
+export default function Sidebar(props: Props) {
+    const sidebarRef = useRef(null);
+    const overlayRef = useRef(null);
 
-        <Transition mountOnEnter unmountOnExit in={props.open} timeout={DURATION}>
-            {(state) => (
-                <SidebarWrapper
-                    style={{
-                        ...sidebarTransitionStyles[state]
-                    }}
-                >
-                    {props.children}
-                </SidebarWrapper>
-            )}
-        </Transition>
-    </>
-);
+    return (
+        <>
+            <Transition
+                nodeRef={overlayRef}
+                mountOnEnter
+                unmountOnExit
+                in={props.open}
+                timeout={DURATION}
+            >
+                {(state) => (
+                    <Overlay
+                        ref={overlayRef}
+                        onClick={() => props.closeSidebar()}
+                        style={{
+                            ...overlayTransitionStyles[state]
+                        }}
+                    />
+                )}
+            </Transition>
 
-export default Sidebar;
+            <Transition
+                nodeRef={sidebarRef}
+                mountOnEnter
+                unmountOnExit
+                in={props.open}
+                timeout={DURATION}
+            >
+                {(state) => (
+                    <div ref={sidebarRef}>
+                        <SidebarWrapper
+                            dense
+                            style={{
+                                ...sidebarTransitionStyles[state]
+                            }}
+                        >
+                            {props.children}
+                        </SidebarWrapper>
+                    </div>
+                )}
+            </Transition>
+        </>
+    );
+}

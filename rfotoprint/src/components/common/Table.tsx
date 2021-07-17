@@ -13,7 +13,6 @@ const Table = styled.table`
     border-collapse: collapse;
     font-size: 16px;
     white-space: nowrap;
-    font-variant-numeric: normal;
 
     th,
     td {
@@ -25,7 +24,7 @@ const Table = styled.table`
     }
 
     tr:nth-child(even) {
-        background-color: ${(props) => props.theme.background.light};
+        background-color: ${(props) => props.theme.background.dark};
     }
 `;
 
