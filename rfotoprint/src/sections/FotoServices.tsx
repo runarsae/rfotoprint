@@ -6,6 +6,7 @@ import Section from '../components/common/Section';
 import Sidebar from '../components/common/Sidebar';
 import { TableWrapper, Table, Th, Td } from '../components/common/Table';
 import { useState } from 'react';
+import ButtonLink from '../components/common/ButtonLink';
 
 const Grid = styled.div`
     display: grid;
@@ -67,16 +68,18 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Utskrift</Undertitle>
                         <Text align="center" margin={0}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc
-                            justo sagittis suscipit ultrices.
+                            Utskrift av bilder fra e-post, minnebrikke, minnepenn, CD og mobil (husk
+                            ledning). <br /> Se&nbsp;
+                            <ButtonLink
+                                onClick={() => {
+                                    setSidebarOpen(true);
+                                }}
+                                closingCondition={sidebarOpen}
+                            >
+                                prisliste
+                            </ButtonLink>
+                            .
                         </Text>
-                        <button
-                            onClick={() => {
-                                setSidebarOpen(true);
-                            }}
-                        >
-                            Se prisliste
-                        </button>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
@@ -84,18 +87,16 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Passfoto</Undertitle>
                         <Text align="center" margin={0}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc
-                            justo sagittis suscipit ultrices.
+                            Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.
                         </Text>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/image-gallery.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Fremkalling</Undertitle>
+                        <Undertitle align="center">Forstørrelse</Undertitle>
                         <Text align="center" margin={0}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc
-                            justo sagittis suscipit ultrices.
+                            Forstørring av bilder opp til A3-størrelse.
                         </Text>
                     </GridItem>
                     <GridItem>
@@ -104,8 +105,7 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Scanning</Undertitle>
                         <Text align="center" margin={0}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc
-                            justo sagittis suscipit ultrices.
+                            Scanning av gamle og nye bilder.
                         </Text>
                     </GridItem>
                     <GridItem>
@@ -114,8 +114,7 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Forbedring</Undertitle>
                         <Text align="center" margin={0}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc
-                            justo sagittis suscipit ultrices.
+                            Fjerning av bretter, skader, striper og lignende.
                         </Text>
                     </GridItem>
                     <GridItem>
@@ -124,8 +123,8 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Dias</Undertitle>
                         <Text align="center" margin={0}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc
-                            justo sagittis suscipit ultrices.
+                            Overføring av lysbilder/dias til digitale <br />
+                            bilder i høy oppløsning.
                         </Text>
                     </GridItem>
                 </Grid>
