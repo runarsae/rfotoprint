@@ -7,13 +7,18 @@ const Wrapper = styled.div<{ color?: 'dark' | 'main' | 'light' }>`
     width: 100%;
 `;
 
-const Content = styled.div<{ dense?: Boolean }>`
-    padding: 80px 20px;
+const Content = styled.div<{ size?: 'large' | 'medium' | 'small' }>`
+    padding: ${(props) => (props.size == 'small' ? '40px 20px' : '80px 20px')};
     max-width: 1300px;
     margin: auto;
 
     @media (min-width: 520px) {
-        padding: ${(props) => (props.dense ? '80px 40px' : '120px 40px')};
+        padding: ${(props) =>
+            props.size == 'large'
+                ? '120px 40px'
+                : props.size == 'small'
+                ? '40px 40px'
+                : '80px 40px'};
     }
 `;
 
@@ -21,14 +26,14 @@ interface Props {
     children: JSX.Element;
     className?: string;
     color?: 'dark' | 'main' | 'light';
-    dense?: Boolean;
+    size?: 'large' | 'medium' | 'small';
     style?: React.CSSProperties;
 }
 
 function Section(props: Props) {
     return (
         <Wrapper className={props.className} color={props.color} style={props.style}>
-            <Content dense={props.dense}>{props.children}</Content>
+            <Content size={props.size}>{props.children}</Content>
         </Wrapper>
     );
 }

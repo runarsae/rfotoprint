@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Section from './Section';
 import { Transition } from 'react-transition-group';
+import { disableScroll, enableScroll } from '../../utils/toggleScroll';
 
-const DURATION = 150;
+const DURATION = 130;
 
 const Overlay = styled.div`
     display: block;
@@ -38,6 +39,32 @@ const sidebarTransitionStyles: { [id: string]: React.CSSProperties } = {
     entered: { right: 0 }
 };
 
+const CloseButton = styled.button`
+    position: absolute;
+    top: 50px;
+    right: 20px;
+
+    width: 20px;
+    height: 20px;
+
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
+
+    opacity: 1;
+    transition: opacity ${DURATION}ms ease-in-out;
+
+    :hover {
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    @media (min-width: 520px) {
+        right: 40px;
+    }
+`;
+
 interface Props {
     children: JSX.Element;
     open: boolean;
@@ -47,6 +74,14 @@ interface Props {
 export default function Sidebar(props: Props) {
     const sidebarRef = useRef(null);
     const overlayRef = useRef(null);
+
+    useEffect(() => {
+        if (props.open) {
+            disableScroll();
+        } else {
+            enableScroll();
+        }
+    }, [props.open]);
 
     return (
         <>
@@ -78,12 +113,17 @@ export default function Sidebar(props: Props) {
                 {(state) => (
                     <div ref={sidebarRef}>
                         <SidebarWrapper
-                            dense
+                            size="small"
                             style={{
                                 ...sidebarTransitionStyles[state]
                             }}
                         >
-                            {props.children}
+                            <>
+                                <CloseButton onClick={() => props.closeSidebar()}>
+                                    <img src="/img/close.svg" alt="Close" />
+                                </CloseButton>
+                                {props.children}
+                            </>
                         </SidebarWrapper>
                     </div>
                 )}
