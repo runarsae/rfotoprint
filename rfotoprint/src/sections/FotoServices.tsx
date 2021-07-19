@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Title from '../components/common/Title';
 import Undertitle from '../components/common/Undertitle';
@@ -5,7 +6,6 @@ import Text from '../components/common/Text';
 import Section from '../components/common/Section';
 import Sidebar from '../components/common/Sidebar';
 import { TableWrapper, Table, Th, Td } from '../components/common/Table';
-import { useState } from 'react';
 import ButtonLink from '../components/common/ButtonLink';
 
 const Grid = styled.div`
@@ -58,7 +58,7 @@ export default function FotoServices() {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
     return (
-        <Section color="main">
+        <Section name="Fototjenester" color="main">
             <>
                 <Title align="center">Fototjenester</Title>
                 <Grid>

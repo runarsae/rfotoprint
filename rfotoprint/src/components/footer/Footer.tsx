@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Section from '../common/Section';
 import Contact from './Contact';
@@ -50,7 +49,7 @@ const CopyrightBar = styled.div`
 function Footer(): JSX.Element {
     return (
         <>
-            <Section color="dark">
+            <Section name="Kontakt" color="dark">
                 <FooterContent>
                     <Contact />
                     <Profile />
