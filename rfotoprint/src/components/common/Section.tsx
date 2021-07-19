@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Element } from 'react-scroll';
 
 const Wrapper = styled.div<{ color?: 'dark' | 'main' | 'light' }>`
     background-color: ${(props) =>
@@ -25,6 +26,7 @@ const Content = styled.div<{ size?: 'large' | 'medium' | 'small' }>`
 interface Props {
     children: JSX.Element;
     className?: string;
+    name?: string;
     color?: 'dark' | 'main' | 'light';
     size?: 'large' | 'medium' | 'small';
     style?: React.CSSProperties;
@@ -32,9 +34,11 @@ interface Props {
 
 function Section(props: Props) {
     return (
-        <Wrapper className={props.className} color={props.color} style={props.style}>
-            <Content size={props.size}>{props.children}</Content>
-        </Wrapper>
+        <Element name={props.name ? props.name : ''}>
+            <Wrapper className={props.className} color={props.color} style={props.style}>
+                <Content size={props.size}>{props.children}</Content>
+            </Wrapper>
+        </Element>
     );
 }
 

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
+import { scroller } from 'react-scroll';
 import { Sections } from '../../constants';
 
 const DURATION = 100;
@@ -59,7 +60,12 @@ function Link(props: Props): JSX.Element {
             <Button
                 onMouseOver={() => setIsHovering(true)}
                 onMouseOut={() => setIsHovering(false)}
-                onClick={() => undefined}
+                onClick={() => {
+                    scroller.scrollTo(props.section.valueOf(), {
+                        duration: 1000,
+                        smooth: 'easeInOutQuad'
+                    });
+                }}
             >
                 {props.section}
             </Button>
