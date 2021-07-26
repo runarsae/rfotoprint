@@ -67,7 +67,7 @@ export default function FotoServices() {
                             <Icon src="/img/icons/printer.svg" />
                         </IconContainer>
                         <Undertitle align="center">Utskrift</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Text align="center">
                             Utskrift av bilder fra e-post, minnebrikke, minnepenn, CD og mobil (husk
                             ledning). <br /> Se&nbsp;
                             <ButtonLink
@@ -86,7 +86,7 @@ export default function FotoServices() {
                             <Icon src="/img/icons/camera.svg" />
                         </IconContainer>
                         <Undertitle align="center">Passfoto</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Text align="center">
                             Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.
                         </Text>
                     </GridItem>
@@ -95,25 +95,21 @@ export default function FotoServices() {
                             <Icon src="/img/icons/image-gallery.svg" />
                         </IconContainer>
                         <Undertitle align="center">Forstørrelse</Undertitle>
-                        <Text align="center" margin={0}>
-                            Forstørring av bilder opp til A3-størrelse.
-                        </Text>
+                        <Text align="center">Forstørring av bilder opp til A3-størrelse.</Text>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/scanner.svg" />
                         </IconContainer>
                         <Undertitle align="center">Scanning</Undertitle>
-                        <Text align="center" margin={0}>
-                            Scanning av gamle og nye bilder.
-                        </Text>
+                        <Text align="center">Scanning av gamle og nye bilder.</Text>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/edit-image.svg" />
                         </IconContainer>
                         <Undertitle align="center">Forbedring</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Text align="center">
                             Fjerning av bretter, skader, striper og lignende.
                         </Text>
                     </GridItem>
@@ -122,7 +118,7 @@ export default function FotoServices() {
                             <Icon src="/img/icons/movie.svg" />
                         </IconContainer>
                         <Undertitle align="center">Dias</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Text align="center">
                             Overføring av lysbilder/dias til digitale <br />
                             bilder i høy oppløsning.
                         </Text>

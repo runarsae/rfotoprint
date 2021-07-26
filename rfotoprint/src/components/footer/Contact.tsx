@@ -24,7 +24,7 @@ const Title = styled.h3`
 `;
 
 const Paragraph = styled.p`
-    color: #999999;
+    color: #9c9c9c;
     margin: 0 0 5px 0;
     text-align: center;
 
@@ -48,7 +48,7 @@ const ContactInformation = styled.div`
 `;
 
 const Link = styled.a`
-    color: #aaaaaa;
+    color: #9c9c9c;
     text-decoration: none;
     transition: color 0.15s;
     margin-top: 5px;
@@ -74,7 +74,7 @@ function Contact(): JSX.Element {
     return (
         <Wrapper>
             <Title>R Fotoprint</Title>
-            <Paragraph>Ta kontakt for avtale.</Paragraph>
+            <Paragraph>Ta kontakt for avtale og kjøp.</Paragraph>
             <ContactInformation>
                 <Icon src="/img/icons/phone.png" alt="Phone" />
                 <span>

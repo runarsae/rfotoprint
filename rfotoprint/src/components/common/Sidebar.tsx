@@ -16,6 +16,7 @@ const Overlay = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     transition: opacity ${DURATION}ms ease-in-out;
+    z-index: 10;
 `;
 
 const overlayTransitionStyles: { [id: string]: React.CSSProperties } = {
@@ -33,6 +34,7 @@ const SidebarWrapper = styled(Section)`
     transition: right ${DURATION}ms ease-in-out;
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 11;
 `;
 
 const sidebarTransitionStyles: { [id: string]: React.CSSProperties } = {
