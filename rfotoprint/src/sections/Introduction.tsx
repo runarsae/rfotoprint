@@ -20,17 +20,6 @@ const LandingText = styled(Text)`
     line-height: 1.5;
 `;
 
-const ImageContainer = styled.div`
-    position: relative;
-    justify-self: center;
-    width: 100%;
-    padding-top: calc(339 / 550 * 100%);
-
-    @media (min-width: 768px) {
-        justify-self: right;
-    }
-`;
-
 const LandingImage = styled.img`
     width: 100%;
     height: 100%;
@@ -38,33 +27,18 @@ const LandingImage = styled.img`
     justify-self: center;
 `;
 
-const LandingImageFront = styled.img`
-    position: absolute;
-    width: 60%;
-    height: 50%;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-`;
-
-const LandingImageBack = styled.img`
-    position: absolute;
-    width: 75%;
-    top: 0;
-    right: 0;
-`;
-
 export default function Introduction() {
     return (
-        <Section color="light" size="large">
+        <Section color="light" size="medium">
             <Wrapper>
                 <>
                     <div>
                         <Title>Bilder, passfoto & kontorrekvisita</Title>
                         <LandingText>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                            pellentesque imperdiet purus, iaculis gravida ex. Duis eu dolor ut lacus
-                            interdum tempus vel et mi.
+                            Jeg startet Rossland Fotoprint januar 2020 og kan tilby følgende
+                            tjenester: utskrift av bilder, passfoto, forstørring, skanning,
+                            forbedring, salg av rammer og kontorrekvisita. Ta kontakt for avtale
+                            eller kjøp.
                             <br />
                             <br />
                             Velkommen!
@@ -74,10 +48,6 @@ export default function Introduction() {
                     </div>
 
                     <LandingImage src="/img/landing4.svg" alt="Rossland Fotoprint" />
-                    {/* <ImageContainer>
-                        <LandingImageBack src="/img/camera.jpg" />
-                        <LandingImageFront src="/img/photos2.jpg" />
-                    </ImageContainer> */}
                 </>
             </Wrapper>
         </Section>
