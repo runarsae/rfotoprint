@@ -5,6 +5,8 @@ import multer from 'multer';
 import path from 'path';
 import { resolvers } from './resolvers';
 import { schema } from './schema';
+import { existsSync, unlinkSync } from 'fs';
+import { verifyUser } from './verifyUser';
 
 const DATABASE_URL = 'mongodb://127.0.0.1:27017';
 const SERVER_PORT = 4000;
@@ -37,15 +39,22 @@ new MongoClient(DATABASE_URL).connect(function (err, database) {
 // GraphQL endpoint
 app.use(
     '/graphql',
-    graphqlHTTP({
-        schema: schema,
-        rootValue: resolvers,
-        graphiql: true
+    graphqlHTTP((req, _res, _graphQLParams) => {
+        // const token = req.headers.authorization;
+
+        // verifyUser(token);
+
+        return {
+            schema: schema,
+            rootValue: resolvers,
+            graphiql: true,
+            context: {}
+        };
     })
 );
 
-// Endpoint to access files at 'uploads/supplies/'
-app.use(express.static(path.join(__dirname, 'uploads/supplies')));
+// Endpoint to access files stored at 'uploads/supplies/'
+app.use('/uploads/supplies', express.static(path.join(__dirname, 'uploads/supplies/')));
 
 // Set up storage of files at 'uploads/supplies/'
 const storage = multer.diskStorage({
@@ -61,5 +70,20 @@ const upload = multer({ storage: storage });
 
 // Endpoint for uploading images
 app.post('/upload', upload.single('image'), function (_req, res, _next) {
+    res.end();
+});
+
+app.delete('/uploads/supplies/:file', function (req, res) {
+    // TODO: Check if user is authenticated
+
+    const file = path.join(__dirname, 'uploads/supplies/' + req.params.file);
+
+    if (existsSync(file)) {
+        console.log('DELETE ' + file);
+        unlinkSync(file);
+    } else {
+        throw new Error(file + ' does not exist.');
+    }
+
     res.end();
 });
