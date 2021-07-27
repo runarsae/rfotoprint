@@ -6,7 +6,7 @@ import Text from '../components/common/Text';
 import Section from '../components/common/Section';
 import Sidebar from '../components/common/Sidebar';
 import { TableWrapper, Table, Th, Td } from '../components/common/Table';
-import ButtonLink from '../components/common/ButtonLink';
+import Button from '../components/common/Button';
 
 const Grid = styled.div`
     display: grid;
@@ -26,8 +26,15 @@ const Grid = styled.div`
 `;
 
 const GridItem = styled.div`
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 16px;
+    height: 100%;
+
+    @media (min-width: 640px) {
+        grid-template-rows: auto auto 1fr 34px;
+    }
 `;
 
 const IconContainer = styled.div`
@@ -54,6 +61,19 @@ const Image = styled.img`
     margin: 40px 0;
 `;
 
+const Description = styled(Text)`
+    margin: auto;
+`;
+
+const Price = styled(Text)`
+    margin: auto;
+    color: white;
+    display: block;
+    background-color: ${(props) => props.theme.primary};
+    padding: 4px 8px;
+    border-radius: 2px;
+`;
+
 export default function FotoServices() {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
@@ -66,66 +86,79 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/printer.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Utskrift</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Undertitle align="center" margin={0}>
+                            Utskrift
+                        </Undertitle>
+                        <Description align="center">
                             Utskrift av bilder fra e-post, minnebrikke, minnepenn, CD og mobil (husk
-                            ledning). <br /> Se&nbsp;
-                            <ButtonLink
-                                onClick={() => {
-                                    setSidebarOpen(true);
-                                }}
-                                closingCondition={sidebarOpen}
-                            >
-                                prisliste
-                            </ButtonLink>
-                            .
-                        </Text>
+                            ledning).
+                        </Description>
+                        <Button
+                            onClick={() => {
+                                setSidebarOpen(true);
+                            }}
+                        >
+                            Prisliste &#187;
+                        </Button>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/camera.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Passfoto</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Undertitle align="center" margin={0}>
+                            Passfoto
+                        </Undertitle>
+                        <Description align="center">
                             Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.
-                        </Text>
+                        </Description>
+                        <Price>Kr 250,-</Price>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/image-gallery.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Forstørrelse</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Undertitle align="center" margin={0}>
+                            Forstørring
+                        </Undertitle>
+                        <Description align="center">
                             Forstørring av bilder opp til A3-størrelse.
-                        </Text>
+                        </Description>
+                        <Price>Se prisliste for utskrift.</Price>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/scanner.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Scanning</Undertitle>
-                        <Text align="center" margin={0}>
-                            Scanning av gamle og nye bilder.
-                        </Text>
+                        <Undertitle align="center" margin={0}>
+                            Skanning
+                        </Undertitle>
+                        <Description align="center">Skanning av gamle og nye bilder.</Description>
+                        <Price>Kr 65,- pr. stk</Price>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/edit-image.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Forbedring</Undertitle>
-                        <Text align="center" margin={0}>
+                        <Undertitle align="center" margin={0}>
+                            Forbedring
+                        </Undertitle>
+                        <Description align="center">
                             Fjerning av bretter, skader, striper og lignende.
-                        </Text>
+                        </Description>
+                        <Price>Fra kr 65,-</Price>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
                             <Icon src="/img/icons/movie.svg" />
                         </IconContainer>
-                        <Undertitle align="center">Dias</Undertitle>
-                        <Text align="center" margin={0}>
-                            Overføring av lysbilder/dias til digitale <br />
+                        <Undertitle align="center" margin={0}>
+                            Lysbilder og negativer
+                        </Undertitle>
+                        <Description align="center">
+                            Overføring av lysbilder og negativer til digitale <br />
                             bilder i høy oppløsning.
-                        </Text>
+                        </Description>
+                        <Price>Pris etter avtale.</Price>
                     </GridItem>
                 </Grid>
 
@@ -176,31 +209,31 @@ export default function FotoServices() {
                                         <Td align="left" color="white">
                                             10x13 / 10x15
                                         </Td>
-                                        <Td>4 kr</Td>
-                                        <Td>3,5 kr</Td>
-                                        <Td>3 kr</Td>
-                                        <Td>2,5 kr</Td>
-                                        <Td>2 kr</Td>
+                                        <Td>4,-</Td>
+                                        <Td>3,50</Td>
+                                        <Td>3,-</Td>
+                                        <Td>2,50</Td>
+                                        <Td>2,-</Td>
                                     </tr>
                                     <tr>
                                         <Td align="left" color="white">
                                             10x20 / 10x21
                                         </Td>
-                                        <Td>10 kr</Td>
-                                        <Td>8 kr</Td>
-                                        <Td>7 kr</Td>
-                                        <Td>6 kr</Td>
-                                        <Td>5 kr</Td>
+                                        <Td>12,-</Td>
+                                        <Td>10,-</Td>
+                                        <Td>8,-</Td>
+                                        <Td>6,-</Td>
+                                        <Td>5,-</Td>
                                     </tr>
                                     <tr>
                                         <Td align="left" color="white">
                                             13x13 / 15x15
                                         </Td>
-                                        <Td>15 kr</Td>
-                                        <Td>10 kr</Td>
-                                        <Td>9 kr</Td>
-                                        <Td>8 kr</Td>
-                                        <Td>7 kr</Td>
+                                        <Td>20,-</Td>
+                                        <Td>15,-</Td>
+                                        <Td>10,-</Td>
+                                        <Td>9,-</Td>
+                                        <Td>8,-</Td>
                                     </tr>
                                 </tbody>
                             </Table>
@@ -239,43 +272,43 @@ export default function FotoServices() {
                                         <Td align="left" color="white">
                                             13x18 / 15x20
                                         </Td>
-                                        <Td>35 kr</Td>
-                                        <Td>30 kr</Td>
-                                        <Td>25 kr</Td>
-                                        <Td>20 kr</Td>
+                                        <Td>45,-</Td>
+                                        <Td>40,-</Td>
+                                        <Td>35,-</Td>
+                                        <Td>30,-</Td>
                                     </tr>
                                     <tr>
                                         <Td align="left" color="white">
                                             18x18 / 20x20
                                         </Td>
-                                        <Td>40 kr</Td>
-                                        <Td>35 kr</Td>
-                                        <Td>30 kr</Td>
-                                        <Td>25 kr</Td>
+                                        <Td>60,-</Td>
+                                        <Td>55,-</Td>
+                                        <Td>50,-</Td>
+                                        <Td>45,-</Td>
                                     </tr>
                                     <tr>
                                         <Td align="left" color="white">
                                             18x24
                                         </Td>
-                                        <Td>50 kr</Td>
-                                        <Td>45 kr</Td>
-                                        <Td>40 kr</Td>
-                                        <Td>35 kr</Td>
+                                        <Td>75,-</Td>
+                                        <Td>70,-</Td>
+                                        <Td>65,-</Td>
+                                        <Td>60,-</Td>
                                     </tr>
                                     <tr>
                                         <Td align="left" color="white">
                                             20x25 / 20x30
                                         </Td>
-                                        <Td>65 kr</Td>
-                                        <Td>60 kr</Td>
-                                        <Td>50 kr</Td>
-                                        <Td>40 kr</Td>
+                                        <Td>95,-</Td>
+                                        <Td>90,-</Td>
+                                        <Td>85,-</Td>
+                                        <Td>80,-</Td>
                                     </tr>
                                     <tr>
                                         <Td align="left" color="white">
                                             30x40
                                         </Td>
-                                        <Td>150 kr </Td>
+                                        <Td>175,-</Td>
                                     </tr>
                                 </tbody>
                             </Table>
