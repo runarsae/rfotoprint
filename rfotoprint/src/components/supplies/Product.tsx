@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import Text from '../common/Text';
 
+// TODO: Environment variable
+const BACKEND_URL = 'http://localhost:4000';
+
 const Content = styled.div`
     width: 100%;
     height: 100%;
@@ -76,7 +79,9 @@ export default function Product(props: Props) {
     const [imgUrl, setImgUrl] = useState<string | null>(null);
     const [imgNotFound, setImgNotFound] = useState<boolean>(false);
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        setImgUrl(BACKEND_URL + '/uploads/supplies/' + props.id + '.' + props.extension);
+    }, []);
 
     return (
         <div>
@@ -96,7 +101,7 @@ export default function Product(props: Props) {
                 <Name>{props.name}</Name>
             </ProductTitle>
 
-            <Inventory>På lager: {props.inventory} stk</Inventory>
+            {/* <Inventory>På lager: {props.inventory} stk</Inventory> */}
         </div>
     );
 }

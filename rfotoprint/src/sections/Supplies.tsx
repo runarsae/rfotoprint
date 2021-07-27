@@ -43,9 +43,9 @@ export default function Supplies() {
     useEffect(() => {}, []);
 
     return (
-        <Section name="Kontorrekvisita" color="light">
+        <Section name="Varer" color="light">
             <div>
-                <Title>Kontorrekvisita</Title>
+                <Title>Varer</Title>
                 <Grid>
                     {products ? (
                         Object.entries(products).map(([id, product]) => (
