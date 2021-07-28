@@ -1,19 +1,50 @@
 import { db } from './server';
-import { ObjectId } from 'mongodb';
+import { Document, ObjectId } from 'mongodb';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { config } from 'dotenv';
+import { existsSync, unlinkSync } from 'fs';
+import path from 'path';
+
+interface Result {
+    success: boolean;
+    message?: string;
+    data?: string | Document[] | ObjectId;
+}
+
+interface Context {
+    auth: boolean;
+    user?: {
+        id: string;
+        username: string;
+    };
+}
 
 config();
 
 export const resolvers = {
-    signUp: async (input: { username: string; password: string }) => {
+    signUp: async (
+        input: { username: string; password: string },
+        context: Context
+    ): Promise<Result> => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
+
+            if (context.auth) throw new Error('Already logged in.');
 
             const { username, password } = input;
 
-            // TODO: Check if username already exists
+            // Check if username already exists
+            const existingUser = await db.collection('users').findOne(
+                {
+                    username: username
+                },
+                {
+                    projection: { _id: 1 }
+                }
+            );
+
+            if (existingUser) throw new Error('Username already exists.');
 
             const hashed = await hash(password, 10);
 
@@ -22,15 +53,32 @@ export const resolvers = {
                 password: hashed
             });
 
-            return sign({ id: user.insertedId.toHexString() }, process.env.JWT_SECRET as string);
+            const token = sign(
+                { id: user.insertedId.toHexString(), username: username },
+                process.env.JWT_SECRET as string
+            );
+
+            return {
+                success: true,
+                message: 'Successfully signed up.',
+                data: token
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     },
 
-    signIn: async (input: { username: string; password: string }) => {
+    signIn: async (
+        input: { username: string; password: string },
+        context: Context
+    ): Promise<Result> => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
+
+            if (context.auth) throw new Error('Already logged in.');
 
             const { username, password } = input;
 
@@ -38,27 +86,33 @@ export const resolvers = {
                 username: username
             });
 
-            if (!user) {
-                // TODO: No user found for username
-                return '';
-            }
+            if (!user) throw new Error('Username does not exist.');
 
             const valid = await compare(password, user.password);
 
-            if (!valid) {
-                // TODO: Invalid password
-                return '';
-            }
+            if (!valid) throw new Error('Invalid password.');
 
-            return sign({ id: user._id }, process.env.JWT_SECRET as string);
+            const token = sign(
+                { id: user._id, username: username },
+                process.env.JWT_SECRET as string
+            );
+
+            return {
+                success: true,
+                message: 'Successfully signed in.',
+                data: token
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     },
 
-    products: async () => {
+    products: async (): Promise<Result> => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
 
             const products = await db
                 .collection('products')
@@ -66,59 +120,80 @@ export const resolvers = {
                 .toArray()
                 .then((result) => {
                     return result;
-                })
-                .catch((error) => {
-                    throw new Error(error);
                 });
 
-            return products;
+            return {
+                success: true,
+                data: products
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     },
 
-    createProduct: async (input: {
-        product: {
-            name: string;
-            inventory: number;
-            extension: string;
-            description?: string;
-            url?: string;
-        };
-    }) => {
+    createProduct: async (
+        input: {
+            product: {
+                name: string;
+                inventory: number;
+                extension: string;
+                description?: string;
+                url?: string;
+            };
+        },
+        context: Context
+    ): Promise<Result> => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
 
-            const { name, inventory, description, url } = input.product;
+            if (!context.auth) throw new Error('You must be logged in to create a product.');
+
+            const { name, inventory, extension, description, url } = input.product;
 
             const result = await db.collection('products').insertOne({
                 name: name,
                 inventory: inventory,
+                extension: extension,
                 ...(description && { description: description }),
                 ...(url && { url: url })
             });
 
-            return result.insertedId;
+            return {
+                success: true,
+                message: 'Product successully created.',
+                data: result.insertedId
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     },
 
-    editProduct: async (input: {
-        _id: string;
-        product: {
-            name: string;
-            inventory: number;
-            extension: string;
-            description?: string;
-            url?: string;
-        };
-    }) => {
+    editProduct: async (
+        input: {
+            _id: string;
+            product: {
+                name: string;
+                inventory: number;
+                extension: string;
+                description?: string;
+                url?: string;
+            };
+        },
+        context: Context
+    ): Promise<Result> => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
+
+            if (!context.auth) throw new Error('You must be logged in to edit a product.');
 
             const _id = new ObjectId(input._id);
-            const { name, inventory, description, url } = input.product;
+            const { name, inventory, extension, description, url } = input.product;
 
             await db.collection('products').updateOne(
                 { _id: _id },
@@ -126,6 +201,7 @@ export const resolvers = {
                     $set: {
                         name: name,
                         inventory: inventory,
+                        extension: extension,
                         ...(description && { description: description }),
                         ...(url && { url: url })
                     },
@@ -136,15 +212,24 @@ export const resolvers = {
                 }
             );
 
-            return _id;
+            return {
+                success: true,
+                message: 'Product successully edited.',
+                data: _id
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     },
 
-    editProductInventory: async (input: { _id: string; inventory: number }) => {
+    editProductInventory: async (input: { _id: string; inventory: number }, context: Context) => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
+
+            if (!context.auth) throw new Error('You must be logged in to edit a product.');
 
             const _id = new ObjectId(input._id);
             const inventory = input.inventory;
@@ -156,23 +241,58 @@ export const resolvers = {
                 }
             );
 
-            return _id;
+            return {
+                success: true,
+                message: 'Product successully edited.',
+                data: _id
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     },
 
-    deleteProduct: async (input: { _id: string }) => {
+    deleteProduct: async (input: { _id: string }, context: Context) => {
         try {
-            if (!db) throw new Error('Could not connect to MongoDB.');
+            if (!db) throw new Error('Could not connect to database.');
+
+            if (!context.auth) throw new Error('You must be logged in to delete a product.');
 
             const _id = new ObjectId(input._id);
 
-            await db.collection('products').deleteOne({ _id: _id });
+            const product = await db.collection('products').findOne({ _id: _id });
 
-            return _id;
+            if (product) {
+                // Delete from database
+                await db.collection('products').deleteOne({ _id: _id });
+
+                // Delete image
+                const file = path.join(
+                    __dirname,
+                    'uploads/supplies/' + _id + '.' + product.extension
+                );
+
+                if (existsSync(file)) {
+                    unlinkSync(file);
+                } else {
+                    throw new Error(file + ' does not exist.');
+                }
+            } else {
+                throw new Error('Product does not exist.');
+            }
+
+            return {
+                success: true,
+                message: 'Product successully deleted.',
+                data: _id
+            };
         } catch (error) {
-            throw error;
+            return {
+                success: false,
+                message: error.message
+            };
         }
     }
 };

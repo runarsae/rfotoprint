@@ -5,9 +5,9 @@ import multer from 'multer';
 import path from 'path';
 import { resolvers } from './resolvers';
 import { schema } from './schema';
-import { existsSync, unlinkSync } from 'fs';
-import { verifyUser } from './verifyUser';
+import { AuthRequest, isAuthenticated, requireAuth } from './auth';
 
+// TODO: Environment variable
 const DATABASE_URL = 'mongodb://127.0.0.1:27017';
 const SERVER_PORT = 4000;
 
@@ -19,11 +19,7 @@ export let db: undefined | Db = undefined;
 new MongoClient(DATABASE_URL).connect(function (err, database) {
     if (!database || err) {
         console.log('Could not connect to MongoDB.');
-        return;
-    }
-
-    if (err) {
-        console.error(err);
+        if (err) console.error(err);
         return;
     }
 
@@ -36,19 +32,25 @@ new MongoClient(DATABASE_URL).connect(function (err, database) {
     });
 });
 
+// Middleware to check for user authentication
+app.use(isAuthenticated);
+
 // GraphQL endpoint
 app.use(
     '/graphql',
-    graphqlHTTP((req, _res, _graphQLParams) => {
-        // const token = req.headers.authorization;
-
-        // verifyUser(token);
+    graphqlHTTP((request, _response, _graphQLParams) => {
+        const auth = (request as AuthRequest).user;
 
         return {
             schema: schema,
             rootValue: resolvers,
             graphiql: true,
-            context: {}
+            context: {
+                auth: auth ? true : false,
+                ...(auth && {
+                    user: auth
+                })
+            }
         };
     })
 );
@@ -69,21 +71,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Endpoint for uploading images
-app.post('/upload', upload.single('image'), function (_req, res, _next) {
-    res.end();
-});
-
-app.delete('/uploads/supplies/:file', function (req, res) {
-    // TODO: Check if user is authenticated
-
-    const file = path.join(__dirname, 'uploads/supplies/' + req.params.file);
-
-    if (existsSync(file)) {
-        console.log('DELETE ' + file);
-        unlinkSync(file);
-    } else {
-        throw new Error(file + ' does not exist.');
-    }
-
-    res.end();
+app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _next) {
+    res.json({
+        sucess: true,
+        message: 'Image uploaded.'
+    });
 });
