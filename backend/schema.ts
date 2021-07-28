@@ -18,20 +18,44 @@ export const schema = buildSchema(`
     input ProductInput {
         name: String!
         inventory: Int!
+        extension: String!
         description: String
         url: String
     }
 
+    interface Result {
+        success: Boolean!
+        message: String
+    }
+
+    type AuthResult implements Result {
+        success: Boolean!
+        message: String
+        data: String
+    }
+
+    type IdResult implements Result {
+        success: Boolean!
+        message: String
+        data: ID
+    }
+
+    type ProductsResult implements Result {
+        success: Boolean!
+        message: String
+        data: [Product]
+    }
+
     type Query {
-        products: [Product]!
+        products: ProductsResult!
     }
 
     type Mutation {
-        signUp(username: String!, password: String!): String!
-        signIn(username: String!, password: String!): String!
-        createProduct(product: ProductInput!): ID!
-        editProduct(_id: ID!, product: ProductInput!): ID!
-        editProductInventory(_id: ID!, inventory: Int!): ID!
-        deleteProduct(_id: ID!): ID!
+        signUp(username: String!, password: String!): AuthResult!
+        signIn(username: String!, password: String!): AuthResult!
+        createProduct(product: ProductInput!): IdResult!
+        editProduct(_id: ID!, product: ProductInput!): IdResult!
+        editProductInventory(_id: ID!, inventory: Int!): IdResult!
+        deleteProduct(_id: ID!): IdResult!
     }
 `);
