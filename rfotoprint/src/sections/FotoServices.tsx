@@ -123,7 +123,7 @@ export default function FotoServices() {
                         <Description align="center">
                             Forstørring av bilder opp til A3-størrelse.
                         </Description>
-                        <Price>Se prisliste for utskrift.</Price>
+                        <Price>Se prisliste for utskrift</Price>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
@@ -158,7 +158,7 @@ export default function FotoServices() {
                             Overføring av lysbilder og negativer til digitale <br />
                             bilder i høy oppløsning.
                         </Description>
-                        <Price>Pris etter avtale.</Price>
+                        <Price>Pris etter avtale</Price>
                     </GridItem>
                 </Grid>
 
