@@ -78,7 +78,7 @@ export const resolvers = {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
-            if (context.auth) throw new Error('Already logged in.');
+            if (context.auth) throw new Error('Allerede innlogget.');
 
             const { username, password } = input;
 
@@ -86,11 +86,11 @@ export const resolvers = {
                 username: username
             });
 
-            if (!user) throw new Error('Username does not exist.');
+            if (!user) throw new Error('Ugyldig brukernavn/passord.');
 
             const valid = await compare(password, user.password);
 
-            if (!valid) throw new Error('Invalid password.');
+            if (!valid) throw new Error('Ugyldig brukernavn/passord.');
 
             const token = sign(
                 { id: user._id, username: username },
@@ -99,7 +99,7 @@ export const resolvers = {
 
             return {
                 success: true,
-                message: 'Successfully signed in.',
+                message: 'Innlogging vellykket.',
                 data: token
             };
         } catch (error) {

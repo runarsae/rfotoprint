@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { graphqlHTTP } from 'express-graphql';
 import { Db, MongoClient } from 'mongodb';
 import multer from 'multer';
@@ -31,6 +32,9 @@ new MongoClient(DATABASE_URL).connect(function (err, database) {
         console.log(`Server is running on port: ${SERVER_PORT}`);
     });
 });
+
+// Enable CORS
+app.use(cors());
 
 // Middleware to check for user authentication
 app.use(isAuthenticated);
