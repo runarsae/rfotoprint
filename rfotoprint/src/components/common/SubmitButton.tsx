@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 const DURATION = 100;
 
-const StyledButton = styled.button`
+const StyledButton = styled.input`
     display: block;
+    width: 100%;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
@@ -25,12 +26,11 @@ const StyledButton = styled.button`
 `;
 
 interface Props {
-    children: string;
-    onClick: () => void;
+    value: string;
 }
 
-function Button(props: Props): JSX.Element {
-    return <StyledButton onClick={() => props.onClick()}>{props.children}</StyledButton>;
+function SubmitButton(props: Props): JSX.Element {
+    return <StyledButton type="submit" value={props.value} />;
 }
 
-export default Button;
+export default SubmitButton;
