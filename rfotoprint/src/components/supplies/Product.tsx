@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { IProduct } from '../../sections/Supplies';
 import Card from '../common/Card';
 import Text from '../common/Text';
-
-// TODO: Environment variable
-const BACKEND_URL = 'http://localhost:4000';
 
 const Content = styled.div`
     width: 100%;
@@ -67,30 +65,24 @@ const Inventory = styled(Text)`
 `;
 
 interface Props {
-    id: string;
-    name: string;
-    description: string;
-    url?: string;
-    inventory: number;
-    extension: string;
+    product: IProduct;
 }
 
 export default function Product(props: Props) {
-    const [imgUrl, setImgUrl] = useState<string | null>(null);
-    const [imgNotFound, setImgNotFound] = useState<boolean>(false);
-
-    useEffect(() => {
-        setImgUrl(BACKEND_URL + '/uploads/supplies/' + props.id + '.' + props.extension);
-    }, []);
-
     return (
         <div>
             <Card>
                 <Content>
-                    {imgUrl && <ProductImage src={imgUrl} alt={props.name} />}
-                    {imgNotFound && <div>ERROR: Bilde ikke funnet.</div>}
-                    {props.url && (
-                        <Link href={props.url} target="_blank" title="Til leverandør">
+                    <ProductImage
+                        src={
+                            process.env.REACT_APP_SERVER_ADDRESS +
+                            '/uploads/supplies/' +
+                            props.product.image
+                        }
+                        alt={props.product.name}
+                    />
+                    {props.product.url && (
+                        <Link href={props.product.url} target="_blank" title="Til leverandør">
                             <LinkImage src="/img/link.svg" />
                         </Link>
                     )}
@@ -98,7 +90,7 @@ export default function Product(props: Props) {
             </Card>
 
             <ProductTitle>
-                <Name>{props.name}</Name>
+                <Name>{props.product.name}</Name>
             </ProductTitle>
 
             {/* <Inventory>På lager: {props.inventory} stk</Inventory> */}

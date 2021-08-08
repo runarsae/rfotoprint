@@ -139,7 +139,7 @@ export const resolvers = {
             product: {
                 name: string;
                 inventory: number;
-                extension: string;
+                image: string;
                 description?: string;
                 url?: string;
             };
@@ -151,12 +151,12 @@ export const resolvers = {
 
             if (!context.auth) throw new Error('You must be logged in to create a product.');
 
-            const { name, inventory, extension, description, url } = input.product;
+            const { name, inventory, image, description, url } = input.product;
 
             const result = await db.collection('products').insertOne({
                 name: name,
                 inventory: inventory,
-                extension: extension,
+                image: image,
                 ...(description && { description: description }),
                 ...(url && { url: url })
             });
@@ -269,10 +269,7 @@ export const resolvers = {
                 await db.collection('products').deleteOne({ _id: _id });
 
                 // Delete image
-                const file = path.join(
-                    __dirname,
-                    'uploads/supplies/' + _id + '.' + product.extension
-                );
+                const file = path.join(__dirname, 'uploads/supplies/' + product.image);
 
                 if (existsSync(file)) {
                     unlinkSync(file);

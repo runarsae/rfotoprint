@@ -3,9 +3,30 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Section from '../components/common/Section';
 import Title from '../components/common/Title';
+import Text from '../components/common/Text';
 import Product from '../components/supplies/Product';
+import Button from '../components/common/Button';
+import Undertitle from '../components/common/Undertitle';
+import useWindowDimensions from '../utils/windowDimensions';
+import { PRODUCTS } from '../api/queries';
+import { useQuery } from 'graphql-hooks';
 
-const Grid = styled.div`
+const SupplierGrid = styled.div`
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 20px;
+    align-items: center;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+`;
+
+const SupplierButton = styled(Button)`
+    height: 35px;
+`;
+
+const SuppliesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -28,41 +49,66 @@ interface IProducts {
     [key: string]: IProduct;
 }
 
-interface IProduct {
+export interface IProduct {
     id: string;
     name: string;
     description: string;
     url?: string;
     inventory: number;
-    extension: string;
+    image: string;
 }
 
 export default function Supplies() {
+    const { width } = useWindowDimensions();
+
+    const { loading, error, data } = useQuery(PRODUCTS);
+
     const [products, setProducts] = useState<IProducts | null>(null);
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if (data && data.products.data) {
+            setProducts(data.products.data);
+        }
+    }, [data]);
 
     return (
         <Section name="Varer" color="light">
             <div>
                 <Title>Varer</Title>
-                <Grid>
-                    {products ? (
-                        Object.entries(products).map(([id, product]) => (
-                            <Product
-                                key={id}
-                                id={id}
-                                name={product.name}
-                                description={product.description}
-                                inventory={product.inventory}
-                                url={product.url}
-                                extension={product.extension}
-                            />
-                        ))
-                    ) : (
-                        <div>Ingen varer.</div>
-                    )}
-                </Grid>
+                <SupplierGrid>
+                    <Text>
+                        Kontorrekvisita kan skaffes ved behov. Gå til kontorkatalogen ved å klikke
+                        på knappen {width >= 768 ? 'til høyre' : 'nedenfor'} for å se hvilke varer
+                        jeg kan skaffe.
+                    </Text>
+                    <div>
+                        <SupplierButton
+                            onClick={() => {
+                                window.open(
+                                    'https://ekstranett.emo.no/kataloger/katalog1/',
+                                    '_blank'
+                                );
+                            }}
+                        >
+                            Til kontorkatalogen &#187;
+                        </SupplierButton>
+                    </div>
+                </SupplierGrid>
+
+                {!(loading || error) && (
+                    <>
+                        <Undertitle margin="40px 0 20px 0">Lagervarer</Undertitle>
+                        <SuppliesGrid>
+                            {products ? (
+                                Object.entries(products).map(([id, product]) => (
+                                    <Product key={id} product={product} />
+                                ))
+                            ) : (
+                                <div>Ingen varer.</div>
+                            )}
+                        </SuppliesGrid>
+                    </>
+                )}
             </div>
         </Section>
     );

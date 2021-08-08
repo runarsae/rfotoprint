@@ -10,7 +10,7 @@ export const schema = buildSchema(`
         _id: ID!
         name: String!
         inventory: Int!
-        extension: String!
+        image: String!
         description: String
         url: String
     }
@@ -18,7 +18,7 @@ export const schema = buildSchema(`
     input ProductInput {
         name: String!
         inventory: Int!
-        extension: String!
+        image: String!
         description: String
         url: String
     }

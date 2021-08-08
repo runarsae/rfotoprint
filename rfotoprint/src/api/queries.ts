@@ -10,7 +10,7 @@ export const PRODUCTS = `
                 _id
                 name
                 inventory
-                extension
+                image
                 description
                 url
             }
