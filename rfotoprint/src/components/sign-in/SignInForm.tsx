@@ -3,8 +3,10 @@ import { FormEvent, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { SIGN_IN } from '../../api/mutations';
-import SubmitButton from '../common/SubmitButton';
-import TextInput from '../common/TextInput';
+import Label from '../common/form/Label';
+import SubmitButton from '../common/form/SubmitButton';
+import TextInput from '../common/form/TextInput';
+import Error from '../common/form/Error';
 
 const Form = styled.form`
     width: 100%;
@@ -12,16 +14,6 @@ const Form = styled.form`
     display: grid;
     grid-template-columns: 100%;
     gap: 20px;
-`;
-
-const Label = styled.label`
-    display: block;
-    margin-bottom: 2px;
-`;
-
-const Error = styled.div`
-    font-size: 14px;
-    color: #e60f0f;
 `;
 
 function SignInForm() {
@@ -59,8 +51,6 @@ function SignInForm() {
         });
 
         if (data) {
-            console.log(data);
-
             if (!data.signIn.success) {
                 setErrorMessage(data.signIn.message);
                 return;
