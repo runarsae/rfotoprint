@@ -7,14 +7,7 @@ import Label from '../common/form/Label';
 import SubmitButton from '../common/form/SubmitButton';
 import TextInput from '../common/form/TextInput';
 import Error from '../common/form/Error';
-
-const Form = styled.form`
-    width: 100%;
-    max-width: 300px;
-    display: grid;
-    grid-template-columns: 100%;
-    gap: 20px;
-`;
+import { Form } from '../common/form/Form';
 
 function SignInForm() {
     const client = useContext(ClientContext);
@@ -57,7 +50,7 @@ function SignInForm() {
             }
 
             const token = data.signIn.data;
-            client.setHeader('Authorization', `${token}`);
+            client.setHeader('Authorization', token);
 
             localStorage.setItem('token', token);
 

@@ -7,6 +7,7 @@ import path from 'path';
 import { resolvers } from './resolvers';
 import { schema } from './schema';
 import { AuthRequest, isAuthenticated, requireAuth } from './auth';
+import fetch from 'node-fetch';
 
 // TODO: Environment variable
 const DATABASE_URL = 'mongodb://127.0.0.1:27017';
@@ -35,6 +36,8 @@ new MongoClient(DATABASE_URL).connect(function (err, database) {
 
 // Enable CORS
 app.use(cors());
+
+app.use(express.json());
 
 // Middleware to check for user authentication
 app.use(isAuthenticated);
@@ -68,16 +71,44 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/supplies/');
     },
     filename: function (req, file, cb) {
-        cb(null, req.body.id + path.extname(file.originalname));
+        cb(null, req.body.imageId + path.extname(file.originalname));
     }
 });
 
 const upload = multer({ storage: storage });
 
-// Endpoint for uploading images
-app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _next) {
-    res.json({
-        sucess: true,
-        message: 'Image uploaded.'
-    });
+// Endpoint for creating a new product and upload an image
+app.post('/create-product', requireAuth, upload.single('image'), function (req, res, _next) {
+    fetch('http://localhost:' + SERVER_PORT + '/graphql', {
+        method: 'POST',
+        headers: {
+            ...(req.headers.authorization && { Authorization: req.headers.authorization }),
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify({
+            query: `
+                mutation createProduct($product: ProductInput!) {
+                    createProduct(product: $product) {
+                        success
+                        message
+                        data
+                    }
+                }
+                `,
+            variables: `
+                {
+                    "product": {
+                        "name": "${req.body.name}",
+                        "inventory": ${req.body.inventory},
+                        "image": "${req.body.imageId + path.extname(req.file!.originalname)}"
+                    } 
+                }
+                `
+        })
+    })
+        .then((r) => r.json())
+        .then((data) => {
+            res.json(data);
+        });
 });

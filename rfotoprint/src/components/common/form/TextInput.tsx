@@ -9,6 +9,7 @@ const TextInput = styled.input`
     border: none;
     border-radius: 2px;
     background-color: #e4e4e4;
+    max-width: 300px;
 `;
 
 export default TextInput;

@@ -110,6 +110,18 @@ export const resolvers = {
         }
     },
 
+    verifyAuth: async (_: any, context: Context): Promise<Result> => {
+        if (context.auth) {
+            return {
+                success: true
+            };
+        }
+
+        return {
+            success: false
+        };
+    },
+
     products: async (): Promise<Result> => {
         try {
             if (!db) throw new Error('Could not connect to database.');

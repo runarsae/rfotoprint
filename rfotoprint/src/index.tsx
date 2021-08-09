@@ -15,13 +15,6 @@ const client = new GraphQLClient({
     url: process.env.REACT_APP_SERVER_ADDRESS + '/graphql'
 });
 
-// Check if authenticated
-const token = localStorage.getItem('token');
-
-if (token) {
-    client.setHeader('Authorization', token);
-}
-
 ReactDOM.render(
     <React.StrictMode>
         <ClientContext.Provider value={client}>

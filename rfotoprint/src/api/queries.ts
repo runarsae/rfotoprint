@@ -1,4 +1,15 @@
 /*
+ *  User authentication
+ */
+export const VERIFY_AUTH = `
+    {
+        verifyAuth {
+            success
+        }
+    }
+`;
+
+/*
  *  Products
  */
 export const PRODUCTS = `

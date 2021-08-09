@@ -5,6 +5,7 @@ const DURATION = 100;
 const StyledButton = styled.input`
     display: block;
     width: 100%;
+    max-width: 300px;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;

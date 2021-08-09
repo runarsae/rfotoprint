@@ -28,6 +28,11 @@ export const schema = buildSchema(`
         message: String
     }
 
+    type DefaultResult implements Result {
+        success: Boolean!
+        message: String
+    }
+
     type AuthResult implements Result {
         success: Boolean!
         message: String
@@ -47,6 +52,7 @@ export const schema = buildSchema(`
     }
 
     type Query {
+        verifyAuth: DefaultResult!
         products: ProductsResult!
     }
 
