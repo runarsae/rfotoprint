@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Section from '../components/common/Section';
 import AddProduct from '../components/panel/AddProduct';
 import MenuButton from '../components/panel/MenuButton';
-import { requireAuth, verifyAuth } from '../utils/auth';
+import { requireAuth } from '../utils/auth';
 
 const Grid = styled.div`
     display: grid;
@@ -32,9 +32,7 @@ const Content = styled.div`
 `;
 
 function Panel() {
-    const verified = verifyAuth();
-
-    console.log(verified);
+    requireAuth();
 
     return (
         <Section color="light">
