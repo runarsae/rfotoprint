@@ -1,7 +1,6 @@
 import { ClientContext, useMutation } from 'graphql-hooks';
 import { FormEvent, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { SIGN_IN } from '../../api/mutations';
 import Label from '../common/form/Label';
 import SubmitButton from '../common/form/SubmitButton';
@@ -68,6 +67,7 @@ function SignInForm() {
                     type="text"
                     id="username"
                     name="username"
+                    autoComplete="username"
                     onChange={(e) => {
                         setErrorMessage(null);
                         setUsername(e.target.value);
@@ -80,6 +80,7 @@ function SignInForm() {
                     type="password"
                     id="password"
                     name="password"
+                    autoComplete="current-password"
                     onChange={(e) => {
                         setErrorMessage(null);
                         setPassword(e.target.value);

@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useMutation } from 'graphql-hooks';
 import styled from 'styled-components';
+import { DELETE_PRODUCT } from '../../api/mutations';
 import { IProduct } from '../../sections/Supplies';
 import Card from '../common/Card';
+import { DeleteIcon, EditIcon } from '../common/Icons';
 import Text from '../common/Text';
 
 const Content = styled.div`
@@ -17,19 +19,27 @@ const ProductImage = styled.img`
     object-fit: contain;
 `;
 
-const Link = styled.a`
+const Actions = styled.div`
     position: absolute;
     bottom: 0;
     right: 0;
-    background-color: ${(props) => props.theme.background.dark};
+    display: grid;
+    grid-template-columns: 32px 32px;
 `;
 
-const LinkImage = styled.img`
+const Action = styled.button`
     display: block;
-    width: 32px;
+    padding: 4px;
     height: 32px;
-    padding: 8px;
-    filter: invert(100%);
+    width: 32px;
+    border: none;
+    background-color: ${(props) => props.theme.background.dark};
+    transition: background-color 100ms ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #636566;
+    }
 `;
 
 const ProductTitle = styled.div`
@@ -66,6 +76,8 @@ const Inventory = styled(Text)`
 
 interface Props {
     product: IProduct;
+    authenticated: boolean;
+    deleteProduct: () => void;
 }
 
 export default function Product(props: Props) {
@@ -81,10 +93,21 @@ export default function Product(props: Props) {
                         }
                         alt={props.product.name}
                     />
-                    {props.product.url && (
-                        <Link href={props.product.url} target="_blank" title="Til leverandør">
-                            <LinkImage src="/img/link.svg" />
-                        </Link>
+                    {props.authenticated && (
+                        <Actions>
+                            <Action
+                                title="Endre vare"
+                                onClick={() => {
+                                    // TODO: Go to /endre-vare/:id
+                                    return null;
+                                }}
+                            >
+                                <EditIcon fill="#FFFFFF" />
+                            </Action>
+                            <Action title="Slett vare" onClick={props.deleteProduct}>
+                                <DeleteIcon fill="#FFFFFF" />
+                            </Action>
+                        </Actions>
                     )}
                 </Content>
             </Card>

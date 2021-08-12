@@ -1,14 +1,9 @@
-import { ClientContext, GraphQLClient } from 'graphql-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './constants';
 import './global.css';
 import reportWebVitals from './reportWebVitals';
-import App from './routes/App';
-import Panel from './routes/Panel';
-import SignIn from './routes/SignIn';
+import App from './App';
+import { ClientContext, GraphQLClient } from 'graphql-hooks';
 
 // GraphQL client to execute API queries and mutations
 const client = new GraphQLClient({
@@ -18,21 +13,7 @@ const client = new GraphQLClient({
 ReactDOM.render(
     <React.StrictMode>
         <ClientContext.Provider value={client}>
-            <ThemeProvider theme={theme}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path="/logg-inn">
-                            <SignIn />
-                        </Route>
-                        <Route path="/panel">
-                            <Panel />
-                        </Route>
-                        <Route path="/">
-                            <App />
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
-            </ThemeProvider>
+            <App />
         </ClientContext.Provider>
     </React.StrictMode>,
     document.getElementById('root')

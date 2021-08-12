@@ -150,6 +150,7 @@ export const resolvers = {
         input: {
             product: {
                 name: string;
+                category: string;
                 inventory: number;
                 image: string;
                 description?: string;
@@ -163,10 +164,11 @@ export const resolvers = {
 
             if (!context.auth) throw new Error('You must be logged in to create a product.');
 
-            const { name, inventory, image, description, url } = input.product;
+            const { name, category, inventory, image, description, url } = input.product;
 
             const result = await db.collection('products').insertOne({
                 name: name,
+                category: category,
                 inventory: inventory,
                 image: image,
                 ...(description && { description: description }),
@@ -175,7 +177,7 @@ export const resolvers = {
 
             return {
                 success: true,
-                message: 'Product successully created.',
+                message: 'Varen ble lagt til.',
                 data: result.insertedId
             };
         } catch (error) {
@@ -191,8 +193,9 @@ export const resolvers = {
             _id: string;
             product: {
                 name: string;
+                category: string;
                 inventory: number;
-                extension: string;
+                image: string;
                 description?: string;
                 url?: string;
             };
@@ -205,15 +208,16 @@ export const resolvers = {
             if (!context.auth) throw new Error('You must be logged in to edit a product.');
 
             const _id = new ObjectId(input._id);
-            const { name, inventory, extension, description, url } = input.product;
+            const { name, category, inventory, image, description, url } = input.product;
 
             await db.collection('products').updateOne(
                 { _id: _id },
                 {
                     $set: {
                         name: name,
+                        category: category,
                         inventory: inventory,
-                        extension: extension,
+                        image: image,
                         ...(description && { description: description }),
                         ...(url && { url: url })
                     },

@@ -4,7 +4,7 @@ import FotoServices from '../sections/FotoServices';
 import Introduction from '../sections/Introduction';
 import Supplies from '../sections/Supplies';
 
-function App() {
+function Index() {
     return (
         <>
             <Header />
@@ -16,4 +16,4 @@ function App() {
     );
 }
 
-export default App;
+export default Index;

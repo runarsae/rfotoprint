@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Section from '../components/common/Section';
@@ -9,7 +9,9 @@ import Button from '../components/common/Button';
 import Undertitle from '../components/common/Undertitle';
 import useWindowDimensions from '../utils/windowDimensions';
 import { PRODUCTS } from '../api/queries';
-import { useQuery } from 'graphql-hooks';
+import { useMutation, useQuery } from 'graphql-hooks';
+import { AuthContext } from '../utils/auth';
+import { DELETE_PRODUCT } from '../api/mutations';
 
 const SupplierGrid = styled.div`
     display: grid;
@@ -50,7 +52,7 @@ interface IProducts {
 }
 
 export interface IProduct {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     url?: string;
@@ -59,9 +61,12 @@ export interface IProduct {
 }
 
 export default function Supplies() {
+    const auth = useContext(AuthContext);
+
     const { width } = useWindowDimensions();
 
     const { loading, error, data } = useQuery(PRODUCTS);
+    const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
     const [products, setProducts] = useState<IProducts | null>(null);
 
@@ -101,7 +106,14 @@ export default function Supplies() {
                         <SuppliesGrid>
                             {products ? (
                                 Object.entries(products).map(([id, product]) => (
-                                    <Product key={id} product={product} />
+                                    <Product
+                                        key={id}
+                                        product={product}
+                                        authenticated={auth}
+                                        deleteProduct={() =>
+                                            deleteProduct({ variables: { _id: product._id } })
+                                        }
+                                    />
                                 ))
                             ) : (
                                 <div>Ingen varer.</div>

@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
+import { BoxIcon, LogoutIcon, TagIcon } from '../components/common/Icons';
 import Section from '../components/common/Section';
 import AddProduct from '../components/panel/AddProduct';
 import MenuButton from '../components/panel/MenuButton';
@@ -34,14 +36,18 @@ const Content = styled.div`
 function Panel() {
     requireAuth();
 
+    const theme = useContext(ThemeContext);
+
+    const fill = theme.text;
+
     return (
         <Section color="light">
             <Grid>
                 <Menu>
                     <Logo src="/img/logo_dark.png" alt="Rossland Fotoprint" />
-                    <MenuButton text="Lagervarer" icon="/img/icons/panel/box.png"></MenuButton>
-                    <MenuButton text="Priser" icon="/img/icons/panel/price.png"></MenuButton>
-                    <MenuButton text="Logg ut" icon="/img/icons/panel/sign-out.png"></MenuButton>
+                    <MenuButton text="Ny vare" icon={<BoxIcon fill={fill} />}></MenuButton>
+                    <MenuButton text="Endre priser" icon={<TagIcon fill={fill} />}></MenuButton>
+                    <MenuButton text="Logg ut" icon={<LogoutIcon fill={fill} />}></MenuButton>
                 </Menu>
                 <Content>
                     <AddProduct />

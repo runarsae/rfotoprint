@@ -3,7 +3,6 @@ import SignInForm from '../components/sign-in/SignInForm';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { verifyAuth } from '../utils/auth';
 
 const Content = styled.div`
     display: flex;
@@ -22,7 +21,6 @@ function SignIn() {
     const history = useHistory();
 
     useEffect(() => {
-        // TODO: If token is set, verify it and redirect to panel, else clear it
         if (localStorage.getItem('token')) {
             history.push('/panel');
         }

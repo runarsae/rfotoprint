@@ -70,45 +70,14 @@ const storage = multer.diskStorage({
     destination: function (_req, _file, cb) {
         cb(null, 'uploads/supplies/');
     },
-    filename: function (req, file, cb) {
-        cb(null, req.body.imageId + path.extname(file.originalname));
+    filename: function (req, _file, cb) {
+        cb(null, req.body.imageId);
     }
 });
 
 const upload = multer({ storage: storage });
 
-// Endpoint for creating a new product and upload an image
-app.post('/create-product', requireAuth, upload.single('image'), function (req, res, _next) {
-    fetch('http://localhost:' + SERVER_PORT + '/graphql', {
-        method: 'POST',
-        headers: {
-            ...(req.headers.authorization && { Authorization: req.headers.authorization }),
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify({
-            query: `
-                mutation createProduct($product: ProductInput!) {
-                    createProduct(product: $product) {
-                        success
-                        message
-                        data
-                    }
-                }
-                `,
-            variables: `
-                {
-                    "product": {
-                        "name": "${req.body.name}",
-                        "inventory": ${req.body.inventory},
-                        "image": "${req.body.imageId + path.extname(req.file!.originalname)}"
-                    } 
-                }
-                `
-        })
-    })
-        .then((r) => r.json())
-        .then((data) => {
-            res.json(data);
-        });
+// Endpoint for uploading an image
+app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _next) {
+    res.end();
 });

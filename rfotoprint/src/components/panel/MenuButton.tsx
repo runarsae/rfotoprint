@@ -8,12 +8,12 @@ const Button = styled.button`
     text-align: left;
     width: 100%;
     max-width: 300px;
-    font-size: 14px;
-    text-transform: uppercase;
+    font-size: 18px;
+    //text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
     background-color: transparent;
-    color: #737373;
+    color: ${(props) => props.theme.text};
     border: none;
     cursor: pointer;
     outline: 0;
@@ -26,21 +26,15 @@ const Button = styled.button`
     }
 `;
 
-const Icon = styled.img`
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-`;
-
 interface Props {
     text: string;
-    icon: string;
+    icon: JSX.Element;
 }
 
 function MenuButton(props: Props) {
     return (
         <Button>
-            <Icon src={props.icon} />
+            {props.icon}
             {props.text}
         </Button>
     );

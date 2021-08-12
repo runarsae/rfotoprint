@@ -17,6 +17,7 @@ export const schema = buildSchema(`
 
     input ProductInput {
         name: String!
+        category: String!
         inventory: Int!
         image: String!
         description: String

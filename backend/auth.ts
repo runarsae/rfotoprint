@@ -47,7 +47,7 @@ export const requireAuth = (req: AuthRequest, res: Response, next: NextFunction)
     } else {
         res.json({
             sucess: false,
-            message: 'Please login to continue'
+            message: 'Login required.'
         });
     }
 };
