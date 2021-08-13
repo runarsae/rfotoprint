@@ -16,6 +16,16 @@ function App() {
                         <Route path="/logg-inn">
                             <SignIn />
                         </Route>
+                        <Route
+                            path="/logg-ut"
+                            render={({ history }) => {
+                                if (localStorage.getItem('token')) {
+                                    localStorage.removeItem('token');
+                                }
+                                history.push('/');
+                                return <></>;
+                            }}
+                        />
                         <Route path="/">
                             <Index />
                         </Route>
