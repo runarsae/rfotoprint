@@ -1,6 +1,4 @@
-import { useMutation } from 'graphql-hooks';
 import styled from 'styled-components';
-import { DELETE_PRODUCT } from '../../api/mutations';
 import { IProduct } from '../../sections/Supplies';
 import Card from '../common/Card';
 import { DeleteIcon, EditIcon } from '../common/Icons';
@@ -77,6 +75,7 @@ const Inventory = styled(Text)`
 interface Props {
     product: IProduct;
     authenticated: boolean;
+    editProduct: () => void;
     deleteProduct: () => void;
 }
 
@@ -95,13 +94,7 @@ export default function Product(props: Props) {
                     />
                     {props.authenticated && (
                         <Actions>
-                            <Action
-                                title="Endre vare"
-                                onClick={() => {
-                                    // TODO: Go to /endre-vare/:id
-                                    return null;
-                                }}
-                            >
+                            <Action title="Endre vare" onClick={props.editProduct}>
                                 <EditIcon fill="#FFFFFF" />
                             </Action>
                             <Action title="Slett vare" onClick={props.deleteProduct}>

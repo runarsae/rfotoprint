@@ -9,8 +9,9 @@ export const schema = buildSchema(`
     type Product {
         _id: ID!
         name: String!
-        inventory: Int!
+        category: String!
         image: String!
+        inventory: Int
         description: String
         url: String
     }
@@ -18,8 +19,8 @@ export const schema = buildSchema(`
     input ProductInput {
         name: String!
         category: String!
-        inventory: Int!
         image: String!
+        inventory: Int
         description: String
         url: String
     }
@@ -52,9 +53,16 @@ export const schema = buildSchema(`
         data: [Product]
     }
 
+    type ProductResult implements Result {
+        success: Boolean!
+        message: String
+        data: Product
+    }
+
     type Query {
         verifyAuth: DefaultResult!
         products: ProductsResult!
+        product(id: ID!): ProductResult!
     }
 
     type Mutation {

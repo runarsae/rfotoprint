@@ -9,13 +9,12 @@ import Title from '../common/Title';
 import axios from 'axios';
 import Confirm from '../common/form/Confirm';
 import { CREATE_PRODUCT } from '../../api/mutations';
-import NumberInput from '../common/form/NumberInput';
 
 function AddProduct() {
     const [name, setName] = useState<string>('');
     const [image, setImage] = useState<File | ''>('');
     const [category, setCategory] = useState<string>('office-supplies');
-    const [inventory, setInventory] = useState<number | ''>('');
+    // const [inventory, setInventory] = useState<number | ''>('');
 
     const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -37,13 +36,13 @@ function AddProduct() {
             return;
         }
 
-        if (!inventory) {
-            setErrorMessage('Vennligst fyll inn lagerbeholdning.');
-            return;
-        }
+        // if (!inventory) {
+        //     setErrorMessage('Vennligst fyll inn lagerbeholdning.');
+        //     return;
+        // }
 
         // E.g., 12938232323.png
-        const imageId = Date.now().toString() + image.name.slice(image.name.indexOf('.'));
+        const imageId = Date.now().toString() + image.name.slice(image.name.lastIndexOf('.'));
 
         const formData = new FormData();
 
@@ -65,7 +64,7 @@ function AddProduct() {
                         product: {
                             name: name,
                             category: category,
-                            inventory: inventory,
+                            // inventory: inventory,
                             image: imageId
                         }
                     }
@@ -82,7 +81,7 @@ function AddProduct() {
                     setImage('');
                     imageInputRef!.current!.value = '';
                     setCategory('office-supplies');
-                    setInventory('');
+                    // setInventory('');
                     setConfirmMessage('Varen ble lagt til.');
                 } else {
                     setErrorMessage('Systemfeil: Varen ble ikke lagt til.');
@@ -113,6 +112,7 @@ function AddProduct() {
                 </div>
                 <div>
                     <Label htmlFor="image">Bilde</Label>
+                    {image && <img src={URL.createObjectURL(image)} alt="Product" />}
                     <input
                         type="file"
                         id="image"
@@ -151,7 +151,7 @@ function AddProduct() {
                         <option value="frames">Rammer</option>
                     </select>
                 </div>
-                <div>
+                {/* <div>
                     <Label htmlFor="inventory">Lagerbeholdning</Label>
                     <NumberInput
                         type="number"
@@ -164,7 +164,7 @@ function AddProduct() {
                             setInventory(parseInt(e.target.value));
                         }}
                     />
-                </div>
+                </div> */}
                 {errorMessage && <Error>{errorMessage}</Error>}
                 {confirmMessage && <Confirm>{confirmMessage}</Confirm>}
                 <SubmitButton value="Legg til vare" />

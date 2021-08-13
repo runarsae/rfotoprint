@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TextInput = styled.input<{ dark?: boolean }>`
+const Select = styled.select<{ dark?: boolean }>`
     display: block;
     width: 100%;
     padding: 14px;
@@ -10,6 +10,7 @@ const TextInput = styled.input<{ dark?: boolean }>`
     border-radius: 2px;
     color: ${(props) => (props.dark ? 'white' : 'black')};
     background-color: ${(props) => (props.dark ? '#404040' : '#e4e4e4')};
+    cursor: pointer;
 `;
 
-export default TextInput;
+export default Select;

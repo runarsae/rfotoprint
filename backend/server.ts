@@ -7,7 +7,7 @@ import path from 'path';
 import { resolvers } from './resolvers';
 import { schema } from './schema';
 import { AuthRequest, isAuthenticated, requireAuth } from './auth';
-import fetch from 'node-fetch';
+import { existsSync, unlinkSync } from 'fs';
 
 // TODO: Environment variable
 const DATABASE_URL = 'mongodb://127.0.0.1:27017';
@@ -79,5 +79,18 @@ const upload = multer({ storage: storage });
 
 // Endpoint for uploading an image
 app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _next) {
+    res.end();
+});
+
+// Endpoint for deleting an image
+app.delete('/uploads/supplies/:imageId', requireAuth, function (req, res, _next) {
+    const file = path.join(__dirname, 'uploads/supplies/' + req.params.imageId);
+
+    if (existsSync(file)) {
+        unlinkSync(file);
+    } else {
+        throw new Error(file + ' does not exist.');
+    }
+
     res.end();
 });

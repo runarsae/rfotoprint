@@ -12,6 +12,8 @@ import { PRODUCTS } from '../api/queries';
 import { useMutation, useQuery } from 'graphql-hooks';
 import { AuthContext } from '../utils/auth';
 import { DELETE_PRODUCT } from '../api/mutations';
+import Sidebar from '../components/common/Sidebar';
+import EditProduct from '../components/panel/EditProduct';
 
 const SupplierGrid = styled.div`
     display: grid;
@@ -63,6 +65,9 @@ export interface IProduct {
 export default function Supplies() {
     const auth = useContext(AuthContext);
 
+    const [editProductId, setEditProductId] = useState<string>();
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
     const { width } = useWindowDimensions();
 
     const { loading, error, data } = useQuery(PRODUCTS);
@@ -78,7 +83,7 @@ export default function Supplies() {
 
     return (
         <Section name="Varer" color="light">
-            <div>
+            <>
                 <Title>Varer</Title>
                 <SupplierGrid>
                     <Text>
@@ -110,9 +115,14 @@ export default function Supplies() {
                                         key={id}
                                         product={product}
                                         authenticated={auth}
-                                        deleteProduct={() =>
-                                            deleteProduct({ variables: { _id: product._id } })
-                                        }
+                                        editProduct={() => {
+                                            setEditProductId(product._id);
+                                            setSidebarOpen(true);
+                                        }}
+                                        deleteProduct={() => {
+                                            deleteProduct({ variables: { _id: product._id } });
+                                            // TODO: Refresh products
+                                        }}
                                     />
                                 ))
                             ) : (
@@ -121,7 +131,17 @@ export default function Supplies() {
                         </SuppliesGrid>
                     </>
                 )}
-            </div>
+                <Sidebar open={sidebarOpen} closeSidebar={() => setSidebarOpen(false)}>
+                    {editProductId ? (
+                        <EditProduct
+                            productId={editProductId}
+                            onClose={() => setSidebarOpen(false)}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </Sidebar>
+            </>
         </Section>
     );
 }

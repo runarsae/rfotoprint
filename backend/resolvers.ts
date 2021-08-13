@@ -9,7 +9,7 @@ import path from 'path';
 interface Result {
     success: boolean;
     message?: string;
-    data?: string | Document[] | ObjectId;
+    data?: string | Document[] | Document | ObjectId;
 }
 
 interface Context {
@@ -146,12 +146,36 @@ export const resolvers = {
         }
     },
 
+    product: async (input: { id: string }): Promise<Result> => {
+        try {
+            if (!db) throw new Error('Could not connect to database.');
+
+            const product = await db
+                .collection('products')
+                .findOne({ _id: new ObjectId(input.id) });
+
+            if (!product) {
+                throw new Error('Produkt med ID ' + input.id + ' eksisterer ikke.');
+            }
+
+            return {
+                success: true,
+                data: product
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
+    },
+
     createProduct: async (
         input: {
             product: {
                 name: string;
                 category: string;
-                inventory: number;
+                // inventory: number;
                 image: string;
                 description?: string;
                 url?: string;
@@ -164,12 +188,12 @@ export const resolvers = {
 
             if (!context.auth) throw new Error('You must be logged in to create a product.');
 
-            const { name, category, inventory, image, description, url } = input.product;
+            const { name, category, image, description, url } = input.product;
 
             const result = await db.collection('products').insertOne({
                 name: name,
                 category: category,
-                inventory: inventory,
+                // inventory: inventory,
                 image: image,
                 ...(description && { description: description }),
                 ...(url && { url: url })
@@ -194,7 +218,7 @@ export const resolvers = {
             product: {
                 name: string;
                 category: string;
-                inventory: number;
+                // inventory: number;
                 image: string;
                 description?: string;
                 url?: string;
@@ -208,7 +232,7 @@ export const resolvers = {
             if (!context.auth) throw new Error('You must be logged in to edit a product.');
 
             const _id = new ObjectId(input._id);
-            const { name, category, inventory, image, description, url } = input.product;
+            const { name, category, image, description, url } = input.product;
 
             await db.collection('products').updateOne(
                 { _id: _id },
@@ -216,7 +240,7 @@ export const resolvers = {
                     $set: {
                         name: name,
                         category: category,
-                        inventory: inventory,
+                        // inventory: inventory,
                         image: image,
                         ...(description && { description: description }),
                         ...(url && { url: url })

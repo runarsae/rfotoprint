@@ -28,3 +28,17 @@ export const PRODUCTS = `
         }
     }
 `;
+
+export const PRODUCT = `
+    query product($id: ID!) {
+        product(id: $id) {
+            success
+            data {
+                _id
+                name
+                image
+                category
+            }
+        }
+    }
+`;
