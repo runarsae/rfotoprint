@@ -7,6 +7,7 @@ import path from 'path';
 import { resolvers } from './resolvers';
 import { schema } from './schema';
 import { AuthRequest, isAuthenticated, requireAuth } from './auth';
+import { existsSync, unlinkSync } from 'fs';
 
 // TODO: Environment variable
 const DATABASE_URL = 'mongodb://127.0.0.1:27017';
@@ -35,6 +36,8 @@ new MongoClient(DATABASE_URL).connect(function (err, database) {
 
 // Enable CORS
 app.use(cors());
+
+app.use(express.json());
 
 // Middleware to check for user authentication
 app.use(isAuthenticated);
@@ -67,17 +70,27 @@ const storage = multer.diskStorage({
     destination: function (_req, _file, cb) {
         cb(null, 'uploads/supplies/');
     },
-    filename: function (req, file, cb) {
-        cb(null, req.body.id + path.extname(file.originalname));
+    filename: function (req, _file, cb) {
+        cb(null, req.body.imageId);
     }
 });
 
 const upload = multer({ storage: storage });
 
-// Endpoint for uploading images
+// Endpoint for uploading an image
 app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _next) {
-    res.json({
-        sucess: true,
-        message: 'Image uploaded.'
-    });
+    res.end();
+});
+
+// Endpoint for deleting an image
+app.delete('/uploads/supplies/:imageId', requireAuth, function (req, res, _next) {
+    const file = path.join(__dirname, 'uploads/supplies/' + req.params.imageId);
+
+    if (existsSync(file)) {
+        unlinkSync(file);
+    } else {
+        throw new Error(file + ' does not exist.');
+    }
+
+    res.end();
 });

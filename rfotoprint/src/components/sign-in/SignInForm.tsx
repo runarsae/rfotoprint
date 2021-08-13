@@ -1,28 +1,12 @@
 import { ClientContext, useMutation } from 'graphql-hooks';
 import { FormEvent, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { SIGN_IN } from '../../api/mutations';
-import SubmitButton from '../common/SubmitButton';
-import TextInput from '../common/TextInput';
-
-const Form = styled.form`
-    width: 100%;
-    max-width: 300px;
-    display: grid;
-    grid-template-columns: 100%;
-    gap: 20px;
-`;
-
-const Label = styled.label`
-    display: block;
-    margin-bottom: 2px;
-`;
-
-const Error = styled.div`
-    font-size: 14px;
-    color: #e60f0f;
-`;
+import Label from '../common/form/Label';
+import SubmitButton from '../common/form/SubmitButton';
+import TextInput from '../common/form/TextInput';
+import Error from '../common/form/Error';
+import { Form } from '../common/form/Form';
 
 function SignInForm() {
     const client = useContext(ClientContext);
@@ -59,19 +43,17 @@ function SignInForm() {
         });
 
         if (data) {
-            console.log(data);
-
             if (!data.signIn.success) {
                 setErrorMessage(data.signIn.message);
                 return;
             }
 
             const token = data.signIn.data;
-            client.setHeader('Authorization', `${token}`);
+            client.setHeader('Authorization', token);
 
             localStorage.setItem('token', token);
 
-            history.push('/panel');
+            history.push('/');
         } else {
             setErrorMessage('Systemfeil: Innlogging mislykket.');
         }
@@ -85,6 +67,7 @@ function SignInForm() {
                     type="text"
                     id="username"
                     name="username"
+                    autoComplete="username"
                     onChange={(e) => {
                         setErrorMessage(null);
                         setUsername(e.target.value);
@@ -97,6 +80,7 @@ function SignInForm() {
                     type="password"
                     id="password"
                     name="password"
+                    autoComplete="current-password"
                     onChange={(e) => {
                         setErrorMessage(null);
                         setPassword(e.target.value);

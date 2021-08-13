@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Section from '../components/common/Section';
@@ -9,7 +9,14 @@ import Button from '../components/common/Button';
 import Undertitle from '../components/common/Undertitle';
 import useWindowDimensions from '../utils/windowDimensions';
 import { PRODUCTS } from '../api/queries';
-import { useQuery } from 'graphql-hooks';
+import { useMutation, useQuery } from 'graphql-hooks';
+import { AuthContext } from '../utils/auth';
+import { DELETE_PRODUCT } from '../api/mutations';
+import Sidebar from '../components/common/Sidebar';
+import EditProduct from '../components/panel/EditProduct';
+import AddProduct from '../components/panel/AddProduct';
+import RoundButton from '../components/common/RoundButton';
+import { AddIcon } from '../components/common/Icons';
 
 const SupplierGrid = styled.div`
     display: grid;
@@ -24,6 +31,14 @@ const SupplierGrid = styled.div`
 
 const SupplierButton = styled(Button)`
     height: 35px;
+`;
+
+const UndertitleGrid = styled.div`
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    margin: 40px 0 20px 0;
+    align-items: center;
 `;
 
 const SuppliesGrid = styled.div`
@@ -50,7 +65,7 @@ interface IProducts {
 }
 
 export interface IProduct {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     url?: string;
@@ -59,9 +74,16 @@ export interface IProduct {
 }
 
 export default function Supplies() {
+    const auth = useContext(AuthContext);
+
+    const [editProductId, setEditProductId] = useState<string>();
+    const [editProductSidebarOpen, setEditProductSidebarOpen] = useState<boolean>(false);
+    const [addProductSidebarOpen, setAddProductSidebarOpen] = useState<boolean>(false);
+
     const { width } = useWindowDimensions();
 
     const { loading, error, data } = useQuery(PRODUCTS);
+    const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
     const [products, setProducts] = useState<IProducts | null>(null);
 
@@ -73,7 +95,7 @@ export default function Supplies() {
 
     return (
         <Section name="Varer" color="light">
-            <div>
+            <>
                 <Title>Varer</Title>
                 <SupplierGrid>
                     <Text>
@@ -97,11 +119,33 @@ export default function Supplies() {
 
                 {!(loading || error) && (
                     <>
-                        <Undertitle margin="40px 0 20px 0">Lagervarer</Undertitle>
+                        <UndertitleGrid>
+                            <Undertitle>Lagervarer</Undertitle>
+                            <RoundButton
+                                title="Ny vare"
+                                onClick={() => {
+                                    setAddProductSidebarOpen(true);
+                                }}
+                            >
+                                <AddIcon fill="#ad8226" />
+                            </RoundButton>
+                        </UndertitleGrid>
                         <SuppliesGrid>
-                            {products ? (
+                            {products && Object.keys(products).length > 0 ? (
                                 Object.entries(products).map(([id, product]) => (
-                                    <Product key={id} product={product} />
+                                    <Product
+                                        key={id}
+                                        product={product}
+                                        authenticated={auth}
+                                        editProduct={() => {
+                                            setEditProductId(product._id);
+                                            setEditProductSidebarOpen(true);
+                                        }}
+                                        deleteProduct={() => {
+                                            deleteProduct({ variables: { _id: product._id } });
+                                            // TODO: Refresh products
+                                        }}
+                                    />
                                 ))
                             ) : (
                                 <div>Ingen varer.</div>
@@ -109,7 +153,28 @@ export default function Supplies() {
                         </SuppliesGrid>
                     </>
                 )}
-            </div>
+
+                <Sidebar
+                    open={addProductSidebarOpen}
+                    closeSidebar={() => setAddProductSidebarOpen(false)}
+                >
+                    <AddProduct />
+                </Sidebar>
+
+                <Sidebar
+                    open={editProductSidebarOpen}
+                    closeSidebar={() => setEditProductSidebarOpen(false)}
+                >
+                    {editProductId ? (
+                        <EditProduct
+                            productId={editProductId}
+                            onClose={() => setEditProductSidebarOpen(false)}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </Sidebar>
+            </>
         </Section>
     );
 }

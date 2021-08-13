@@ -9,7 +9,7 @@ import path from 'path';
 interface Result {
     success: boolean;
     message?: string;
-    data?: string | Document[] | ObjectId;
+    data?: string | Document[] | Document | ObjectId;
 }
 
 interface Context {
@@ -110,6 +110,18 @@ export const resolvers = {
         }
     },
 
+    verifyAuth: async (_: any, context: Context): Promise<Result> => {
+        if (context.auth) {
+            return {
+                success: true
+            };
+        }
+
+        return {
+            success: false
+        };
+    },
+
     products: async (): Promise<Result> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
@@ -134,11 +146,36 @@ export const resolvers = {
         }
     },
 
+    product: async (input: { id: string }): Promise<Result> => {
+        try {
+            if (!db) throw new Error('Could not connect to database.');
+
+            const product = await db
+                .collection('products')
+                .findOne({ _id: new ObjectId(input.id) });
+
+            if (!product) {
+                throw new Error('Produkt med ID ' + input.id + ' eksisterer ikke.');
+            }
+
+            return {
+                success: true,
+                data: product
+            };
+        } catch (error) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
+    },
+
     createProduct: async (
         input: {
             product: {
                 name: string;
-                inventory: number;
+                category: string;
+                // inventory: number;
                 image: string;
                 description?: string;
                 url?: string;
@@ -151,11 +188,12 @@ export const resolvers = {
 
             if (!context.auth) throw new Error('You must be logged in to create a product.');
 
-            const { name, inventory, image, description, url } = input.product;
+            const { name, category, image, description, url } = input.product;
 
             const result = await db.collection('products').insertOne({
                 name: name,
-                inventory: inventory,
+                category: category,
+                // inventory: inventory,
                 image: image,
                 ...(description && { description: description }),
                 ...(url && { url: url })
@@ -163,7 +201,7 @@ export const resolvers = {
 
             return {
                 success: true,
-                message: 'Product successully created.',
+                message: 'Varen ble lagt til.',
                 data: result.insertedId
             };
         } catch (error) {
@@ -179,8 +217,9 @@ export const resolvers = {
             _id: string;
             product: {
                 name: string;
-                inventory: number;
-                extension: string;
+                category: string;
+                // inventory: number;
+                image: string;
                 description?: string;
                 url?: string;
             };
@@ -193,15 +232,16 @@ export const resolvers = {
             if (!context.auth) throw new Error('You must be logged in to edit a product.');
 
             const _id = new ObjectId(input._id);
-            const { name, inventory, extension, description, url } = input.product;
+            const { name, category, image, description, url } = input.product;
 
             await db.collection('products').updateOne(
                 { _id: _id },
                 {
                     $set: {
                         name: name,
-                        inventory: inventory,
-                        extension: extension,
+                        category: category,
+                        // inventory: inventory,
+                        image: image,
                         ...(description && { description: description }),
                         ...(url && { url: url })
                     },

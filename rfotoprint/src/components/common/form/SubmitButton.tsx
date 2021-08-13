@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 const DURATION = 100;
 
-const StyledButton = styled.input`
+const StyledButton = styled.input<{ dark?: boolean }>`
     display: block;
     width: 100%;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
-    background-color: white;
+    background-color: ${(props) => (props.dark ? '#39362c' : 'white')};
     color: ${(props) => props.theme.primary};
     border: 1px solid ${(props) => props.theme.primary};
     cursor: pointer;
@@ -21,16 +21,17 @@ const StyledButton = styled.input`
     transition: background-color ${DURATION}ms ease-in-out;
 
     &:hover {
-        background-color: #ad82261f;
+        background-color: ${(props) => (props.dark ? '#4a473c' : '#ad82261f')};
     }
 `;
 
 interface Props {
+    dark?: boolean;
     value: string;
 }
 
 function SubmitButton(props: Props): JSX.Element {
-    return <StyledButton type="submit" value={props.value} />;
+    return <StyledButton dark={props.dark} type="submit" value={props.value} />;
 }
 
 export default SubmitButton;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Undertitle = styled.h2<{
     align?: 'left' | 'center' | 'right';
     color?: 'light' | 'gray';
-    margin?: number;
+    margin?: string;
     capitalize?: boolean;
 }>`
     text-align: ${(props) => (props.align ? props.align : 'left')};
@@ -16,7 +16,7 @@ const Undertitle = styled.h2<{
     font-size: 24px;
     font-weight: normal;
     ${(props) => props.capitalize && 'text-transform: capitalize;'}
-    ${(props) => (props.margin || props.margin === 0) && 'margin: ' + props.margin + 'px 0;'}
+    ${(props) => (props.margin ? 'margin: ' + props.margin + ';' : 'margin: 0;')}
 `;
 
 export default Undertitle;
