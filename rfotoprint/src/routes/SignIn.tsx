@@ -30,7 +30,9 @@ function SignIn() {
         <Section color="light">
             <Content>
                 <Logo src="/img/logo_dark.png" alt="Rossland Fotoprint" />
-                <SignInForm />
+                <div style={{ maxWidth: '300px', width: '100%' }}>
+                    <SignInForm />
+                </div>
             </Content>
         </Section>
     );
