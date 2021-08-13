@@ -53,7 +53,7 @@ function SignInForm() {
 
             localStorage.setItem('token', token);
 
-            history.push('/panel');
+            history.push('/');
         } else {
             setErrorMessage('Systemfeil: Innlogging mislykket.');
         }

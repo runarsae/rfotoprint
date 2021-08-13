@@ -9,6 +9,8 @@ import Title from '../common/Title';
 import axios from 'axios';
 import Confirm from '../common/form/Confirm';
 import { CREATE_PRODUCT } from '../../api/mutations';
+import Select from '../common/form/Select';
+import { ImageWrapper, ImageDisplay, ImagePlaceholder } from '../common/form/ImagePreview';
 
 function AddProduct() {
     const [name, setName] = useState<string>('');
@@ -25,6 +27,8 @@ function AddProduct() {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setConfirmMessage(undefined);
 
         if (!name) {
             setErrorMessage('Vennligst fyll inn varenavn.');
@@ -57,48 +61,51 @@ function AddProduct() {
                 'Content-Type': 'multipart/form-data',
                 Authorization: localStorage.getItem('token')
             }
-        })
-            .then(async () => {
-                const { data } = await createProduct({
-                    variables: {
-                        product: {
-                            name: name,
-                            category: category,
-                            // inventory: inventory,
-                            image: imageId
-                        }
+        }).then(async () => {
+            const { data } = await createProduct({
+                variables: {
+                    product: {
+                        name: name,
+                        category: category,
+                        // inventory: inventory,
+                        image: imageId
                     }
-                });
-
-                if (data) {
-                    if (!data.createProduct.success) {
-                        setErrorMessage(data.createProduct.message);
-                        return;
-                    }
-
-                    // Reset values
-                    setName('');
-                    setImage('');
-                    imageInputRef!.current!.value = '';
-                    setCategory('office-supplies');
-                    // setInventory('');
-                    setConfirmMessage('Varen ble lagt til.');
-                } else {
-                    setErrorMessage('Systemfeil: Varen ble ikke lagt til.');
                 }
-            })
-            .catch((response) => {
-                setErrorMessage(response);
             });
+
+            if (data) {
+                if (!data.createProduct.success) {
+                    setErrorMessage(data.createProduct.message);
+                    return;
+                }
+
+                // TODO: Refresh products
+
+                // Reset values
+                setName('');
+                setImage('');
+                imageInputRef!.current!.value = '';
+                setCategory('office-supplies');
+                // setInventory('');
+                setConfirmMessage('Varen ble lagt til.');
+            } else {
+                setErrorMessage('Systemfeil: Varen ble ikke lagt til.');
+            }
+        });
     };
 
     return (
         <div>
-            <Title marginTop={0}>Ny vare</Title>
+            <Title color="light" marginTop={0}>
+                Ny vare
+            </Title>
             <Form onSubmit={handleSubmit}>
                 <div>
-                    <Label htmlFor="name">Navn</Label>
+                    <Label dark htmlFor="name">
+                        Navn
+                    </Label>
                     <TextInput
+                        dark
                         type="text"
                         id="name"
                         name="name"
@@ -111,9 +118,18 @@ function AddProduct() {
                     />
                 </div>
                 <div>
-                    <Label htmlFor="image">Bilde</Label>
-                    {image && <img src={URL.createObjectURL(image)} alt="Product" />}
+                    <Label dark htmlFor="image">
+                        <div style={{ marginBottom: '4px' }}>Bilde</div>
+                        <ImageWrapper title="Last opp bilde">
+                            {image ? (
+                                <ImageDisplay src={URL.createObjectURL(image)} alt="Product" />
+                            ) : (
+                                <ImagePlaceholder>Last opp bilde</ImagePlaceholder>
+                            )}
+                        </ImageWrapper>
+                    </Label>
                     <input
+                        style={{ display: 'none' }}
                         type="file"
                         id="image"
                         name="image"
@@ -136,8 +152,11 @@ function AddProduct() {
                     />
                 </div>
                 <div>
-                    <Label htmlFor="category">Kategori</Label>
-                    <select
+                    <Label dark htmlFor="category">
+                        Kategori
+                    </Label>
+                    <Select
+                        dark
                         id="category"
                         name="category"
                         value={category}
@@ -149,7 +168,7 @@ function AddProduct() {
                     >
                         <option value="office-supplies">Kontorrekvisita</option>
                         <option value="frames">Rammer</option>
-                    </select>
+                    </Select>
                 </div>
                 {/* <div>
                     <Label htmlFor="inventory">Lagerbeholdning</Label>
@@ -167,7 +186,7 @@ function AddProduct() {
                 </div> */}
                 {errorMessage && <Error>{errorMessage}</Error>}
                 {confirmMessage && <Confirm>{confirmMessage}</Confirm>}
-                <SubmitButton value="Legg til vare" />
+                <SubmitButton dark value="Legg til vare" />
             </Form>
         </div>
     );

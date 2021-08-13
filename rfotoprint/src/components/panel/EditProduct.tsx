@@ -1,33 +1,17 @@
 import axios from 'axios';
 import { useMutation, useQuery } from 'graphql-hooks';
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { EDIT_PRODUCT } from '../../api/mutations';
 import { PRODUCT } from '../../api/queries';
 import Confirm from '../common/form/Confirm';
 import Error from '../common/form/Error';
 import { Form } from '../common/form/Form';
+import { ImageWrapper, ImageDisplay } from '../common/form/ImagePreview';
 import Label from '../common/form/Label';
 import Select from '../common/form/Select';
 import SubmitButton from '../common/form/SubmitButton';
 import TextInput from '../common/form/TextInput';
 import Title from '../common/Title';
-
-const ImageWrapper = styled.div`
-    width: 100%;
-    height: 260px;
-    border-radius: 2px;
-    background-color: #404040;
-    padding: 14px;
-    cursor: pointer;
-`;
-
-const ImageDisplay = styled.img`
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-`;
 
 interface Props {
     productId: string;
