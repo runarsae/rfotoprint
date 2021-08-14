@@ -37,7 +37,7 @@ const UndertitleGrid = styled.div`
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 8px;
-    margin: 40px 0 20px 0;
+    margin: 80px 0 20px 0;
     align-items: center;
 `;
 
@@ -121,14 +121,16 @@ export default function Supplies() {
                     <>
                         <UndertitleGrid>
                             <Undertitle>Lagervarer</Undertitle>
-                            <RoundButton
-                                title="Ny vare"
-                                onClick={() => {
-                                    setAddProductSidebarOpen(true);
-                                }}
-                            >
-                                <AddIcon fill="#ad8226" />
-                            </RoundButton>
+                            {auth && (
+                                <RoundButton
+                                    title="Ny vare"
+                                    onClick={() => {
+                                        setAddProductSidebarOpen(true);
+                                    }}
+                                >
+                                    <AddIcon fill="#ad8226" />
+                                </RoundButton>
+                            )}
                         </UndertitleGrid>
                         <SuppliesGrid>
                             {products && Object.keys(products).length > 0 ? (
