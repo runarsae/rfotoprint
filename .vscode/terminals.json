@@ -1,0 +1,19 @@
+{
+  "autorun": true,
+  "terminals": [
+    {
+      "name": "backend",
+      "focus": true,
+      "icon": "database",
+      "cwd": "[workspaceFolder]/backend",
+      "command": "yarn start"
+    },
+    {
+      "name": "frontend",
+      "focus": true,
+      "icon": "device-desktop",
+      "cwd": "[workspaceFolder]/rfotoprint",
+      "command": "yarn start"
+    }
+  ]
+}

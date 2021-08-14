@@ -15,6 +15,6 @@ export const theme: DefaultTheme = {
 
 export enum Sections {
     Fototjenester = 'Fototjenester',
-    Kontorrekvisita = 'Kontorrekvisita',
+    Varer = 'Varer',
     Kontakt = 'Kontakt'
 }

@@ -27,7 +27,7 @@ const ProfileTitle = styled.p`
     display: block;
     text-align: center;
     margin: 0;
-    color: #999999;
+    color: #9c9c9c;
 `;
 
 function Profile(): JSX.Element {

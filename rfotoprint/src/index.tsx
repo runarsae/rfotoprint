@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './global.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import { ClientContext, GraphQLClient } from 'graphql-hooks';
+
+// GraphQL client to execute API queries and mutations
+const client = new GraphQLClient({
+    url: process.env.REACT_APP_SERVER_ADDRESS + '/graphql'
+});
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <ClientContext.Provider value={client}>
+            <App />
+        </ClientContext.Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );

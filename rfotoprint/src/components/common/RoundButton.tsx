@@ -2,20 +2,16 @@ import styled from 'styled-components';
 
 const DURATION = 100;
 
-const Button = styled.button`
-    display: block;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
+const RoundButton = styled.button`
+    display: inline-block;
+    width: 34px;
+    height: 34px;
     background-color: white;
-    color: ${(props) => props.theme.primary};
     border: 1px solid ${(props) => props.theme.primary};
     cursor: pointer;
     outline: 0;
-    padding: 8px 24px;
-    margin: 0 auto;
-    border-radius: 2px;
+    padding: 4px;
+    border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     transition: background-color ${DURATION}ms ease-in-out;
 
@@ -24,4 +20,4 @@ const Button = styled.button`
     }
 `;
 
-export default Button;
+export default RoundButton;

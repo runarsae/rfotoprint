@@ -4,6 +4,7 @@ const Title = styled.h1<{
     align?: 'left' | 'center' | 'right';
     color?: 'light';
     margin?: number;
+    marginTop?: number;
 }>`
     text-align: ${(props) => (props.align ? props.align : 'left')};
     color: ${(props) => (props.color === 'light' ? 'white' : props.theme.title)};
@@ -12,6 +13,8 @@ const Title = styled.h1<{
     transition: font-size 0.2s ease-in-out;
 
     ${(props) => (props.margin || props.margin === 0) && 'margin: ' + props.margin + 'px 0;'}
+    ${(props) =>
+        (props.marginTop || props.marginTop === 0) && 'margin-top: ' + props.marginTop + ';'}
 `;
 
 export default Title;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Section from './Section';
 import { Transition } from 'react-transition-group';
@@ -16,6 +16,7 @@ const Overlay = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     transition: opacity ${DURATION}ms ease-in-out;
+    z-index: 10;
 `;
 
 const overlayTransitionStyles: { [id: string]: React.CSSProperties } = {
@@ -33,6 +34,7 @@ const SidebarWrapper = styled(Section)`
     transition: right ${DURATION}ms ease-in-out;
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 11;
 `;
 
 const sidebarTransitionStyles: { [id: string]: React.CSSProperties } = {
@@ -74,6 +76,22 @@ interface Props {
 export default function Sidebar(props: Props) {
     const sidebarRef = useRef(null);
     const overlayRef = useRef(null);
+
+    const close = (e: KeyboardEvent) => {
+        if (props.open && e.key == 'Escape') {
+            props.closeSidebar();
+        }
+    };
+
+    useEffect(() => {
+        if (props.open) {
+            document.addEventListener('keydown', close, false);
+
+            return () => {
+                document.removeEventListener('keydown', close, false);
+            };
+        }
+    }, [props.open]);
 
     useEffect(() => {
         if (props.open) {
