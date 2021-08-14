@@ -67,11 +67,9 @@ const Description = styled(Text)`
 
 const Price = styled(Text)`
     margin: auto;
-    color: white;
+    color: ${(props) => props.theme.primary};
     display: block;
-    background-color: ${(props) => props.theme.primary};
-    padding: 4px 8px;
-    border-radius: 2px;
+    font-weight: bold;
 `;
 
 export default function FotoServices() {
@@ -86,9 +84,7 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/printer.svg" />
                         </IconContainer>
-                        <Undertitle align="center" margin={0}>
-                            Utskrift
-                        </Undertitle>
+                        <Undertitle align="center">Utskrift</Undertitle>
                         <Description align="center">
                             Utskrift av bilder fra e-post, minnebrikke, minnepenn, CD og mobil (husk
                             ledning).
@@ -105,9 +101,7 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/camera.svg" />
                         </IconContainer>
-                        <Undertitle align="center" margin={0}>
-                            Passfoto
-                        </Undertitle>
+                        <Undertitle align="center">Passfoto</Undertitle>
                         <Description align="center">
                             Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.
                         </Description>
@@ -117,9 +111,7 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/image-gallery.svg" />
                         </IconContainer>
-                        <Undertitle align="center" margin={0}>
-                            Forstørring
-                        </Undertitle>
+                        <Undertitle align="center">Forstørring</Undertitle>
                         <Description align="center">
                             Forstørring av bilder opp til A3-størrelse.
                         </Description>
@@ -129,9 +121,7 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/scanner.svg" />
                         </IconContainer>
-                        <Undertitle align="center" margin={0}>
-                            Skanning
-                        </Undertitle>
+                        <Undertitle align="center">Skanning</Undertitle>
                         <Description align="center">Skanning av gamle og nye bilder.</Description>
                         <Price>Kr 65,- pr. stk</Price>
                     </GridItem>
@@ -139,9 +129,7 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/edit-image.svg" />
                         </IconContainer>
-                        <Undertitle align="center" margin={0}>
-                            Forbedring
-                        </Undertitle>
+                        <Undertitle align="center">Forbedring</Undertitle>
                         <Description align="center">
                             Fjerning av bretter, skader, striper og lignende.
                         </Description>
@@ -151,9 +139,7 @@ export default function FotoServices() {
                         <IconContainer>
                             <Icon src="/img/icons/movie.svg" />
                         </IconContainer>
-                        <Undertitle align="center" margin={0}>
-                            Lysbilder og negativer
-                        </Undertitle>
+                        <Undertitle align="center">Lysbilder og negativer</Undertitle>
                         <Description align="center">
                             Overføring av lysbilder og negativer til digitale <br />
                             bilder i høy oppløsning.
@@ -167,9 +153,7 @@ export default function FotoServices() {
                         <Title color="light" margin={0}>
                             Prisliste
                         </Title>
-                        <Undertitle color="gray" margin={0}>
-                            Utskrift av bilder
-                        </Undertitle>
+                        <Undertitle color="gray">Utskrift av bilder</Undertitle>
                         <TableWrapper>
                             <Table>
                                 <thead>
