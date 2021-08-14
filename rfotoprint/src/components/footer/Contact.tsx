@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { LocationIcon, MailIcon, PhoneIcon } from '../common/Icons';
 
 const Wrapper = styled.div`
     display: block;
@@ -37,12 +38,13 @@ const ContactInformation = styled.div`
     display: grid;
     grid-template-columns: auto;
     gap: 10px;
+    align-items: center;
     margin-top: 20px;
     text-align: center;
 
     @media (min-width: 640px) {
-        grid-template-columns: 32px auto;
-        grid-gap: 15px 10px;
+        grid-template-columns: 36px auto;
+        grid-gap: 20px 10px;
         text-align: left;
     }
 `;
@@ -60,14 +62,17 @@ const Link = styled.a`
     }
 `;
 
-const Icon = styled.img`
+const IconWrapper = styled.div`
+    width: 36px;
+    height: 36px;
     padding: 8px;
-    width: 32px;
     background-color: ${(props) => props.theme.background.darker};
     border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
+    margin: 20px auto 0 auto;
+
+    @media (min-width: 640px) {
+        margin-top: 0;
+    }
 `;
 
 function Contact(): JSX.Element {
@@ -76,21 +81,27 @@ function Contact(): JSX.Element {
             <Title>R Fotoprint</Title>
             <Paragraph>Ta kontakt for avtale og kjøp.</Paragraph>
             <ContactInformation>
-                <Icon src="/img/icons/phone.png" alt="Phone" />
+                <IconWrapper>
+                    <PhoneIcon fill="#AD8226" size={20} />
+                </IconWrapper>
                 <span>
                     Telefon
                     <Paragraph>
                         <Link href="tel:+4790284152">+47 902 84 152</Link>
                     </Paragraph>
                 </span>
-                <Icon src="/img/icons/mail.png" alt="Email" />
+                <IconWrapper>
+                    <MailIcon fill="#AD8226" size={20} />
+                </IconWrapper>
                 <span>
                     E-post
                     <Paragraph>
                         <Link href="mailto:r-fotoprint@online.no">r-fotoprint@online.no</Link>
                     </Paragraph>
                 </span>
-                <Icon src="/img/icons/marker.png" alt="Address" />
+                <IconWrapper>
+                    <LocationIcon fill="#AD8226" size={20} />
+                </IconWrapper>
                 <span>
                     Adresse
                     <Paragraph>
