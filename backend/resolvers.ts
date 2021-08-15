@@ -122,18 +122,26 @@ export const resolvers = {
         };
     },
 
-    products: async (input: { page: number; pageSize: number }): Promise<Result> => {
+    products: async (input: {
+        filter: { category: string };
+        page: number;
+        pageSize: number;
+    }): Promise<Result> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
-            const { page, pageSize } = input;
+            const { filter, page, pageSize } = input;
 
-            let filter = {};
+            const queryFilter = [];
+
+            if (filter.category) {
+                queryFilter.push({ category: filter.category });
+            }
 
             const query = db.collection('products');
 
             const products = await query
-                .find(filter)
+                .find(queryFilter.length === 0 ? {} : { $and: queryFilter })
                 .skip((page - 1) * pageSize)
                 .limit(pageSize)
                 .toArray()
@@ -141,7 +149,9 @@ export const resolvers = {
                     return result;
                 });
 
-            const count = await query.countDocuments(filter);
+            const count = await query.countDocuments(
+                queryFilter.length === 0 ? {} : { $and: queryFilter }
+            );
             let pageCount = Math.floor(count / pageSize);
 
             if (count % pageSize > 0) {

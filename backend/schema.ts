@@ -21,6 +21,10 @@ export const schema = buildSchema(`
         pageCount: Int
     }
 
+    input FilterInput {
+        category: String
+    }
+
     input ProductInput {
         name: String!
         category: String!
@@ -66,7 +70,7 @@ export const schema = buildSchema(`
 
     type Query {
         verifyAuth: DefaultResult!
-        products(page: Int = 1, pageSize: Int = 8): ProductsResult!
+        products(filter: FilterInput!, page: Int = 1, pageSize: Int = 8): ProductsResult!
         product(id: ID!): ProductResult!
     }
 
