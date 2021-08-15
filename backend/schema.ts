@@ -16,6 +16,11 @@ export const schema = buildSchema(`
         url: String
     }
 
+    type Products {
+        products: [Product]
+        pageCount: Int
+    }
+
     input ProductInput {
         name: String!
         category: String!
@@ -50,7 +55,7 @@ export const schema = buildSchema(`
     type ProductsResult implements Result {
         success: Boolean!
         message: String
-        data: [Product]
+        data: Products
     }
 
     type ProductResult implements Result {
@@ -61,7 +66,7 @@ export const schema = buildSchema(`
 
     type Query {
         verifyAuth: DefaultResult!
-        products: ProductsResult!
+        products(page: Int = 1, pageSize: Int = 8): ProductsResult!
         product(id: ID!): ProductResult!
     }
 

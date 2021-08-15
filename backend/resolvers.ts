@@ -122,21 +122,38 @@ export const resolvers = {
         };
     },
 
-    products: async (): Promise<Result> => {
+    products: async (input: { page: number; pageSize: number }): Promise<Result> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
-            const products = await db
-                .collection('products')
-                .find()
+            const { page, pageSize } = input;
+
+            let filter = {};
+
+            const query = db.collection('products');
+
+            const products = await query
+                .find(filter)
+                .skip((page - 1) * pageSize)
+                .limit(pageSize)
                 .toArray()
                 .then((result) => {
                     return result;
                 });
 
+            const count = await query.countDocuments(filter);
+            let pageCount = Math.floor(count / pageSize);
+
+            if (count % pageSize > 0) {
+                pageCount++;
+            }
+
             return {
                 success: true,
-                data: products
+                data: {
+                    products: products,
+                    pageCount: pageCount
+                }
             };
         } catch (error) {
             return {
