@@ -12,7 +12,11 @@ import { CREATE_PRODUCT } from '../../api/mutations';
 import Select from '../common/form/Select';
 import { ImageWrapper, ImageDisplay, ImagePlaceholder } from '../common/form/ImagePreview';
 
-function AddProduct() {
+interface Props {
+    refreshProducts: () => void;
+}
+
+function AddProduct(props: Props) {
     const [name, setName] = useState<string>('');
     const [image, setImage] = useState<File | ''>('');
     const [category, setCategory] = useState<string>('office-supplies');
@@ -79,7 +83,7 @@ function AddProduct() {
                     return;
                 }
 
-                // TODO: Refresh products
+                props.refreshProducts();
 
                 // Reset values
                 setName('');

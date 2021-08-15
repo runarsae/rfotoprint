@@ -41,8 +41,6 @@ const Action = styled.button`
 `;
 
 const ProductTitle = styled.div`
-    display: flex;
-    align-items: center;
     width: 100%;
     height: 32px;
     margin: 8px 0;
@@ -52,14 +50,6 @@ const ProductTitle = styled.div`
 
     @media (min-width: 520px) {
         height: 38px;
-    }
-`;
-
-const Name = styled(Text)`
-    font-size: 14px;
-    font-weight: bold;
-
-    @media (min-width: 520px) {
         font-size: 16px;
     }
 `;
@@ -105,9 +95,7 @@ export default function Product(props: Props) {
                 </Content>
             </Card>
 
-            <ProductTitle>
-                <Name>{props.product.name}</Name>
-            </ProductTitle>
+            <ProductTitle>{props.product.name}</ProductTitle>
 
             {/* <Inventory>På lager: {props.inventory} stk</Inventory> */}
         </div>

@@ -16,6 +16,7 @@ import Title from '../common/Title';
 interface Props {
     productId: string;
     onClose: () => void;
+    refreshProducts: () => void;
 }
 
 function EditProduct(props: Props) {
@@ -119,7 +120,7 @@ function EditProduct(props: Props) {
             }
 
             props.onClose();
-            // TODO: Refresh products
+            props.refreshProducts();
 
             // Reset values
             setName('');

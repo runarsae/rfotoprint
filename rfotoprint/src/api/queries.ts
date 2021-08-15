@@ -13,17 +13,17 @@ export const VERIFY_AUTH = `
  *  Products
  */
 export const PRODUCTS = `
-    {
-        products {
+    query products($page: Int, $pageSize: Int) {
+        products(page: $page, pageSize: $pageSize) {
             success
-            message
             data {
-                _id
-                name
-                inventory
-                image
-                description
-                url
+                products {
+                    _id
+                    name
+                    image
+                    category
+                }
+                pageCount
             }
         }
     }
