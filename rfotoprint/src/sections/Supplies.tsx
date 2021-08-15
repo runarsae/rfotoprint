@@ -17,8 +17,7 @@ import EditProduct from '../components/panel/EditProduct';
 import AddProduct from '../components/panel/AddProduct';
 import RoundButton from '../components/common/RoundButton';
 import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
-
-const PAGE_SIZE = 8;
+import Chip from '../components/common/form/Chip';
 
 const SupplierGrid = styled.div`
     display: grid;
@@ -35,13 +34,36 @@ const SupplierButton = styled(Button)`
     height: 35px;
 `;
 
+const SuppliesHeader = styled.div`
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 80px 0 20px 0;
+    padding-top: 40px;
+    align-items: center;
+
+    @media (min-width: 640px) {
+        gap: 0px;
+        grid-template-columns: auto 1fr;
+    }
+`;
+
 const UndertitleGrid = styled.div`
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 8px;
-    margin: 40px 0 20px 0;
-    padding-top: 40px;
     align-items: center;
+`;
+
+const ChipContainer = styled.div`
+    display: grid;
+    grid-template-columns: min-content min-content min-content;
+    gap: 8px;
+    align-items: center;
+
+    @media (min-width: 640px) {
+        justify-self: right;
+    }
 `;
 
 const SuppliesGrid = styled.div`
@@ -80,6 +102,7 @@ const PaginationButton = styled.button`
     border-radius: 50%;
     cursor: pointer;
     background-color: ${(props) => props.theme.background.main};
+    transition: background-color 100ms ease-in-out;
 
     &:disabled {
         cursor: default;
@@ -120,7 +143,20 @@ export default function Supplies() {
     const [fetchProducts] = useManualQuery(PRODUCTS);
     const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
+    const [initialFetch, setInitialFetch] = useState<boolean>(false);
     const [products, setProducts] = useState<IProducts | null>(null);
+
+    const [category, setCategory] = useState<string>('');
+
+    const handleCategoryChange = (value: string) => {
+        if (category == value) {
+            setCategory('');
+        } else {
+            setCategory(value);
+        }
+    };
+
+    const [pageSize, setPageSize] = useState<number>(width >= 768 && width < 1080 ? 9 : 8);
 
     const [currentPage, _setCurrentPage] = useState<number>(1);
     const [pageCount, _setPageCount] = useState<number>(0);
@@ -138,39 +174,57 @@ export default function Supplies() {
         _setPageCount(data);
     };
 
-    const fetchProductsCallback = () => {
-        fetchProducts({ variables: { page: currentPage, pageSize: PAGE_SIZE } }).then((res) => {
+    const scrollIntoView = () => document?.getElementById('products-in-stock')?.scrollIntoView();
+
+    const fetchProductsCallback = async (page: number, scroll: boolean, deleteFlag?: boolean) => {
+        if (deleteFlag) {
+            // Check if last product on page is deleted, and go to previous page if so
+            if (products && Object.keys(products).length === 1 && page > 1) {
+                page -= 1;
+            }
+        }
+
+        await fetchProducts({
+            variables: {
+                filter: { category: category },
+                page: page,
+                pageSize: pageSize
+            }
+        }).then((res) => {
             const result = res.data.products.data;
             setProducts(result.products);
-
-            if (pageCount != 0) {
-                scroll();
-            }
-
             setPageCount(result.pageCount);
 
-            if (result.pageCount !== 0 && currentPage > result.pageCount) {
-                setCurrentPage(result.pageCount);
+            if (scroll) {
+                scrollIntoView();
             }
+
+            setCurrentPage(page);
         });
     };
 
-    // When current page changes, fetch the products for that page
     useEffect(() => {
-        fetchProductsCallback();
-    }, [currentPage]);
+        if (!initialFetch) {
+            fetchProductsCallback(1, false);
+            setInitialFetch(true);
+        }
+    }, []);
 
-    const scroll = () => document?.getElementById('products-in-stock')?.scrollIntoView();
+    useEffect(() => {
+        if (initialFetch) {
+            fetchProductsCallback(1, false);
+        }
+    }, [category]);
 
     const nextPage = () => {
         if (currentPageRef.current < pageCountRef.current) {
-            setCurrentPage(currentPageRef.current + 1);
+            fetchProductsCallback(currentPageRef.current + 1, true);
         }
     };
 
     const previousPage = () => {
         if (currentPageRef.current > 1) {
-            setCurrentPage(currentPageRef.current - 1);
+            fetchProductsCallback(currentPageRef.current - 1, true);
         }
     };
 
@@ -191,6 +245,20 @@ export default function Supplies() {
             };
         }
     }, [pageCount]);
+
+    useEffect(() => {
+        if (width >= 768 && width < 1080) {
+            setPageSize(9);
+        } else {
+            setPageSize(8);
+        }
+    }, [width]);
+
+    useEffect(() => {
+        if (initialFetch) {
+            fetchProductsCallback(currentPage, false);
+        }
+    }, [pageSize]);
 
     return (
         <Section name="Varer" color="light">
@@ -216,19 +284,40 @@ export default function Supplies() {
                     </div>
                 </SupplierGrid>
 
-                <UndertitleGrid id="products-in-stock">
-                    <Undertitle>Lagervarer</Undertitle>
-                    {auth && (
-                        <RoundButton
-                            title="Ny vare"
-                            onClick={() => {
-                                setAddProductSidebarOpen(true);
-                            }}
+                <SuppliesHeader id="products-in-stock">
+                    <UndertitleGrid>
+                        <Undertitle>Lagervarer</Undertitle>
+                        {auth ? (
+                            <RoundButton
+                                title="Ny vare"
+                                onClick={() => {
+                                    setAddProductSidebarOpen(true);
+                                }}
+                            >
+                                <AddIcon fill="#ad8226" />
+                            </RoundButton>
+                        ) : (
+                            <div></div>
+                        )}
+                    </UndertitleGrid>
+                    <ChipContainer>
+                        <Text>
+                            <b>Kategori:</b>
+                        </Text>
+                        <Chip
+                            active={category === 'office-supplies'}
+                            onClick={() => handleCategoryChange('office-supplies')}
                         >
-                            <AddIcon fill="#ad8226" />
-                        </RoundButton>
-                    )}
-                </UndertitleGrid>
+                            Kontorrekvisita
+                        </Chip>
+                        <Chip
+                            active={category === 'frames'}
+                            onClick={() => handleCategoryChange('frames')}
+                        >
+                            Rammer
+                        </Chip>
+                    </ChipContainer>
+                </SuppliesHeader>
                 {products && pageCount && Object.keys(products).length > 0 ? (
                     <>
                         <SuppliesGrid>
@@ -243,9 +332,7 @@ export default function Supplies() {
                                     }}
                                     deleteProduct={() => {
                                         deleteProduct({ variables: { _id: product._id } }).then(
-                                            () => {
-                                                fetchProductsCallback();
-                                            }
+                                            () => fetchProductsCallback(currentPage, false, true)
                                         );
                                     }}
                                 />
@@ -279,7 +366,7 @@ export default function Supplies() {
                     open={addProductSidebarOpen}
                     closeSidebar={() => setAddProductSidebarOpen(false)}
                 >
-                    <AddProduct refreshProducts={() => fetchProductsCallback()} />
+                    <AddProduct refreshProducts={() => fetchProductsCallback(currentPage, false)} />
                 </Sidebar>
 
                 <Sidebar
@@ -290,7 +377,7 @@ export default function Supplies() {
                         <EditProduct
                             productId={editProductId}
                             onClose={() => setEditProductSidebarOpen(false)}
-                            refreshProducts={() => fetchProductsCallback()}
+                            refreshProducts={() => fetchProductsCallback(currentPage, false)}
                         />
                     ) : (
                         <></>

@@ -13,8 +13,8 @@ export const VERIFY_AUTH = `
  *  Products
  */
 export const PRODUCTS = `
-    query products($page: Int, $pageSize: Int) {
-        products(page: $page, pageSize: $pageSize) {
+    query products($filter: FilterInput!, $page: Int, $pageSize: Int) {
+        products(filter: $filter, page: $page, pageSize: $pageSize) {
             success
             data {
                 products {
