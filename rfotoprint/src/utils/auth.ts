@@ -1,5 +1,5 @@
-import { ClientContext, useQuery } from 'graphql-hooks';
-import { createContext, useContext } from 'react';
+import { ClientContext, useManualQuery, useQuery } from 'graphql-hooks';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { VERIFY_AUTH } from '../api/queries';
 
@@ -14,29 +14,45 @@ export const requireAuth = () => {
 };
 
 // BUG: This is called twice when app mounts
-export const verifyAuth = (): boolean => {
-    console.log('Verifying authentication..');
+export const verifyAuth = (): [boolean, () => void] => {
+    const [authenticated, setAuthenticated] = useState<boolean>(false);
 
     const client = useContext(ClientContext);
 
-    const token = localStorage.getItem('token');
+    const [verifyAuthCallback] = useManualQuery(VERIFY_AUTH);
 
-    if (token) {
-        client.setHeader('Authorization', token);
-    } else {
-        client.removeHeader('Authorization');
-        console.log('Not authenticated.');
-        return false;
-    }
+    const checkAuth = () => {
+        console.log('Verifying authentication..');
 
-    const { error, data } = useQuery(VERIFY_AUTH);
+        const token = localStorage.getItem('token');
 
-    if (error || (data && !data.verifyAuth.success)) {
-        localStorage.removeItem('token');
-        console.log('Not authenticated.');
-        return false;
-    }
+        if (token) {
+            client.setHeader('Authorization', token);
+        } else {
+            client.removeHeader('Authorization');
+            console.log('Not authenticated.');
+            setAuthenticated(false);
+            return;
+        }
 
-    console.log('Authenticated.');
-    return true;
+        (async () => {
+            await verifyAuthCallback().then(({ error, data }) => {
+                if (error || (data && !data.verifyAuth.success)) {
+                    localStorage.removeItem('token');
+                    console.log('Not authenticated.');
+                    setAuthenticated(false);
+                    return;
+                }
+
+                console.log('Authenticated.');
+                setAuthenticated(true);
+            });
+        })();
+    };
+
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
+    return [authenticated, checkAuth];
 };
