@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './constants';
+import { preloadImages, theme } from './constants';
 import Index from './routes/Index';
 import SignIn from './routes/SignIn';
 import { AuthContext, verifyAuth } from './utils/auth';
@@ -11,10 +11,15 @@ function App() {
 
     const history = useHistory();
 
-    // Re-verify authentication when routing is done
     useEffect(() => {
+        // Re-verify authentication when routing is done
         history.listen(() => {
             reVerifyAuth();
+        });
+
+        // Preload images
+        Object.values(preloadImages).forEach((img) => {
+            new Image().src = img;
         });
     }, []);
 

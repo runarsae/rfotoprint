@@ -18,3 +18,7 @@ export enum Sections {
     Varer = 'Varer',
     Kontakt = 'Kontakt'
 }
+
+export const preloadImages = {
+    printing: '/img/printing.svg'
+};
