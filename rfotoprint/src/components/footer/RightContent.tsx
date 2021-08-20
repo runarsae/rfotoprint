@@ -111,7 +111,7 @@ function RightContent(): JSX.Element {
                 target="_blank"
             >
                 <Logo src="/img/auraavis.png" alt="Aura Avis" />
-                Les artikkel i Aura Avis &#187;
+                Les artikkel i Aura Avis (+) &#187;
                 {/* <ButtonLink
                     onClick={() => {
                         window.open(
