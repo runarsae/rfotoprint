@@ -196,7 +196,10 @@ export default function Supplies() {
             setPageCount(result.pageCount);
 
             if (scroll) {
-                scrollIntoView();
+                // Scroll only if on smaller devices
+                if (width < 1080) {
+                    scrollIntoView();
+                }
             }
 
             setCurrentPage(page);
@@ -228,6 +231,8 @@ export default function Supplies() {
         }
     };
 
+    /*
+    // Arrow key navigation
     const navigate = (e: KeyboardEvent) => {
         if (e.key == 'ArrowLeft') {
             previousPage();
@@ -245,6 +250,7 @@ export default function Supplies() {
             };
         }
     }, [pageCount]);
+    */
 
     useEffect(() => {
         if (width >= 768 && width < 1080) {
