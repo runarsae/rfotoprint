@@ -20,5 +20,6 @@ export enum Sections {
 }
 
 export const preloadImages = {
-    printing: '/img/printing.svg'
+    printing: '/img/printing.svg',
+    close: '/img/close.svg'
 };

@@ -9,7 +9,7 @@ import Button from '../components/common/Button';
 import Undertitle from '../components/common/Undertitle';
 import useWindowDimensions from '../utils/windowDimensions';
 import { PRODUCTS } from '../api/queries';
-import { useManualQuery, useMutation, useQuery } from 'graphql-hooks';
+import { useManualQuery, useMutation } from 'graphql-hooks';
 import { AuthContext } from '../utils/auth';
 import { DELETE_PRODUCT } from '../api/mutations';
 import Sidebar from '../components/common/Sidebar';
@@ -18,6 +18,7 @@ import AddProduct from '../components/panel/AddProduct';
 import RoundButton from '../components/common/RoundButton';
 import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
+import Popup from '../components/common/Popup';
 
 const SupplierGrid = styled.div`
     display: grid;
@@ -116,6 +117,17 @@ const PaginationButton = styled.button`
 
 const PageInfo = styled.div`
     font-size: 14px;
+`;
+
+const FullImage = styled.img`
+    display: block;
+    background-color: white;
+    padding: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: auto;
+    user-select: none;
+    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
 `;
 
 interface IProducts {
@@ -266,6 +278,9 @@ export default function Supplies() {
         }
     }, [pageSize]);
 
+    const [imagePopupOpen, setImagePopupOpen] = useState<boolean>(false);
+    const [popupImage, setPopupImage] = useState<string>();
+
     return (
         <Section name="Varer" color="light">
             <>
@@ -341,6 +356,10 @@ export default function Supplies() {
                                             () => fetchProductsCallback(currentPage, false, true)
                                         );
                                     }}
+                                    viewImage={() => {
+                                        setPopupImage(product.image);
+                                        setImagePopupOpen(true);
+                                    }}
                                 />
                             ))}
                         </SuppliesGrid>
@@ -389,6 +408,20 @@ export default function Supplies() {
                         <></>
                     )}
                 </Sidebar>
+
+                <Popup
+                    open={imagePopupOpen}
+                    onClose={() => {
+                        setImagePopupOpen(false);
+                    }}
+                >
+                    <FullImage
+                        src={
+                            process.env.REACT_APP_SERVER_ADDRESS + '/uploads/supplies/' + popupImage
+                        }
+                        alt="Product"
+                    />
+                </Popup>
             </>
         </Section>
     );

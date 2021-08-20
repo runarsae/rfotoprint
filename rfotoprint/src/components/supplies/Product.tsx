@@ -15,6 +15,7 @@ const ProductImage = styled.img`
     height: 100%;
     display: block;
     object-fit: contain;
+    user-select: none;
 `;
 
 const Actions = styled.div`
@@ -67,6 +68,7 @@ interface Props {
     authenticated: boolean;
     editProduct: () => void;
     deleteProduct: () => void;
+    viewImage: () => void;
 }
 
 export default function Product(props: Props) {
@@ -81,6 +83,7 @@ export default function Product(props: Props) {
                             props.product.image
                         }
                         alt={props.product.name}
+                        onClick={props.viewImage}
                     />
                     {props.authenticated && (
                         <Actions>
