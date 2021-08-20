@@ -22,7 +22,7 @@ function SignIn() {
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            history.push('/panel');
+            history.push('/');
         }
     });
 
