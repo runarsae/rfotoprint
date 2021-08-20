@@ -13,7 +13,7 @@ const Grid = styled.div`
     grid-template-columns: 1fr;
     align-items: flex-start;
     width: 100%;
-    gap: 80px 40px;
+    gap: 80px;
     padding: 40px 0;
 
     @media (min-width: 640px) {
@@ -134,8 +134,8 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Lysbilder og negativer</Undertitle>
                         <Description align="center">
-                            Overføring av lysbilder og negativer til digitale <br />
-                            bilder i høy oppløsning.
+                            Overføring av lysbilder og negativer til digitale bilder i høy
+                            oppløsning.
                         </Description>
                         <Price>Pris etter avtale</Price>
                     </GridItem>
