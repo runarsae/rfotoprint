@@ -123,12 +123,11 @@ const FullImage = styled.img`
     display: block;
     background-color: white;
     padding: 20px;
-    border-radius: 2px;
     max-width: 100%;
     max-height: 100%;
     pointer-events: auto;
     user-select: none;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
 `;
 
 interface IProducts {
