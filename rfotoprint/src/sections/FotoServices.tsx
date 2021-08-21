@@ -7,6 +7,9 @@ import Section from '../components/common/Section';
 import Sidebar from '../components/common/Sidebar';
 import Button from '../components/common/Button';
 import PriceList from '../components/foto-services/PriceList';
+import Popup from '../components/common/Popup';
+import { preloadImages } from '../constants';
+import ButtonLink from '../components/common/ButtonLink';
 
 const Grid = styled.div`
     display: grid;
@@ -65,8 +68,53 @@ const Price = styled(Text)`
     font-weight: bold;
 `;
 
+const ImageDisplay = styled.div`
+    display: grid;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    max-width: 1080px;
+    grid-template-columns: auto;
+    align-items: center;
+    user-select: none;
+    pointer-events: auto;
+    gap: 20px;
+    overflow: auto;
+
+    @media (min-width: 520px) {
+        gap: 40px;
+    }
+
+    @media (min-width: 640px) {
+        grid-template-columns: auto auto;
+    }
+`;
+
+const ImageContainer = styled.div`
+    position: relative;
+
+    & img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+    }
+`;
+
+const Label = styled(Text)`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: ${(props) => props.theme.background.dark};
+    padding: 12px;
+    font-weight: bold;
+`;
+
 export default function FotoServices() {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+    const [popupOpen, setPopupOpen] = useState<boolean>(false);
 
     return (
         <Section name="Fototjenester" color="main">
@@ -124,7 +172,16 @@ export default function FotoServices() {
                         </IconContainer>
                         <Undertitle align="center">Forbedring</Undertitle>
                         <Description align="center">
-                            Fjerning av bretter, skader, striper og lignende.
+                            Fjerning av bretter, skader, striper og lignende. Se{' '}
+                            <ButtonLink
+                                onClick={() => {
+                                    setPopupOpen(true);
+                                }}
+                                closingCondition={popupOpen}
+                            >
+                                eksempel
+                            </ButtonLink>
+                            .
                         </Description>
                         <Price>Fra kr 65,-</Price>
                     </GridItem>
@@ -144,6 +201,24 @@ export default function FotoServices() {
                 <Sidebar open={sidebarOpen} closeSidebar={() => setSidebarOpen(false)}>
                     <PriceList />
                 </Sidebar>
+
+                <Popup
+                    open={popupOpen}
+                    onClose={() => {
+                        setPopupOpen(false);
+                    }}
+                >
+                    <ImageDisplay>
+                        <ImageContainer>
+                            <img src={preloadImages.before} alt="Before edit" />
+                            <Label>FØR</Label>
+                        </ImageContainer>
+                        <ImageContainer>
+                            <img src={preloadImages.after} alt="After edit" />
+                            <Label>ETTER</Label>
+                        </ImageContainer>
+                    </ImageDisplay>
+                </Popup>
             </>
         </Section>
     );
