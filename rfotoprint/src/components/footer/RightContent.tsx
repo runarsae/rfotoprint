@@ -22,7 +22,7 @@ const FacebookWrapper = styled.div`
     height: 130px;
 
     @media (min-width: 1080px) {
-        width: 320px;
+        width: 250px;
     }
 `;
 
@@ -50,7 +50,7 @@ const Title = styled.h3`
     }
 `;
 
-const Logo = styled.img`
+const MediaLogo = styled.img`
     display: inline-block;
     width: 26px;
     height: 26px;
@@ -97,8 +97,8 @@ function RightContent(): JSX.Element {
                     ></Embed>
                 ) : (
                     <Embed
-                        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FR-Fotoprint-112650973637204&tabs&width=320&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
-                        width="320"
+                        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FR-Fotoprint-112650973637204&tabs&width=250&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+                        width="250"
                         height="130"
                         scrolling="no"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -110,19 +110,8 @@ function RightContent(): JSX.Element {
                 href="https://www.auraavis.no/ann-elin-skapte-sin-egen-arbeidsplass/s/5-5-276059"
                 target="_blank"
             >
-                <Logo src="/img/auraavis.png" alt="Aura Avis" />
+                <MediaLogo src="/img/auraavis.png" alt="Aura Avis" />
                 Les artikkel i Aura Avis (+) &#187;
-                {/* <ButtonLink
-                    onClick={() => {
-                        window.open(
-                            'https://www.auraavis.no/ann-elin-skapte-sin-egen-arbeidsplass/s/5-5-276059',
-                            '_blank'
-                        );
-                    }}
-                    closingCondition={false}
-                >
-                    Les artikkel i Aura Avis &#187;
-                </ButtonLink> */}
             </Link>
         </Wrapper>
     );
