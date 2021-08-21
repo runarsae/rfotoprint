@@ -7,6 +7,7 @@ const Button = styled.button`
     top: 50px;
     right: 20px;
     pointer-events: auto;
+    user-select: none;
 
     width: 20px;
     height: 20px;

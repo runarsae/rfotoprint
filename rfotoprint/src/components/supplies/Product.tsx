@@ -74,7 +74,7 @@ interface Props {
 export default function Product(props: Props) {
     return (
         <div>
-            <Card>
+            <Card onClick={props.viewImage}>
                 <Content>
                     <ProductImage
                         src={
@@ -83,7 +83,6 @@ export default function Product(props: Props) {
                             props.product.image
                         }
                         alt={props.product.name}
-                        onClick={props.viewImage}
                     />
                     {props.authenticated && (
                         <Actions>

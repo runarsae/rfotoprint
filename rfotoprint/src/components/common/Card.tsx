@@ -24,11 +24,12 @@ const Content = styled.div`
 
 interface Props {
     children: JSX.Element;
+    onClick?: () => void;
 }
 
 function Card(props: Props) {
     return (
-        <Wrapper>
+        <Wrapper onClick={props.onClick}>
             <Content>{props.children}</Content>
         </Wrapper>
     );
