@@ -290,7 +290,7 @@ export default function Products() {
                     </Text>
                     <Button
                         onClick={() => {
-                            window.open('https://ekstranett.emo.no/kataloger/katalog1/', '_blank');
+                            window.open('/katalog', '_blank');
                         }}
                     >
                         Til kontorkatalogen &#187;
