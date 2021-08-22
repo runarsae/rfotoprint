@@ -47,7 +47,7 @@ const ProductTitle = styled.div`
     max-height: 32px;
     margin: 8px 0;
     overflow: hidden;
-
+    color: ${(props) => props.theme.text};
     font-size: 14px;
     font-weight: bold;
 
