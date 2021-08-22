@@ -7,7 +7,7 @@ const Chip = styled.button<{ active: boolean }>`
     height: 34px;
     width: fit-content;
     padding: 8px 16px;
-    cursor: pointer;
+    cursor: ${(props) => (props.active ? 'default' : 'pointer')};
     color: ${(props) => (props.active ? 'white' : props.theme.text)};
     background-color: ${(props) => (props.active ? '#caa557' : props.theme.background.main)};
     transition: background-color 100ms ease-in-out, color 100ms ease-in-out;

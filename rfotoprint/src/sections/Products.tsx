@@ -52,15 +52,26 @@ const UndertitleGrid = styled.div`
     align-items: center;
 `;
 
-const ChipContainer = styled.div`
+const Categories = styled.div`
     display: grid;
-    grid-template-columns: min-content min-content min-content;
+    grid-template-columns: 1fr;
     gap: 8px;
     align-items: center;
+
+    @media (min-width: 375px) {
+        grid-template-columns: min-content min-content;
+    }
 
     @media (min-width: 640px) {
         justify-self: right;
     }
+`;
+
+const ChipContainer = styled.div`
+    display: grid;
+    grid-template-columns: min-content min-content;
+    gap: 8px;
+    align-items: center;
 `;
 
 const ProductsGrid = styled.div`
@@ -155,12 +166,10 @@ export default function Products() {
     const [initialFetch, setInitialFetch] = useState<boolean>(false);
     const [products, setProducts] = useState<IProducts | null>(null);
 
-    const [category, setCategory] = useState<string>('');
+    const [category, setCategory] = useState<string>('office-supplies');
 
     const handleCategoryChange = (value: string) => {
-        if (category == value) {
-            setCategory('');
-        } else {
+        if (category !== value) {
             setCategory(value);
         }
     };
@@ -313,23 +322,25 @@ export default function Products() {
                             <div></div>
                         )}
                     </UndertitleGrid>
-                    <ChipContainer>
+                    <Categories>
                         <Text>
                             <b>Kategori:</b>
                         </Text>
-                        <Chip
-                            active={category === 'office-supplies'}
-                            onClick={() => handleCategoryChange('office-supplies')}
-                        >
-                            Kontorrekvisita
-                        </Chip>
-                        <Chip
-                            active={category === 'frames'}
-                            onClick={() => handleCategoryChange('frames')}
-                        >
-                            Rammer
-                        </Chip>
-                    </ChipContainer>
+                        <ChipContainer>
+                            <Chip
+                                active={category === 'office-supplies'}
+                                onClick={() => handleCategoryChange('office-supplies')}
+                            >
+                                Kontorrekvisita
+                            </Chip>
+                            <Chip
+                                active={category === 'frames'}
+                                onClick={() => handleCategoryChange('frames')}
+                            >
+                                Rammer
+                            </Chip>
+                        </ChipContainer>
+                    </Categories>
                 </ProductsHeader>
                 {products && pageCount && Object.keys(products).length > 0 ? (
                     <>
