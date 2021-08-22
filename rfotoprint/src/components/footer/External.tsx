@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    grid-area: right;
+    grid-area: external;
     justify-self: center;
     text-align: center;
 
@@ -55,6 +55,7 @@ const MediaLogo = styled.img`
     width: 26px;
     height: 26px;
     margin-right: 8px;
+    border-radius: 2px;
 `;
 
 const Link = styled.a`
@@ -71,7 +72,7 @@ const Link = styled.a`
     }
 `;
 
-function RightContent(): JSX.Element {
+function External(): JSX.Element {
     const [screenWidth, setScreenWidth] = useState(1080);
 
     useEffect(() => {
@@ -117,4 +118,4 @@ function RightContent(): JSX.Element {
     );
 }
 
-export default RightContent;
+export default External;

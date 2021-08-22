@@ -31,10 +31,6 @@ const SupplierGrid = styled.div`
     }
 `;
 
-const SupplierButton = styled(Button)`
-    height: 35px;
-`;
-
 const SuppliesHeader = styled.div`
     display: grid;
     grid-template-columns: 1fr;
@@ -128,6 +124,7 @@ const FullImage = styled.img`
     pointer-events: auto;
     user-select: none;
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+    border-radius: 2px;
 `;
 
 interface IProducts {
@@ -291,18 +288,13 @@ export default function Supplies() {
                         på knappen {width >= 768 ? 'til høyre' : 'nedenfor'} for å se hvilke varer
                         jeg kan skaffe.
                     </Text>
-                    <div>
-                        <SupplierButton
-                            onClick={() => {
-                                window.open(
-                                    'https://ekstranett.emo.no/kataloger/katalog1/',
-                                    '_blank'
-                                );
-                            }}
-                        >
-                            Til kontorkatalogen &#187;
-                        </SupplierButton>
-                    </div>
+                    <Button
+                        onClick={() => {
+                            window.open('https://ekstranett.emo.no/kataloger/katalog1/', '_blank');
+                        }}
+                    >
+                        Til kontorkatalogen &#187;
+                    </Button>
                 </SupplierGrid>
 
                 <SuppliesHeader id="products-in-stock">

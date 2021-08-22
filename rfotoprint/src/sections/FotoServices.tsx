@@ -92,6 +92,8 @@ const ImageDisplay = styled.div`
 
 const ImageContainer = styled.div`
     position: relative;
+    border-radius: 2px;
+    overflow: hidden;
 
     & img {
         display: block;
@@ -110,6 +112,8 @@ const Label = styled(Text)`
     background-color: ${(props) => props.theme.background.dark};
     padding: 12px;
     font-weight: bold;
+    border-top-left-radius: 2px;
+    overflow: hidden;
 `;
 
 export default function FotoServices() {

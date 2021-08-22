@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 0;
     padding-top: 100%;
+    border-radius: 2px;
 `;
 
 const Content = styled.div`

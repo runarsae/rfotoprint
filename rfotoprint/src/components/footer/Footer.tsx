@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Section from '../common/Section';
 import Contact from './Contact';
-import RightContent from './RightContent';
+import External from './External';
 import Profile from './Profile';
 
 const FooterContent = styled.div`
@@ -10,14 +10,14 @@ const FooterContent = styled.div`
     grid-template-areas:
         'contact'
         'profile'
-        'right';
+        'external';
     gap: 60px;
     color: #ffffff;
 
     @media (min-width: 640px) {
         grid-template-columns: repeat(2, 1fr);
         grid-template-areas:
-            'contact right'
+            'contact external'
             'profile profile';
         gap: 40px 40px;
     }
@@ -28,7 +28,7 @@ const FooterContent = styled.div`
 
     @media (min-width: 1080px) {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-areas: 'contact profile right';
+        grid-template-areas: 'contact profile external';
         gap: 20px;
     }
 `;
@@ -53,7 +53,7 @@ function Footer(): JSX.Element {
                 <FooterContent>
                     <Contact />
                     <Profile />
-                    <RightContent />
+                    <External />
                 </FooterContent>
             </Section>
             <CopyrightBar>Copyright &copy; {new Date().getFullYear()}, R Fotoprint</CopyrightBar>
