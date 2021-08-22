@@ -135,6 +135,7 @@ export default function FotoServices() {
                             ledning).
                         </Description>
                         <Button
+                            center
                             onClick={() => {
                                 setSidebarOpen(true);
                             }}

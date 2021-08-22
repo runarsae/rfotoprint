@@ -20,15 +20,11 @@ import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
 
-const SupplierGrid = styled.div`
+const Supplier = styled.div`
+    width: 50%;
     display: grid;
-    grid-template-columns: 100%;
-    gap: 20px;
-    align-items: center;
-
-    @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: 1fr;
+    gap: 24px;
 `;
 
 const ProductsHeader = styled.div`
@@ -291,11 +287,11 @@ export default function Products() {
         <Section name="Varer" color="light">
             <>
                 <Title>Varer</Title>
-                <SupplierGrid>
+                <Supplier>
                     <Text>
-                        Kontorrekvisita kan skaffes ved behov. Gå til kontorkatalogen ved å klikke
-                        på knappen {width >= 768 ? 'til høyre' : 'nedenfor'} for å se hvilke varer
-                        jeg kan skaffe.
+                        Kontorpapir, skriveredskap, skrivebøker, datatilbehør og diverse
+                        kontorutstyr kan skaffes ved behov. Gå til kontorkatalogen ved å klikke på
+                        knappen nedenfor for å se hvilke varer jeg kan skaffe.
                     </Text>
                     <Button
                         onClick={() => {
@@ -304,7 +300,7 @@ export default function Products() {
                     >
                         Til kontorkatalogen &#187;
                     </Button>
-                </SupplierGrid>
+                </Supplier>
 
                 <ProductsHeader id="products-in-stock">
                     <UndertitleGrid>
