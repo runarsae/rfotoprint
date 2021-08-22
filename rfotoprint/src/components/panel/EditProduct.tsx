@@ -76,7 +76,7 @@ function EditProduct(props: Props) {
 
             axios({
                 method: 'delete',
-                url: process.env.REACT_APP_SERVER_ADDRESS + '/uploads/supplies/' + oldImage,
+                url: process.env.REACT_APP_SERVER_ADDRESS + '/uploads/products/' + oldImage,
                 headers: {
                     Authorization: localStorage.getItem('token')
                 }
@@ -167,7 +167,7 @@ function EditProduct(props: Props) {
                                     src={
                                         prevImage
                                             ? process.env.REACT_APP_SERVER_ADDRESS +
-                                              '/uploads/supplies/' +
+                                              '/uploads/products/' +
                                               prevImage
                                             : URL.createObjectURL(image)
                                     }

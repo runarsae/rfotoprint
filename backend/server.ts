@@ -62,13 +62,13 @@ app.use(
     })
 );
 
-// Endpoint to access files stored at 'uploads/supplies/'
-app.use('/uploads/supplies', express.static(path.join(__dirname, 'uploads/supplies/')));
+// Endpoint to access files stored at 'uploads/products/'
+app.use('/uploads/products', express.static(path.join(__dirname, 'uploads/products/')));
 
-// Set up storage of files at 'uploads/supplies/'
+// Set up storage of files at 'uploads/products/'
 const storage = multer.diskStorage({
     destination: function (_req, _file, cb) {
-        cb(null, 'uploads/supplies/');
+        cb(null, 'uploads/products/');
     },
     filename: function (req, _file, cb) {
         cb(null, req.body.imageId);
@@ -83,8 +83,8 @@ app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _n
 });
 
 // Endpoint for deleting an image
-app.delete('/uploads/supplies/:imageId', requireAuth, function (req, res, _next) {
-    const file = path.join(__dirname, 'uploads/supplies/' + req.params.imageId);
+app.delete('/uploads/products/:imageId', requireAuth, function (req, res, _next) {
+    const file = path.join(__dirname, 'uploads/products/' + req.params.imageId);
 
     if (existsSync(file)) {
         unlinkSync(file);

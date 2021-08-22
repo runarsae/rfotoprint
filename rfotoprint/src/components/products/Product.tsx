@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IProduct } from '../../sections/Supplies';
+import { IProduct } from '../../sections/Products';
 import Card from '../common/Card';
 import { DeleteIcon, EditIcon } from '../common/Icons';
 import Text from '../common/Text';
@@ -81,7 +81,7 @@ export default function Product(props: Props) {
                     <ProductImage
                         src={
                             process.env.REACT_APP_SERVER_ADDRESS +
-                            '/uploads/supplies/' +
+                            '/uploads/products/' +
                             props.product.image
                         }
                         alt={props.product.name}

@@ -336,7 +336,7 @@ export const resolvers = {
                 await db.collection('products').deleteOne({ _id: _id });
 
                 // Delete image
-                const file = path.join(__dirname, 'uploads/supplies/' + product.image);
+                const file = path.join(__dirname, 'uploads/products/' + product.image);
 
                 if (existsSync(file)) {
                     unlinkSync(file);

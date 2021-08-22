@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Section from '../components/common/Section';
 import Title from '../components/common/Title';
 import Text from '../components/common/Text';
-import Product from '../components/supplies/Product';
+import Product from '../components/products/Product';
 import Button from '../components/common/Button';
 import Undertitle from '../components/common/Undertitle';
 import useWindowDimensions from '../utils/windowDimensions';
@@ -31,7 +31,7 @@ const SupplierGrid = styled.div`
     }
 `;
 
-const SuppliesHeader = styled.div`
+const ProductsHeader = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
@@ -63,7 +63,7 @@ const ChipContainer = styled.div`
     }
 `;
 
-const SuppliesGrid = styled.div`
+const ProductsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -140,7 +140,7 @@ export interface IProduct {
     image: string;
 }
 
-export default function Supplies() {
+export default function Products() {
     const auth = useContext(AuthContext);
 
     const [editProductId, setEditProductId] = useState<string>();
@@ -297,7 +297,7 @@ export default function Supplies() {
                     </Button>
                 </SupplierGrid>
 
-                <SuppliesHeader id="products-in-stock">
+                <ProductsHeader id="products-in-stock">
                     <UndertitleGrid>
                         <Undertitle>Lagervarer</Undertitle>
                         {auth ? (
@@ -330,10 +330,10 @@ export default function Supplies() {
                             Rammer
                         </Chip>
                     </ChipContainer>
-                </SuppliesHeader>
+                </ProductsHeader>
                 {products && pageCount && Object.keys(products).length > 0 ? (
                     <>
-                        <SuppliesGrid>
+                        <ProductsGrid>
                             {Object.entries(products).map(([id, product]) => (
                                 <Product
                                     key={id}
@@ -354,7 +354,7 @@ export default function Supplies() {
                                     }}
                                 />
                             ))}
-                        </SuppliesGrid>
+                        </ProductsGrid>
                         <Pagination>
                             <PaginationButton
                                 disabled={currentPage == 1}
@@ -409,7 +409,7 @@ export default function Supplies() {
                 >
                     <FullImage
                         src={
-                            process.env.REACT_APP_SERVER_ADDRESS + '/uploads/supplies/' + popupImage
+                            process.env.REACT_APP_SERVER_ADDRESS + '/uploads/products/' + popupImage
                         }
                         alt="Product"
                     />
