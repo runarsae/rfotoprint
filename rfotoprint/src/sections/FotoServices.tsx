@@ -127,7 +127,7 @@ export default function FotoServices() {
                 <Grid>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/printer.svg" />
+                            <Icon src="/img/icons/printer.svg" alt="Printer" />
                         </IconContainer>
                         <Undertitle align="center">Utskrift</Undertitle>
                         <Description align="center">
@@ -144,7 +144,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/camera.svg" />
+                            <Icon src="/img/icons/camera.svg" alt="Kamera" />
                         </IconContainer>
                         <Undertitle align="center">Passfoto</Undertitle>
                         <Description align="center">
@@ -154,7 +154,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/image-gallery.svg" />
+                            <Icon src="/img/icons/image-gallery.svg" alt="Galleri" />
                         </IconContainer>
                         <Undertitle align="center">Forstørring</Undertitle>
                         <Description align="center">
@@ -164,7 +164,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/scanner.svg" />
+                            <Icon src="/img/icons/scanner.svg" alt="Skanner" />
                         </IconContainer>
                         <Undertitle align="center">Skanning</Undertitle>
                         <Description align="center">Skanning av gamle og nye bilder.</Description>
@@ -172,7 +172,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/edit-image.svg" />
+                            <Icon src="/img/icons/edit-image.svg" alt="Endre bilde" />
                         </IconContainer>
                         <Undertitle align="center">Forbedring</Undertitle>
                         <Description align="center">
@@ -191,7 +191,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/movie.svg" />
+                            <Icon src="/img/icons/movie.svg" alt="Film" />
                         </IconContainer>
                         <Undertitle align="center">Lysbilder og negativer</Undertitle>
                         <Description align="center">
