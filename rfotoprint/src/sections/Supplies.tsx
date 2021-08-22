@@ -307,7 +307,7 @@ export default function Supplies() {
                                     setAddProductSidebarOpen(true);
                                 }}
                             >
-                                <AddIcon fill="#ad8226" />
+                                <AddIcon fill="#FFFFFF" />
                             </RoundButton>
                         ) : (
                             <div></div>
