@@ -7,13 +7,16 @@ import Section from '../components/common/Section';
 import Sidebar from '../components/common/Sidebar';
 import Button from '../components/common/Button';
 import PriceList from '../components/foto-services/PriceList';
+import Popup from '../components/common/Popup';
+import { preloadImages } from '../constants';
+import ButtonLink from '../components/common/ButtonLink';
 
 const Grid = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     align-items: flex-start;
     width: 100%;
-    gap: 80px 40px;
+    gap: 80px;
     padding: 40px 0;
 
     @media (min-width: 640px) {
@@ -65,8 +68,57 @@ const Price = styled(Text)`
     font-weight: bold;
 `;
 
+const ImageDisplay = styled.div`
+    display: grid;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    max-width: 1080px;
+    grid-template-columns: auto;
+    align-items: center;
+    user-select: none;
+    pointer-events: auto;
+    gap: 20px;
+    overflow: auto;
+
+    @media (min-width: 520px) {
+        gap: 40px;
+    }
+
+    @media (min-width: 640px) {
+        grid-template-columns: auto auto;
+    }
+`;
+
+const ImageContainer = styled.div`
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+
+    & img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+    }
+`;
+
+const Label = styled(Text)`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: ${(props) => props.theme.background.dark};
+    padding: 12px;
+    font-weight: bold;
+    border-top-left-radius: 2px;
+    overflow: hidden;
+`;
+
 export default function FotoServices() {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+    const [popupOpen, setPopupOpen] = useState<boolean>(false);
 
     return (
         <Section name="Fototjenester" color="main">
@@ -75,7 +127,7 @@ export default function FotoServices() {
                 <Grid>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/printer.svg" />
+                            <Icon src="/img/icons/printer.svg" alt="Printer" />
                         </IconContainer>
                         <Undertitle align="center">Utskrift</Undertitle>
                         <Description align="center">
@@ -83,6 +135,7 @@ export default function FotoServices() {
                             ledning).
                         </Description>
                         <Button
+                            center
                             onClick={() => {
                                 setSidebarOpen(true);
                             }}
@@ -92,7 +145,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/camera.svg" />
+                            <Icon src="/img/icons/camera.svg" alt="Kamera" />
                         </IconContainer>
                         <Undertitle align="center">Passfoto</Undertitle>
                         <Description align="center">
@@ -102,7 +155,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/image-gallery.svg" />
+                            <Icon src="/img/icons/image-gallery.svg" alt="Galleri" />
                         </IconContainer>
                         <Undertitle align="center">Forstørring</Undertitle>
                         <Description align="center">
@@ -112,7 +165,7 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/scanner.svg" />
+                            <Icon src="/img/icons/scanner.svg" alt="Skanner" />
                         </IconContainer>
                         <Undertitle align="center">Skanning</Undertitle>
                         <Description align="center">Skanning av gamle og nye bilder.</Description>
@@ -120,22 +173,31 @@ export default function FotoServices() {
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/edit-image.svg" />
+                            <Icon src="/img/icons/edit-image.svg" alt="Endre bilde" />
                         </IconContainer>
                         <Undertitle align="center">Forbedring</Undertitle>
                         <Description align="center">
-                            Fjerning av bretter, skader, striper og lignende.
+                            Fjerning av bretter, skader, striper og lignende. Se{' '}
+                            <ButtonLink
+                                onClick={() => {
+                                    setPopupOpen(true);
+                                }}
+                                closingCondition={popupOpen}
+                            >
+                                eksempel
+                            </ButtonLink>
+                            .
                         </Description>
                         <Price>Fra kr 65,-</Price>
                     </GridItem>
                     <GridItem>
                         <IconContainer>
-                            <Icon src="/img/icons/movie.svg" />
+                            <Icon src="/img/icons/movie.svg" alt="Film" />
                         </IconContainer>
                         <Undertitle align="center">Lysbilder og negativer</Undertitle>
                         <Description align="center">
-                            Overføring av lysbilder og negativer til digitale <br />
-                            bilder i høy oppløsning.
+                            Overføring av lysbilder og negativer til digitale bilder i høy
+                            oppløsning.
                         </Description>
                         <Price>Pris etter avtale</Price>
                     </GridItem>
@@ -144,6 +206,24 @@ export default function FotoServices() {
                 <Sidebar open={sidebarOpen} closeSidebar={() => setSidebarOpen(false)}>
                     <PriceList />
                 </Sidebar>
+
+                <Popup
+                    open={popupOpen}
+                    onClose={() => {
+                        setPopupOpen(false);
+                    }}
+                >
+                    <ImageDisplay>
+                        <ImageContainer>
+                            <img src={preloadImages.before} alt="Before edit" />
+                            <Label>FØR</Label>
+                        </ImageContainer>
+                        <ImageContainer>
+                            <img src={preloadImages.after} alt="After edit" />
+                            <Label>ETTER</Label>
+                        </ImageContainer>
+                    </ImageDisplay>
+                </Popup>
             </>
         </Section>
     );

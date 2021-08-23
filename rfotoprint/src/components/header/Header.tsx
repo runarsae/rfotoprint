@@ -5,6 +5,10 @@ import Navigation from './Navigation';
 const Wrapper = styled.div`
     max-width: min(1300px, 95%);
     margin: auto;
+
+    @media (min-width: 640px) {
+        margin: 8px auto;
+    }
 `;
 
 const Content = styled.div`

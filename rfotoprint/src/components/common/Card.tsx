@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 0;
     padding-top: 100%;
+    border-radius: 2px;
 `;
 
 const Content = styled.div`
@@ -24,11 +25,12 @@ const Content = styled.div`
 
 interface Props {
     children: JSX.Element;
+    onClick?: () => void;
 }
 
 function Card(props: Props) {
     return (
-        <Wrapper>
+        <Wrapper onClick={props.onClick}>
             <Content>{props.children}</Content>
         </Wrapper>
     );

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { preloadImages, theme } from './constants';
+import Catalog from './routes/Catalog';
 import Index from './routes/Index';
 import SignIn from './routes/SignIn';
 import { AuthContext, verifyAuth } from './utils/auth';
@@ -40,6 +41,9 @@ function App() {
                             return <></>;
                         }}
                     />
+                    <Route path="/katalog">
+                        <Catalog />
+                    </Route>
                     <Route path="/">
                         <Index />
                     </Route>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Section from '../components/common/Section';
 import Title from '../components/common/Title';
 import Text from '../components/common/Text';
-import Product from '../components/supplies/Product';
+import Product from '../components/products/Product';
 import Button from '../components/common/Button';
 import Undertitle from '../components/common/Undertitle';
 import useWindowDimensions from '../utils/windowDimensions';
@@ -20,22 +20,18 @@ import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
 
-const SupplierGrid = styled.div`
+const Supplier = styled.div`
     display: grid;
-    grid-template-columns: 100%;
-    gap: 20px;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
 
     @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+        width: 50%;
     }
 `;
 
-const SupplierButton = styled(Button)`
-    height: 35px;
-`;
-
-const SuppliesHeader = styled.div`
+const ProductsHeader = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
@@ -56,18 +52,29 @@ const UndertitleGrid = styled.div`
     align-items: center;
 `;
 
-const ChipContainer = styled.div`
+const Categories = styled.div`
     display: grid;
-    grid-template-columns: min-content min-content min-content;
+    grid-template-columns: 1fr;
     gap: 8px;
     align-items: center;
+
+    @media (min-width: 375px) {
+        grid-template-columns: min-content min-content;
+    }
 
     @media (min-width: 640px) {
         justify-self: right;
     }
 `;
 
-const SuppliesGrid = styled.div`
+const ChipContainer = styled.div`
+    display: grid;
+    grid-template-columns: min-content min-content;
+    gap: 8px;
+    align-items: center;
+`;
+
+const ProductsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -128,6 +135,7 @@ const FullImage = styled.img`
     pointer-events: auto;
     user-select: none;
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+    border-radius: 2px;
 `;
 
 interface IProducts {
@@ -143,7 +151,7 @@ export interface IProduct {
     image: string;
 }
 
-export default function Supplies() {
+export default function Products() {
     const auth = useContext(AuthContext);
 
     const [editProductId, setEditProductId] = useState<string>();
@@ -158,12 +166,10 @@ export default function Supplies() {
     const [initialFetch, setInitialFetch] = useState<boolean>(false);
     const [products, setProducts] = useState<IProducts | null>(null);
 
-    const [category, setCategory] = useState<string>('');
+    const [category, setCategory] = useState<string>('office-supplies');
 
     const handleCategoryChange = (value: string) => {
-        if (category == value) {
-            setCategory('');
-        } else {
+        if (category !== value) {
             setCategory(value);
         }
     };
@@ -285,27 +291,22 @@ export default function Supplies() {
         <Section name="Varer" color="light">
             <>
                 <Title>Varer</Title>
-                <SupplierGrid>
+                <Supplier>
                     <Text>
-                        Kontorrekvisita kan skaffes ved behov. Gå til kontorkatalogen ved å klikke
-                        på knappen {width >= 768 ? 'til høyre' : 'nedenfor'} for å se hvilke varer
-                        jeg kan skaffe.
+                        Kontorpapir, skriveredskap, skrivebøker, datatilbehør og diverse
+                        kontorutstyr kan skaffes ved behov. Gå til kontorkatalogen ved å klikke på
+                        knappen nedenfor for å se hvilke varer jeg kan skaffe.
                     </Text>
-                    <div>
-                        <SupplierButton
-                            onClick={() => {
-                                window.open(
-                                    'https://ekstranett.emo.no/kataloger/katalog1/',
-                                    '_blank'
-                                );
-                            }}
-                        >
-                            Til kontorkatalogen &#187;
-                        </SupplierButton>
-                    </div>
-                </SupplierGrid>
+                    <Button
+                        onClick={() => {
+                            window.open('/katalog', '_blank');
+                        }}
+                    >
+                        Kontorkatalogen &#187;
+                    </Button>
+                </Supplier>
 
-                <SuppliesHeader id="products-in-stock">
+                <ProductsHeader id="products-in-stock">
                     <UndertitleGrid>
                         <Undertitle>Lagervarer</Undertitle>
                         {auth ? (
@@ -315,33 +316,35 @@ export default function Supplies() {
                                     setAddProductSidebarOpen(true);
                                 }}
                             >
-                                <AddIcon fill="#ad8226" />
+                                <AddIcon fill="#FFFFFF" />
                             </RoundButton>
                         ) : (
                             <div></div>
                         )}
                     </UndertitleGrid>
-                    <ChipContainer>
+                    <Categories>
                         <Text>
                             <b>Kategori:</b>
                         </Text>
-                        <Chip
-                            active={category === 'office-supplies'}
-                            onClick={() => handleCategoryChange('office-supplies')}
-                        >
-                            Kontorrekvisita
-                        </Chip>
-                        <Chip
-                            active={category === 'frames'}
-                            onClick={() => handleCategoryChange('frames')}
-                        >
-                            Rammer
-                        </Chip>
-                    </ChipContainer>
-                </SuppliesHeader>
+                        <ChipContainer>
+                            <Chip
+                                active={category === 'office-supplies'}
+                                onClick={() => handleCategoryChange('office-supplies')}
+                            >
+                                Kontorrekvisita
+                            </Chip>
+                            <Chip
+                                active={category === 'frames'}
+                                onClick={() => handleCategoryChange('frames')}
+                            >
+                                Rammer
+                            </Chip>
+                        </ChipContainer>
+                    </Categories>
+                </ProductsHeader>
                 {products && pageCount && Object.keys(products).length > 0 ? (
                     <>
-                        <SuppliesGrid>
+                        <ProductsGrid>
                             {Object.entries(products).map(([id, product]) => (
                                 <Product
                                     key={id}
@@ -362,7 +365,7 @@ export default function Supplies() {
                                     }}
                                 />
                             ))}
-                        </SuppliesGrid>
+                        </ProductsGrid>
                         <Pagination>
                             <PaginationButton
                                 disabled={currentPage == 1}
@@ -417,7 +420,7 @@ export default function Supplies() {
                 >
                     <FullImage
                         src={
-                            process.env.REACT_APP_SERVER_ADDRESS + '/uploads/supplies/' + popupImage
+                            process.env.REACT_APP_SERVER_ADDRESS + '/uploads/products/' + popupImage
                         }
                         alt="Product"
                     />

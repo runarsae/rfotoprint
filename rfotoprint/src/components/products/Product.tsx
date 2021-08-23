@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IProduct } from '../../sections/Supplies';
+import { IProduct } from '../../sections/Products';
 import Card from '../common/Card';
 import { DeleteIcon, EditIcon } from '../common/Icons';
 import Text from '../common/Text';
@@ -35,6 +35,7 @@ const Action = styled.button`
     background-color: ${(props) => props.theme.background.dark};
     transition: background-color 100ms ease-in-out;
     cursor: pointer;
+    pointer-events: all;
 
     &:hover {
         background-color: #636566;
@@ -43,14 +44,15 @@ const Action = styled.button`
 
 const ProductTitle = styled.div`
     width: 100%;
-    height: 32px;
+    max-height: 32px;
     margin: 8px 0;
-
+    overflow: hidden;
+    color: ${(props) => props.theme.text};
     font-size: 14px;
     font-weight: bold;
 
     @media (min-width: 520px) {
-        height: 38px;
+        max-height: 38px;
         font-size: 16px;
     }
 `;
@@ -74,23 +76,36 @@ interface Props {
 export default function Product(props: Props) {
     return (
         <div>
-            <Card>
+            <Card onClick={props.viewImage}>
                 <Content>
                     <ProductImage
                         src={
                             process.env.REACT_APP_SERVER_ADDRESS +
-                            '/uploads/supplies/' +
+                            '/uploads/products/' +
                             props.product.image
                         }
                         alt={props.product.name}
-                        onClick={props.viewImage}
                     />
                     {props.authenticated && (
                         <Actions>
-                            <Action title="Endre vare" onClick={props.editProduct}>
+                            <Action
+                                title="Endre vare"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    props.editProduct();
+                                }}
+                            >
                                 <EditIcon fill="#FFFFFF" />
                             </Action>
-                            <Action title="Slett vare" onClick={props.deleteProduct}>
+                            <Action
+                                title="Slett vare"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    props.deleteProduct();
+                                }}
+                            >
                                 <DeleteIcon fill="#FFFFFF" />
                             </Action>
                         </Actions>

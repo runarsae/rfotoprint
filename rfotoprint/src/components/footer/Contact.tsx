@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 const Title = styled.h3`
     font-weight: normal;
     text-align: center;
+    margin-bottom: 10px;
 
     @media (min-width: 640px) {
         text-align: left;

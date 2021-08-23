@@ -2,7 +2,7 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import FotoServices from '../sections/FotoServices';
 import Introduction from '../sections/Introduction';
-import Supplies from '../sections/Supplies';
+import Products from '../sections/Products';
 
 function Index() {
     return (
@@ -10,7 +10,7 @@ function Index() {
             <Header />
             <Introduction />
             <FotoServices />
-            <Supplies />
+            <Products />
             <Footer />
         </>
     );

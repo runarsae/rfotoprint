@@ -47,7 +47,7 @@ export default function Introduction() {
                         </LandingText>
                     </div>
 
-                    <LandingImage src="/img/landing4.svg" alt="Rossland Fotoprint" />
+                    <LandingImage src="/img/landing.svg" alt="Rossland Fotoprint" />
                 </>
             </Wrapper>
         </Section>

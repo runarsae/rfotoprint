@@ -13,11 +13,11 @@ const Wrapper = styled.div`
     height: 100%;
     z-index: 12;
     opacity: 0;
-    padding: 20px;
+    padding: 100px 20px 20px 20px;
     pointer-events: none;
 
     @media (min-width: 520px) {
-        padding: 40px;
+        padding: 100px 40px 40px 40px;
     }
 `;
 
@@ -59,6 +59,7 @@ export default function Popup(props: Props) {
                     <Wrapper
                         ref={popupRef}
                         style={{
+                            transition: `opacity 130ms ease-in-out`,
                             ...popupTransitionStyles[state]
                         }}
                     >
