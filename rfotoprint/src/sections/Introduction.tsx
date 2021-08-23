@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Title from '../components/common/Title';
 import Text from '../components/common/Text';
 import Section from '../components/common/Section';
+import { Fade } from 'react-awesome-reveal';
 
 const Wrapper = styled.div`
     display: grid;
@@ -23,8 +24,9 @@ const LandingText = styled(Text)`
 const LandingImage = styled.img`
     width: 100%;
     height: 100%;
-    max-width: 435px;
-    justify-self: center;
+    max-width: 370px;
+    display: block;
+    margin: auto;
 `;
 
 export default function Introduction() {
@@ -33,21 +35,26 @@ export default function Introduction() {
             <Wrapper>
                 <>
                     <div>
-                        <Title>Bilder, passfoto & kontorrekvisita</Title>
-                        <LandingText>
-                            Jeg startet Rossland Fotoprint januar 2020 og kan tilby følgende
-                            tjenester: utskrift av bilder, passfoto, forstørring, skanning,
-                            forbedring, salg av rammer og kontorrekvisita. Ta kontakt for avtale
-                            eller kjøp.
-                            <br />
-                            <br />
-                            Velkommen!
-                            <br />
-                            <i>Hilsen Ann Elin</i>
-                        </LandingText>
-                    </div>
+                        <Fade direction="up" triggerOnce cascade damping={0.3}>
+                            <Title>Bilder, passfoto & kontorrekvisita</Title>
+                            <LandingText>
+                                Jeg startet Rossland Fotoprint januar 2020 og kan tilby følgende
+                                tjenester: utskrift av bilder, passfoto, forstørring, skanning,
+                                forbedring, salg av rammer og kontorrekvisita. Ta kontakt for avtale
+                                eller kjøp.
+                                <br /> <br />
+                            </LandingText>
 
-                    <LandingImage src="/img/landing.svg" alt="Rossland Fotoprint" />
+                            <LandingText>
+                                Velkommen!
+                                <br />
+                                <i>Hilsen Ann Elin</i>
+                            </LandingText>
+                        </Fade>
+                    </div>
+                    <Fade triggerOnce delay={500} style={{ width: '100%', height: '100%' }}>
+                        <LandingImage src="/img/landing.svg" alt="Rossland Fotoprint" />
+                    </Fade>
                 </>
             </Wrapper>
         </Section>

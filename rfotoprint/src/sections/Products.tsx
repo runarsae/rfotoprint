@@ -19,6 +19,7 @@ import RoundButton from '../components/common/RoundButton';
 import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
+import { Fade } from 'react-awesome-reveal';
 
 const Supplier = styled.div`
     display: grid;
@@ -292,18 +293,20 @@ export default function Products() {
             <>
                 <Title>Varer</Title>
                 <Supplier>
-                    <Text>
-                        Kontorpapir, skriveredskap, skrivebøker, datatilbehør og diverse
-                        kontorutstyr kan skaffes ved behov. Gå til kontorkatalogen ved å klikke på
-                        knappen nedenfor for å se hvilke varer jeg kan skaffe.
-                    </Text>
-                    <Button
-                        onClick={() => {
-                            window.open('/katalog', '_blank');
-                        }}
-                    >
-                        Kontorkatalogen &#187;
-                    </Button>
+                    <Fade direction="up" triggerOnce cascade damping={0.2}>
+                        <Text>
+                            Kontorpapir, skriveredskap, skrivebøker, datatilbehør og diverse
+                            kontorutstyr kan skaffes ved behov. Gå til kontorkatalogen ved å klikke
+                            på knappen nedenfor for å se hvilke varer jeg kan skaffe.
+                        </Text>
+                        <Button
+                            onClick={() => {
+                                window.open('/katalog', '_blank');
+                            }}
+                        >
+                            Kontorkatalogen &#187;
+                        </Button>
+                    </Fade>
                 </Supplier>
 
                 <ProductsHeader id="products-in-stock">

@@ -10,6 +10,7 @@ import PriceList from '../components/foto-services/PriceList';
 import Popup from '../components/common/Popup';
 import { preloadImages } from '../constants';
 import ButtonLink from '../components/common/ButtonLink';
+import { Fade } from 'react-awesome-reveal';
 
 const Grid = styled.div`
     display: grid;
@@ -125,82 +126,86 @@ export default function FotoServices() {
             <>
                 <Title align="center">Fototjenester</Title>
                 <Grid>
-                    <GridItem>
-                        <IconContainer>
-                            <Icon src="/img/icons/printer.svg" alt="Printer" />
-                        </IconContainer>
-                        <Undertitle align="center">Utskrift</Undertitle>
-                        <Description align="center">
-                            Utskrift av bilder fra e-post, minnebrikke, minnepenn, CD og mobil (husk
-                            ledning).
-                        </Description>
-                        <Button
-                            center
-                            onClick={() => {
-                                setSidebarOpen(true);
-                            }}
-                        >
-                            Prisliste &#187;
-                        </Button>
-                    </GridItem>
-                    <GridItem>
-                        <IconContainer>
-                            <Icon src="/img/icons/camera.svg" alt="Kamera" />
-                        </IconContainer>
-                        <Undertitle align="center">Passfoto</Undertitle>
-                        <Description align="center">
-                            Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.
-                        </Description>
-                        <Price>Kr 250,-</Price>
-                    </GridItem>
-                    <GridItem>
-                        <IconContainer>
-                            <Icon src="/img/icons/image-gallery.svg" alt="Galleri" />
-                        </IconContainer>
-                        <Undertitle align="center">Forstørring</Undertitle>
-                        <Description align="center">
-                            Forstørring av bilder opp til A3-størrelse.
-                        </Description>
-                        <Price>Se prisliste for utskrift</Price>
-                    </GridItem>
-                    <GridItem>
-                        <IconContainer>
-                            <Icon src="/img/icons/scanner.svg" alt="Skanner" />
-                        </IconContainer>
-                        <Undertitle align="center">Skanning</Undertitle>
-                        <Description align="center">Skanning av gamle og nye bilder.</Description>
-                        <Price>Kr 65,- pr. stk</Price>
-                    </GridItem>
-                    <GridItem>
-                        <IconContainer>
-                            <Icon src="/img/icons/edit-image.svg" alt="Endre bilde" />
-                        </IconContainer>
-                        <Undertitle align="center">Forbedring</Undertitle>
-                        <Description align="center">
-                            Fjerning av bretter, skader, striper og lignende. Se{' '}
-                            <ButtonLink
+                    <Fade triggerOnce cascade duration={1000} damping={0.1}>
+                        <GridItem>
+                            <IconContainer>
+                                <Icon src="/img/icons/printer.svg" alt="Printer" />
+                            </IconContainer>
+                            <Undertitle align="center">Utskrift</Undertitle>
+                            <Description align="center">
+                                Utskrift av bilder fra e-post, minnebrikke, minnepenn, CD og mobil
+                                (husk ledning).
+                            </Description>
+                            <Button
+                                center
                                 onClick={() => {
-                                    setPopupOpen(true);
+                                    setSidebarOpen(true);
                                 }}
-                                closingCondition={popupOpen}
                             >
-                                eksempel
-                            </ButtonLink>
-                            .
-                        </Description>
-                        <Price>Fra kr 65,-</Price>
-                    </GridItem>
-                    <GridItem>
-                        <IconContainer>
-                            <Icon src="/img/icons/movie.svg" alt="Film" />
-                        </IconContainer>
-                        <Undertitle align="center">Lysbilder og negativer</Undertitle>
-                        <Description align="center">
-                            Overføring av lysbilder og negativer til digitale bilder i høy
-                            oppløsning.
-                        </Description>
-                        <Price>Pris etter avtale</Price>
-                    </GridItem>
+                                Prisliste &#187;
+                            </Button>
+                        </GridItem>
+                        <GridItem>
+                            <IconContainer>
+                                <Icon src="/img/icons/camera.svg" alt="Kamera" />
+                            </IconContainer>
+                            <Undertitle align="center">Passfoto</Undertitle>
+                            <Description align="center">
+                                Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.
+                            </Description>
+                            <Price>Kr 250,-</Price>
+                        </GridItem>
+                        <GridItem>
+                            <IconContainer>
+                                <Icon src="/img/icons/image-gallery.svg" alt="Galleri" />
+                            </IconContainer>
+                            <Undertitle align="center">Forstørring</Undertitle>
+                            <Description align="center">
+                                Forstørring av bilder opp til A3-størrelse.
+                            </Description>
+                            <Price>Se prisliste for utskrift</Price>
+                        </GridItem>
+                        <GridItem>
+                            <IconContainer>
+                                <Icon src="/img/icons/scanner.svg" alt="Skanner" />
+                            </IconContainer>
+                            <Undertitle align="center">Skanning</Undertitle>
+                            <Description align="center">
+                                Skanning av gamle og nye bilder.
+                            </Description>
+                            <Price>Kr 65,- pr. stk</Price>
+                        </GridItem>
+                        <GridItem>
+                            <IconContainer>
+                                <Icon src="/img/icons/edit-image.svg" alt="Endre bilde" />
+                            </IconContainer>
+                            <Undertitle align="center">Forbedring</Undertitle>
+                            <Description align="center">
+                                Fjerning av bretter, skader, striper og lignende. Se{' '}
+                                <ButtonLink
+                                    onClick={() => {
+                                        setPopupOpen(true);
+                                    }}
+                                    closingCondition={popupOpen}
+                                >
+                                    eksempel
+                                </ButtonLink>
+                                .
+                            </Description>
+                            <Price>Fra kr 65,-</Price>
+                        </GridItem>
+                        <GridItem>
+                            <IconContainer>
+                                <Icon src="/img/icons/movie.svg" alt="Film" />
+                            </IconContainer>
+                            <Undertitle align="center">Lysbilder og negativer</Undertitle>
+                            <Description align="center">
+                                Overføring av lysbilder og negativer til digitale bilder i høy
+                                oppløsning.
+                            </Description>
+                            <Price>Pris etter avtale</Price>
+                        </GridItem>
+                    </Fade>
                 </Grid>
 
                 <Sidebar open={sidebarOpen} closeSidebar={() => setSidebarOpen(false)}>
