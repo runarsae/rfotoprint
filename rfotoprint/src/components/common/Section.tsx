@@ -8,12 +8,24 @@ const Wrapper = styled.div<{ color?: 'dark' | 'main' | 'light' }>`
     width: 100%;
 `;
 
-const Content = styled.div<{ size?: 'large' | 'medium' | 'small' }>`
-    padding: ${(props) => (props.size == 'small' ? '40px 20px' : '80px 20px')};
+const Content = styled.div<{ size?: 'large' | 'medium' | 'small'; first?: boolean }>`
+    padding: ${(props) =>
+        props.size == 'small' ? '40px 20px' : props.first ? '20px 20px 80px 20px' : '80px 20px'};
     max-width: 1300px;
     margin: auto;
 
     @media (min-width: 520px) {
+        padding: ${(props) =>
+            props.size == 'large'
+                ? '120px 40px'
+                : props.size == 'small'
+                ? '40px 40px'
+                : props.first
+                ? '20px 40px 80px 40px'
+                : '80px 40px'};
+    }
+
+    @media (min-width: 768px) {
         padding: ${(props) =>
             props.size == 'large'
                 ? '120px 40px'
@@ -30,13 +42,16 @@ interface Props {
     color?: 'dark' | 'main' | 'light';
     size?: 'large' | 'medium' | 'small';
     style?: React.CSSProperties;
+    first?: boolean;
 }
 
 function Section(props: Props) {
     return (
         <Element name={props.name ? props.name : ''}>
             <Wrapper className={props.className} color={props.color} style={props.style}>
-                <Content size={props.size}>{props.children}</Content>
+                <Content size={props.size} first={props.first}>
+                    {props.children}
+                </Content>
             </Wrapper>
         </Element>
     );

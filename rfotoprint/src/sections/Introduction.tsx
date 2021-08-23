@@ -29,7 +29,7 @@ const LandingImage = styled.img`
 
 export default function Introduction() {
     return (
-        <Section color="light" size="medium">
+        <Section color="light" size="medium" first>
             <Wrapper>
                 <>
                     <div>
