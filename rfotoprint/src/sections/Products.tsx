@@ -21,10 +21,14 @@ import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
 
 const Supplier = styled.div`
-    width: 50%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        width: 50%;
+    }
 `;
 
 const ProductsHeader = styled.div`
@@ -298,7 +302,7 @@ export default function Products() {
                             window.open('/katalog', '_blank');
                         }}
                     >
-                        Til kontorkatalogen &#187;
+                        Kontorkatalogen &#187;
                     </Button>
                 </Supplier>
 
