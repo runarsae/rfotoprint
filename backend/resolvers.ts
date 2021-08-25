@@ -2,7 +2,6 @@ import { db } from './server';
 import { Document, ObjectId } from 'mongodb';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { config } from 'dotenv';
 import { existsSync, unlinkSync } from 'fs';
 import path from 'path';
 
@@ -19,8 +18,6 @@ interface Context {
         username: string;
     };
 }
-
-config();
 
 export const resolvers = {
     signUp: async (
