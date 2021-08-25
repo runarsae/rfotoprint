@@ -20,6 +20,7 @@ import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
 import { Fade } from 'react-awesome-reveal';
+import Error from '../components/common/form/Error';
 
 const Supplier = styled.div`
     display: grid;
@@ -164,6 +165,8 @@ export default function Products() {
     const [fetchProducts] = useManualQuery(PRODUCTS);
     const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
+    const [error, setError] = useState<string>();
+
     const [initialFetch, setInitialFetch] = useState<boolean>(false);
     const [products, setProducts] = useState<IProducts | null>(null);
 
@@ -196,6 +199,8 @@ export default function Products() {
     const scrollIntoView = () => document?.getElementById('products-in-stock')?.scrollIntoView();
 
     const fetchProductsCallback = async (page: number, scroll: boolean, deleteFlag?: boolean) => {
+        setError(undefined);
+
         if (deleteFlag) {
             // Check if last product on page is deleted, and go to previous page if so
             if (products && Object.keys(products).length === 1 && page > 1) {
@@ -210,18 +215,27 @@ export default function Products() {
                 pageSize: pageSize
             }
         }).then((res) => {
-            const result = res.data.products.data;
-            setProducts(result.products);
-            setPageCount(result.pageCount);
-
-            if (scroll) {
-                // Scroll only if on smaller devices
-                if (width < 1080) {
-                    scrollIntoView();
+            if (res.data && res.data.products) {
+                if (!res.data.products.success) {
+                    setError(res.data.products.message);
+                    return;
                 }
-            }
 
-            setCurrentPage(page);
+                const result = res.data.products.data;
+                setProducts(result.products);
+                setPageCount(result.pageCount);
+
+                if (scroll) {
+                    // Scroll only if on smaller devices
+                    if (width < 1080) {
+                        scrollIntoView();
+                    }
+                }
+
+                setCurrentPage(page);
+            } else {
+                setError('Systemfeil: Kunne ikke laste inn produkter.');
+            }
         });
     };
 
@@ -389,6 +403,8 @@ export default function Products() {
                             </PaginationButton>
                         </Pagination>
                     </>
+                ) : error ? (
+                    <Error>{error}</Error>
                 ) : (
                     <Text>Ingen varer.</Text>
                 )}
