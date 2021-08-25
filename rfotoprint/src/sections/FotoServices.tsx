@@ -126,7 +126,7 @@ export default function FotoServices() {
             <>
                 <Title align="center">Fototjenester</Title>
                 <Grid>
-                    <Fade triggerOnce cascade duration={1000} damping={0.1}>
+                    <Fade triggerOnce cascade duration={600} damping={0.1}>
                         <GridItem>
                             <IconContainer>
                                 <Icon src="/img/icons/printer.svg" alt="Printer" />
