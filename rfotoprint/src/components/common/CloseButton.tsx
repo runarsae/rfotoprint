@@ -16,6 +16,7 @@ const Button = styled.button`
     padding: 0;
     margin: 0;
     border: none;
+    -webkit-appearance: none;
 
     opacity: 1;
     transition: opacity 130ms ease-in-out;

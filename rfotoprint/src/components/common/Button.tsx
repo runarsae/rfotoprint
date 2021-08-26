@@ -19,6 +19,7 @@ const Button = styled.button<{ center?: boolean }>`
     border-radius: 2px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     transition: background-color ${DURATION}ms ease-in-out;
+    -webkit-appearance: none;
 
     &:hover {
         background-color: #ad82261f;

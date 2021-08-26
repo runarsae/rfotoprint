@@ -18,6 +18,7 @@ const Button = styled.button`
     border: 0;
     padding: 0;
     margin: 0;
+    -webkit-appearance: none;
 
     transition: color ${DURATION}ms ease-in-out;
     color: ${(props) => props.theme.primary};
