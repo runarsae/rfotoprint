@@ -7,6 +7,7 @@ import Text from '../common/Text';
 const Content = styled.div`
     width: 100%;
     height: 100%;
+    cursor: zoom-in;
 `;
 
 const ProductImage = styled.img`
