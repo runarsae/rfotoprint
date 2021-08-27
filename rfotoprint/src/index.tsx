@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 // GraphQL client to execute API queries and mutations
 const client = new GraphQLClient({
-    url: process.env.REACT_APP_SERVER_ADDRESS + '/graphql'
+    url: '/graphql'
 });
 
 ReactDOM.render(

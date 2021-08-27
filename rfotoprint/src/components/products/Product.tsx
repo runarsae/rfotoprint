@@ -80,11 +80,7 @@ export default function Product(props: Props) {
             <Card onClick={props.viewImage}>
                 <Content>
                     <ProductImage
-                        src={
-                            process.env.REACT_APP_SERVER_ADDRESS +
-                            '/uploads/products/' +
-                            props.product.image
-                        }
+                        src={'/uploads/products/' + props.product.image}
                         alt={props.product.name}
                     />
                     {props.authenticated && (

@@ -467,12 +467,7 @@ export default function Products() {
                         setImagePopupOpen(false);
                     }}
                 >
-                    <FullImage
-                        src={
-                            process.env.REACT_APP_SERVER_ADDRESS + '/uploads/products/' + popupImage
-                        }
-                        alt="Product"
-                    />
+                    <FullImage src={'/uploads/products/' + popupImage} alt="Product" />
                 </Popup>
             </>
         </Section>

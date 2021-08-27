@@ -76,7 +76,7 @@ function EditProduct(props: Props) {
 
             axios({
                 method: 'delete',
-                url: process.env.REACT_APP_SERVER_ADDRESS + '/uploads/products/' + oldImage,
+                url: '/uploads/products/' + oldImage,
                 headers: {
                     Authorization: localStorage.getItem('token')
                 }
@@ -92,7 +92,7 @@ function EditProduct(props: Props) {
 
             axios({
                 method: 'post',
-                url: process.env.REACT_APP_SERVER_ADDRESS + '/upload',
+                url: '/upload',
                 data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -166,9 +166,7 @@ function EditProduct(props: Props) {
                                 <ImageDisplay
                                     src={
                                         prevImage
-                                            ? process.env.REACT_APP_SERVER_ADDRESS +
-                                              '/uploads/products/' +
-                                              prevImage
+                                            ? '/uploads/products/' + prevImage
                                             : URL.createObjectURL(image)
                                     }
                                     alt="Product"
