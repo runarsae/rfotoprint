@@ -93,3 +93,9 @@ app.delete('/uploads/products/:imageId', requireAuth, function (req, res, _next)
 
     res.end();
 });
+
+app.use(express.static(path.join(__dirname, 'www')));
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'www', 'index.html'));
+});
