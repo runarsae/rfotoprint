@@ -8,17 +8,16 @@ import { resolvers } from './resolvers';
 import { schema } from './schema';
 import { AuthRequest, isAuthenticated, requireAuth } from './auth';
 import { existsSync, unlinkSync } from 'fs';
+import { config } from 'dotenv';
 
-// TODO: Environment variable
-const DATABASE_URL = 'mongodb://127.0.0.1:27017';
-const SERVER_PORT = 4000;
+config();
 
 const app = express();
 
 export let db: undefined | Db = undefined;
 
 // Database connection
-new MongoClient(DATABASE_URL).connect(function (err, database) {
+new MongoClient(process.env.DATABASE_URL as string).connect(function (err, database) {
     if (!database || err) {
         console.log('Could not connect to MongoDB.');
         if (err) console.error(err);
@@ -29,8 +28,8 @@ new MongoClient(DATABASE_URL).connect(function (err, database) {
     console.log('Successfully connected to MongoDB.');
 
     // Start server
-    app.listen(SERVER_PORT, () => {
-        console.log(`Server is running on port: ${SERVER_PORT}`);
+    app.listen(process.env.SERVER_PORT, () => {
+        console.log(`Server is running on port: ${process.env.SERVER_PORT}`);
     });
 });
 

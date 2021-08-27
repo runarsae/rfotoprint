@@ -13,6 +13,7 @@ const RoundButton = styled.button`
     padding: 4px;
     border-radius: 50%;
     transition: background-color ${DURATION}ms ease-in-out;
+    -webkit-appearance: none;
 
     &:hover {
         background-color: #636566;

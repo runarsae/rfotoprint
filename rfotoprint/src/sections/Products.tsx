@@ -20,6 +20,8 @@ import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
 import { Fade } from 'react-awesome-reveal';
+import Error from '../components/common/form/Error';
+import { scroller } from 'react-scroll';
 
 const Supplier = styled.div`
     display: grid;
@@ -96,6 +98,7 @@ const ProductsGrid = styled.div`
 
 const Pagination = styled.div`
     display: grid;
+    height: 32px;
     grid-template-columns: 32px auto 32px;
     justify-content: center;
     align-items: center;
@@ -164,12 +167,23 @@ export default function Products() {
     const [fetchProducts] = useManualQuery(PRODUCTS);
     const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
+    const [loading, _setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string>();
+
+    const loadingRef = useRef(loading);
+    const setLoading = (data: boolean) => {
+        loadingRef.current = data;
+        _setLoading(data);
+    };
+
     const [initialFetch, setInitialFetch] = useState<boolean>(false);
     const [products, setProducts] = useState<IProducts | null>(null);
 
     const [category, setCategory] = useState<string>('office-supplies');
 
     const handleCategoryChange = (value: string) => {
+        setShowPagination(false);
+
         if (category !== value) {
             setCategory(value);
         }
@@ -193,15 +207,27 @@ export default function Products() {
         _setPageCount(data);
     };
 
-    const scrollIntoView = () => document?.getElementById('products-in-stock')?.scrollIntoView();
+    const [showPagination, setShowPagination] = useState<boolean>(false);
 
     const fetchProductsCallback = async (page: number, scroll: boolean, deleteFlag?: boolean) => {
+        if (scroll) {
+            scroller.scrollTo('products-in-stock', {
+                duration: 300,
+                smooth: 'easeInOut'
+            });
+        }
+
+        setError(undefined);
+        setLoading(true);
+
         if (deleteFlag) {
             // Check if last product on page is deleted, and go to previous page if so
             if (products && Object.keys(products).length === 1 && page > 1) {
                 page -= 1;
             }
         }
+
+        setCurrentPage(page);
 
         await fetchProducts({
             variables: {
@@ -210,19 +236,23 @@ export default function Products() {
                 pageSize: pageSize
             }
         }).then((res) => {
-            const result = res.data.products.data;
-            setProducts(result.products);
-            setPageCount(result.pageCount);
-
-            if (scroll) {
-                // Scroll only if on smaller devices
-                if (width < 1080) {
-                    scrollIntoView();
+            if (res.data && res.data.products) {
+                if (!res.data.products.success) {
+                    setError(res.data.products.message);
+                    return;
                 }
-            }
 
-            setCurrentPage(page);
+                const result = res.data.products.data;
+                setProducts(result.products);
+                setPageCount(result.pageCount);
+
+                setShowPagination(true);
+            } else {
+                setError('Systemfeil: Kunne ikke laste inn produkter.');
+            }
         });
+
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -234,7 +264,7 @@ export default function Products() {
 
     useEffect(() => {
         if (initialFetch) {
-            fetchProductsCallback(1, false);
+            fetchProductsCallback(1, true);
         }
     }, [category]);
 
@@ -250,13 +280,14 @@ export default function Products() {
         }
     };
 
-    /*
     // Arrow key navigation
     const navigate = (e: KeyboardEvent) => {
-        if (e.key == 'ArrowLeft') {
-            previousPage();
-        } else if (e.key == 'ArrowRight') {
-            nextPage();
+        if (loadingRef.current === false) {
+            if (e.key == 'ArrowLeft') {
+                previousPage();
+            } else if (e.key == 'ArrowRight') {
+                nextPage();
+            }
         }
     };
 
@@ -269,7 +300,6 @@ export default function Products() {
             };
         }
     }, [pageCount]);
-    */
 
     useEffect(() => {
         if (width >= 768 && width < 1080) {
@@ -345,75 +375,91 @@ export default function Products() {
                         </ChipContainer>
                     </Categories>
                 </ProductsHeader>
-                {products && pageCount && Object.keys(products).length > 0 ? (
-                    <>
-                        <ProductsGrid>
-                            {Object.entries(products).map(([id, product]) => (
-                                <Product
-                                    key={id}
-                                    product={product}
-                                    authenticated={auth}
-                                    editProduct={() => {
-                                        setEditProductId(product._id);
-                                        setEditProductSidebarOpen(true);
-                                    }}
-                                    deleteProduct={() => {
-                                        deleteProduct({ variables: { _id: product._id } }).then(
-                                            () => fetchProductsCallback(currentPage, false, true)
-                                        );
-                                    }}
-                                    viewImage={() => {
-                                        setPopupImage(product.image);
-                                        setImagePopupOpen(true);
-                                    }}
-                                />
-                            ))}
-                        </ProductsGrid>
-                        <Pagination>
-                            <PaginationButton
-                                disabled={currentPage == 1}
-                                onClick={previousPage}
-                                title="Forrige side"
-                            >
-                                <PreviousIcon fill={'#000000'} size={20} />
-                            </PaginationButton>
-                            <PageInfo>
-                                {currentPage} / {pageCount}
-                            </PageInfo>
-                            <PaginationButton
-                                disabled={currentPage == pageCount}
-                                onClick={nextPage}
-                                title="Neste side"
-                            >
-                                <NextIcon fill={'#000000'} size={20} />
-                            </PaginationButton>
-                        </Pagination>
-                    </>
+
+                {error ? (
+                    <Error>{error}</Error>
+                ) : products && pageCount && Object.keys(products).length > 0 ? (
+                    <ProductsGrid>
+                        {Object.entries(products).map(([id, product]) => (
+                            <Product
+                                key={id}
+                                product={product}
+                                authenticated={auth}
+                                editProduct={() => {
+                                    setEditProductId(product._id);
+                                    setEditProductSidebarOpen(true);
+                                }}
+                                deleteProduct={() => {
+                                    deleteProduct({ variables: { _id: product._id } }).then(() =>
+                                        fetchProductsCallback(currentPage, false, true)
+                                    );
+                                }}
+                                viewImage={() => {
+                                    setPopupImage(product.image);
+                                    setImagePopupOpen(true);
+                                }}
+                            />
+                        ))}
+                    </ProductsGrid>
                 ) : (
                     <Text>Ingen varer.</Text>
                 )}
 
-                <Sidebar
-                    open={addProductSidebarOpen}
-                    closeSidebar={() => setAddProductSidebarOpen(false)}
-                >
-                    <AddProduct refreshProducts={() => fetchProductsCallback(currentPage, false)} />
-                </Sidebar>
+                {(products || loading) && (
+                    <Pagination>
+                        {showPagination && (
+                            <>
+                                <PaginationButton
+                                    disabled={currentPage == 1}
+                                    onClick={previousPage}
+                                    title="Forrige side"
+                                >
+                                    <PreviousIcon fill={'#000000'} size={20} />
+                                </PaginationButton>
+                                <PageInfo>
+                                    {currentPage} / {pageCount}
+                                </PageInfo>
+                                <PaginationButton
+                                    disabled={currentPage == pageCount}
+                                    onClick={nextPage}
+                                    title="Neste side"
+                                >
+                                    <NextIcon fill={'#000000'} size={20} />
+                                </PaginationButton>
+                            </>
+                        )}
+                    </Pagination>
+                )}
 
-                <Sidebar
-                    open={editProductSidebarOpen}
-                    closeSidebar={() => setEditProductSidebarOpen(false)}
-                >
-                    {editProductId ? (
-                        <EditProduct
-                            productId={editProductId}
-                            onClose={() => setEditProductSidebarOpen(false)}
-                            refreshProducts={() => fetchProductsCallback(currentPage, false)}
-                        />
-                    ) : (
-                        <></>
-                    )}
-                </Sidebar>
+                {auth && (
+                    <>
+                        <Sidebar
+                            open={addProductSidebarOpen}
+                            closeSidebar={() => setAddProductSidebarOpen(false)}
+                        >
+                            <AddProduct
+                                refreshProducts={() => fetchProductsCallback(currentPage, false)}
+                            />
+                        </Sidebar>
+
+                        <Sidebar
+                            open={editProductSidebarOpen}
+                            closeSidebar={() => setEditProductSidebarOpen(false)}
+                        >
+                            {editProductId ? (
+                                <EditProduct
+                                    productId={editProductId}
+                                    onClose={() => setEditProductSidebarOpen(false)}
+                                    refreshProducts={() =>
+                                        fetchProductsCallback(currentPage, false)
+                                    }
+                                />
+                            ) : (
+                                <></>
+                            )}
+                        </Sidebar>
+                    </>
+                )}
 
                 <Popup
                     open={imagePopupOpen}
