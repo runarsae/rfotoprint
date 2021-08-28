@@ -24,7 +24,7 @@ jobs:
         run: cd backend && yarn install && yarn build
 
       - name: Build frontend
-        run: cd frontend && yarn install && yarn build
+        run: cd rfotoprint && yarn install && yarn build
 
       - name: Check build folder
         run: cd build && dir /b
