@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -65,21 +65,22 @@ const Link = styled.a`
 `;
 
 function External(): JSX.Element {
-    const [screenWidth, setScreenWidth] = useState(1080);
-
     useEffect(() => {
-        setScreenWidth(window.innerWidth);
-        window.addEventListener('resize', resize);
+        const script = document.createElement('script');
+        script.src =
+            'https://connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v11.0&appId=3862451110533375&autoLogAppEvents=1';
+        script.async = true;
+        script.defer = true;
+        script.crossOrigin = 'anonymous';
+        script.nonce = 'gpbFNnSm';
+        document.head.appendChild(script);
     }, []);
-
-    const resize = () => {
-        setScreenWidth(window.innerWidth);
-    };
 
     return (
         <Wrapper>
             <Title>Facebook</Title>
             <FacebookWrapper>
+                <div id="fb-root"></div>
                 <div
                     className="fb-page"
                     data-href="https://www.facebook.com/profile.php?id=100063615033077"
