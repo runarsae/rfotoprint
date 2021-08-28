@@ -59,7 +59,7 @@ function AddProduct(props: Props) {
 
         axios({
             method: 'post',
-            url: process.env.REACT_APP_SERVER_ADDRESS + '/upload',
+            url: '/upload',
             data: formData,
             headers: {
                 'Content-Type': 'multipart/form-data',

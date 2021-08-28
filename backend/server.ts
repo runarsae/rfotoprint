@@ -50,7 +50,6 @@ app.use(
         return {
             schema: schema,
             rootValue: resolvers,
-            graphiql: true,
             context: {
                 auth: auth ? true : false,
                 ...(auth && {
@@ -92,4 +91,11 @@ app.delete('/uploads/products/:imageId', requireAuth, function (req, res, _next)
     }
 
     res.end();
+});
+
+// Serve application located in /www folder
+app.use(express.static(path.join(__dirname, 'www')));
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'www', 'index.html'));
 });

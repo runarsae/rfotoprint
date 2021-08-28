@@ -1,6 +1,8 @@
 /uploads/products/*
 .env
 
+/www
+
 # dependencies
 /node_modules
 /.pnp
