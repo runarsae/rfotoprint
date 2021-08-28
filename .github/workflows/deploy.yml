@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -20,14 +20,11 @@ jobs:
       - name: Install yarn
         run: npm install --global yarn
 
-      - name: Install dependencies
-        run: yarn install --production
-
       - name: Build backend
-        run: cd backend && yarn build
+        run: cd backend && yarn install && yarn build
 
       - name: Build frontend
-        run: cd ../frontend && yarn build && cd ..
+        run: cd ../frontend && yarn install && yarn build && cd ..
 
       # - name: Deploy to Server
       #   uses: easingthemes/ssh-deploy@main
@@ -39,3 +36,7 @@ jobs:
       #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
       #     TARGET: ${{ secrets.REMOTE_TARGET }}
       #     EXCLUDE: "/dist/, /node_modules/"
+
+      # Install dependencies through SSH
+      # - name: Install dependencies
+      #   run: yarn install --production
