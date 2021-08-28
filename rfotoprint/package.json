@@ -26,7 +26,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && move ./build ../build/www",
+    "build-windows": "react-scripts build && move ./build ../build/www",
+    "build-linux": "react-scripts build && mv ./build ../build/www",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

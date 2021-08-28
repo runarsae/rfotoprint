@@ -24,7 +24,7 @@ jobs:
         run: cd backend && yarn install && yarn build
 
       - name: Build frontend
-        run: cd rfotoprint && yarn install && yarn build
+        run: cd rfotoprint && yarn install && yarn build-linux
 
       # - name: Deploy to server through SSH
       #   uses: easingthemes/ssh-deploy@main
