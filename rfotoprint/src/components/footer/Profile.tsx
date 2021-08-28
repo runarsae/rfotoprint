@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const ProfileImg = styled.img`
     display: block;
     margin: auto;
+    height: 100px;
     width: 100px;
     border-radius: 50%;
 `;
