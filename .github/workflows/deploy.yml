@@ -24,7 +24,10 @@ jobs:
         run: cd backend && yarn install && yarn build
 
       - name: Build frontend
-        run: cd ../frontend && yarn install && yarn build && cd ..
+        run: cd frontend && yarn install && yarn build
+
+      - name: Check build folder
+        run: cd build && dir /b
 
       # - name: Deploy to Server
       #   uses: easingthemes/ssh-deploy@main
@@ -37,6 +40,6 @@ jobs:
       #     TARGET: ${{ secrets.REMOTE_TARGET }}
       #     EXCLUDE: "/dist/, /node_modules/"
 
-      # Install dependencies through SSH
+      # Install dependencies on server through SSH
       # - name: Install dependencies
       #   run: yarn install --production
