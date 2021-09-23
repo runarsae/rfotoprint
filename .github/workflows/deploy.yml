@@ -26,14 +26,11 @@ jobs:
       - name: Build frontend
         run: cd rfotoprint && yarn install && yarn build-linux
 
-      - name: List files
-        run: ls
-
-      # - name: Sync files
-      #   uses: SamKirkland/FTP-Deploy-Action@3.1.1
-      #   with:
-      #     ftp-server: ${{ secrets.REMOTE_SERVER }}
-      #     ftp-username: ${{ secrets.REMOTE_USERNAME }}
-      #     ftp-password: ${{ secrets.REMOTE_PASSWORD }}
-      #     local-dir: ${{ secrets.LOCAL_DIRECTIORY }}
-      #     git-ftp-args: --insecure
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        with:
+          ftp-server: ${{ secrets.REMOTE_SERVER }}
+          ftp-username: ${{ secrets.REMOTE_USERNAME }}
+          ftp-password: ${{ secrets.REMOTE_PASSWORD }}
+          local-dir: build
+          git-ftp-args: --insecure
