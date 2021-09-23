@@ -27,11 +27,11 @@ jobs:
         run: cd rfotoprint && yarn install && yarn build-linux
 
       - name: Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
           server: ${{ secrets.REMOTE_SERVER }}
           port: ${{ secrets.REMOTE_PORT }}
-          protocol: ftps
+          protocol: sftp
           username: ${{ secrets.REMOTE_USERNAME }}
           password: ${{ secrets.REMOTE_PASSWORD }}
           local-dir: ${{ secrets.LOCAL_DIRECTIORY }}
