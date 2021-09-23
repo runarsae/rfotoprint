@@ -29,10 +29,7 @@ jobs:
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@3.1.1
         with:
-          server: ${{ secrets.REMOTE_SERVER }}
-          port: ${{ secrets.REMOTE_PORT }}
-          protocol: sftp
-          username: ${{ secrets.REMOTE_USERNAME }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
+          ftp-server: ${{ secrets.REMOTE_SERVER }}
+          ftp-username: ${{ secrets.REMOTE_USERNAME }}
+          ftp-password: ${{ secrets.REMOTE_PASSWORD }}
           local-dir: ${{ secrets.LOCAL_DIRECTIORY }}
-          server-dir: ${{ secrets.REMOTE_DIRECTORY }}
