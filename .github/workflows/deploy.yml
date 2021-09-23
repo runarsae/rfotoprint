@@ -33,3 +33,4 @@ jobs:
           ftp-username: ${{ secrets.REMOTE_USERNAME }}
           ftp-password: ${{ secrets.REMOTE_PASSWORD }}
           local-dir: ${{ secrets.LOCAL_DIRECTIORY }}
+          git-ftp-args: --insecure
