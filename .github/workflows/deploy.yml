@@ -31,7 +31,7 @@ jobs:
         with:
           server: ${{ secrets.REMOTE_SERVER }}
           port: ${{ secrets.REMOTE_PORT }}
-          protocol: sftp
+          protocol: ftps
           username: ${{ secrets.REMOTE_USERNAME }}
           password: ${{ secrets.REMOTE_PASSWORD }}
           local-dir: ${{ secrets.LOCAL_DIRECTIORY }}
