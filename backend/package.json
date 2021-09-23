@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon server.ts",
     "build": "tsc --project ./",
-    "postbuild": "copyfiles package.json yarn.lock .env ../build/"
+    "postbuild": "copyfiles package.json ../build/ && copyfiles .env ../build/ -s"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
