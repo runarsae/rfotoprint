@@ -25,6 +25,10 @@ export const resolvers = {
         context: Context
     ): Promise<Result> => {
         try {
+            if ((process.env.NODE_ENV as string) == 'production') {
+                throw new Error('User cannot be created in production.');
+            }
+
             if (!db) throw new Error('Could not connect to database.');
 
             if (context.auth) throw new Error('Already logged in.');
@@ -60,7 +64,7 @@ export const resolvers = {
                 message: 'Successfully signed up.',
                 data: token
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -99,7 +103,7 @@ export const resolvers = {
                 message: 'Innlogging vellykket.',
                 data: token
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -162,7 +166,7 @@ export const resolvers = {
                     pageCount: pageCount
                 }
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -186,7 +190,7 @@ export const resolvers = {
                 success: true,
                 data: product
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -228,7 +232,7 @@ export const resolvers = {
                 message: 'Varen ble lagt til.',
                 data: result.insertedId
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -281,7 +285,7 @@ export const resolvers = {
                 message: 'Product successully edited.',
                 data: _id
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -310,7 +314,7 @@ export const resolvers = {
                 message: 'Product successully edited.',
                 data: _id
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
@@ -349,7 +353,7 @@ export const resolvers = {
                 message: 'Product successully deleted.',
                 data: _id
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message
