@@ -67,6 +67,7 @@ const Price = styled(Text)`
     color: ${(props) => props.theme.primary};
     display: block;
     font-weight: bold;
+    text-align: center;
 `;
 
 const ImageDisplay = styled.div`
@@ -185,7 +186,7 @@ export default function FotoServices() {
                             <IconContainer>
                                 <Icon src="/img/icons/edit-image.svg" alt="Endre bilde" />
                             </IconContainer>
-                            <Undertitle align="center">Forbedring</Undertitle>
+                            <Undertitle align="center">Forbedring/redigering</Undertitle>
                             <Description align="center">
                                 Fjerning av bretter, skader, striper og lignende. Se{' '}
                                 <ButtonLink
@@ -198,7 +199,11 @@ export default function FotoServices() {
                                 </ButtonLink>
                                 .
                             </Description>
-                            <Price>Fra kr 65,-</Price>
+                            <Price>
+                                Fra kr 65,-
+                                {/* <div style={{ marginBottom: 8 }}>Enkel redigering kr 65,-</div>
+                                Ved behov for mye redigering avtales pris på forhånd */}
+                            </Price>
                         </GridItem>
                         <GridItem>
                             <IconContainer>
