@@ -330,7 +330,7 @@ export default function Products() {
                             på knappen nedenfor for å se hvilke varer jeg kan skaffe.
                         </Text>
                         <Button
-                            onClick={() => {
+                            onMouseDown={() => {
                                 window.open('/katalog', '_blank');
                             }}
                         >
@@ -345,7 +345,7 @@ export default function Products() {
                         {auth ? (
                             <RoundButton
                                 title="Ny vare"
-                                onClick={() => {
+                                onMouseDown={() => {
                                     setAddProductSidebarOpen(true);
                                 }}
                             >
@@ -362,13 +362,13 @@ export default function Products() {
                         <ChipContainer>
                             <Chip
                                 active={category === 'office-supplies'}
-                                onClick={() => handleCategoryChange('office-supplies')}
+                                onMouseDown={() => handleCategoryChange('office-supplies')}
                             >
                                 Kontorrekvisita
                             </Chip>
                             <Chip
                                 active={category === 'frames'}
-                                onClick={() => handleCategoryChange('frames')}
+                                onMouseDown={() => handleCategoryChange('frames')}
                             >
                                 Rammer
                             </Chip>
@@ -411,7 +411,7 @@ export default function Products() {
                             <>
                                 <PaginationButton
                                     disabled={currentPage == 1}
-                                    onClick={previousPage}
+                                    onMouseDown={previousPage}
                                     title="Forrige side"
                                 >
                                     <PreviousIcon fill={'#000000'} size={20} />
@@ -421,7 +421,7 @@ export default function Products() {
                                 </PageInfo>
                                 <PaginationButton
                                     disabled={currentPage == pageCount}
-                                    onClick={nextPage}
+                                    onMouseDown={nextPage}
                                     title="Neste side"
                                 >
                                     <NextIcon fill={'#000000'} size={20} />

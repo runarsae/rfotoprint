@@ -60,7 +60,7 @@ function Link(props: Props): JSX.Element {
             <Button
                 onMouseOver={() => setIsHovering(true)}
                 onMouseOut={() => setIsHovering(false)}
-                onClick={() => {
+                onMouseDown={() => {
                     scroller.scrollTo(props.section.valueOf(), {
                         duration: 1000,
                         smooth: 'easeInOutQuad'

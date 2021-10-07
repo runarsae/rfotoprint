@@ -63,7 +63,7 @@ export default function Popup(props: Props) {
                             ...popupTransitionStyles[state]
                         }}
                     >
-                        <CloseButton onClick={props.onClose} />
+                        <CloseButton onMouseDown={props.onClose} />
                         <Content>{props.children}</Content>
                     </Wrapper>
                 )}
