@@ -77,7 +77,7 @@ interface Props {
 export default function Product(props: Props) {
     return (
         <div>
-            <Card onClick={props.viewImage}>
+            <Card onMouseDown={props.viewImage}>
                 <Content>
                     <ProductImage
                         src={'/uploads/products/' + props.product.image}
@@ -87,7 +87,7 @@ export default function Product(props: Props) {
                         <Actions>
                             <Action
                                 title="Endre vare"
-                                onClick={(e) => {
+                                onMouseDown={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
                                     props.editProduct();
@@ -97,7 +97,7 @@ export default function Product(props: Props) {
                             </Action>
                             <Action
                                 title="Slett vare"
-                                onClick={(e) => {
+                                onMouseDown={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
                                     props.deleteProduct();

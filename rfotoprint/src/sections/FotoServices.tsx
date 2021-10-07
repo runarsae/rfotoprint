@@ -144,7 +144,7 @@ export default function FotoServices() {
                             </Description>
                             <Button
                                 center
-                                onClick={() => {
+                                onMouseDown={() => {
                                     setSidebarOpen(true);
                                 }}
                             >
@@ -189,7 +189,7 @@ export default function FotoServices() {
                             <Description align="center">
                                 Fjerning av bretter, skader, striper og lignende. Se{' '}
                                 <ButtonLink
-                                    onClick={() => {
+                                    onMouseDown={() => {
                                         setPopupOpen(true);
                                     }}
                                     closingCondition={popupOpen}
