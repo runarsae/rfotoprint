@@ -4,6 +4,11 @@ import Title from '../common/Title';
 import Undertitle from '../common/Undertitle';
 import { TableWrapper, Table, Th, Td } from '../common/Table';
 import { preloadImages } from '../../constants';
+import Text from '../common/Text';
+
+const ChargeCost = styled(Text)`
+    color: ${(props) => props.theme.primary};
+`;
 
 const Image = styled.img`
     position: relative;
@@ -162,6 +167,8 @@ function PriceList(): JSX.Element {
                     </tbody>
                 </Table>
             </TableWrapper>
+
+            <ChargeCost>Omkostningsgebyr pr. ordre kr 30,-</ChargeCost>
 
             <Image src={preloadImages.printing} />
         </>
