@@ -79,9 +79,7 @@ const ImageDisplay = styled.div`
     grid-template-columns: auto;
     align-items: center;
     user-select: none;
-    pointer-events: auto;
     gap: 20px;
-    overflow: auto;
 
     @media (min-width: 520px) {
         gap: 40px;
@@ -145,7 +143,7 @@ export default function FotoServices() {
                             </Description>
                             <Button
                                 center
-                                onClick={() => {
+                                onClick={(e) => {
                                     setSidebarOpen(true);
                                 }}
                             >
@@ -229,7 +227,11 @@ export default function FotoServices() {
                         setPopupOpen(false);
                     }}
                 >
-                    <ImageDisplay>
+                    <ImageDisplay
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                    >
                         <ImageContainer>
                             <img src={preloadImages.before} alt="Before edit" />
                             <Label>FØR</Label>
