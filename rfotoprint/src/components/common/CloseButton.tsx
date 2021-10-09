@@ -32,12 +32,12 @@ const Button = styled.button`
 `;
 
 interface Props {
-    onMouseDown: () => void;
+    onClick: () => void;
 }
 
 export default function CloseButton(props: Props) {
     return (
-        <Button onMouseDown={props.onMouseDown}>
+        <Button onClick={props.onClick}>
             <img src={preloadImages.close} alt="Close" />
         </Button>
     );

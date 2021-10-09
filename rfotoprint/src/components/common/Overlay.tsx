@@ -39,7 +39,7 @@ export default function Overlay(props: Props) {
             {(state) => (
                 <Backdrop
                     ref={overlayRef}
-                    onMouseDown={props.onClose}
+                    onClick={props.onClose}
                     style={{
                         ...overlayTransitionStyles[state]
                     }}

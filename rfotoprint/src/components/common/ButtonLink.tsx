@@ -39,7 +39,7 @@ const transitionStyles: { [id: string]: React.CSSProperties } = {
 
 interface Props {
     children: string;
-    onMouseDown: () => void;
+    onClick: () => void;
     closingCondition: boolean;
 }
 
@@ -65,7 +65,7 @@ function ButtonLink(props: Props): JSX.Element {
                         setIsUnderlined(false);
                     }
                 }}
-                onMouseDown={() => props.onMouseDown()}
+                onClick={() => props.onClick()}
             >
                 {props.children}
             </Button>

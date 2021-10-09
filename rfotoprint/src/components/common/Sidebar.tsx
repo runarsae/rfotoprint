@@ -77,7 +77,7 @@ export default function Sidebar(props: Props) {
                             }}
                         >
                             <>
-                                <CloseButton onMouseDown={props.closeSidebar} />
+                                <CloseButton onClick={props.closeSidebar} />
                                 {props.children}
                             </>
                         </SidebarWrapper>
