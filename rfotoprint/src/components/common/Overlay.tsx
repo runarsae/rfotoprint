@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
+import { TRANSITION_DURATION } from '../../constants';
 
 const Backdrop = styled.div`
     display: block;
@@ -11,7 +12,7 @@ const Backdrop = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.75);
-    transition: opacity 130ms ease-in-out;
+    transition: opacity ${TRANSITION_DURATION}ms ease-in-out;
     z-index: 10;
 `;
 
@@ -28,11 +29,17 @@ export default function Overlay(props: Props) {
     const overlayRef = useRef(null);
 
     return (
-        <Transition nodeRef={overlayRef} mountOnEnter unmountOnExit in={props.open} timeout={130}>
+        <Transition
+            nodeRef={overlayRef}
+            mountOnEnter
+            unmountOnExit
+            in={props.open}
+            timeout={TRANSITION_DURATION}
+        >
             {(state) => (
                 <Backdrop
                     ref={overlayRef}
-                    onMouseDown={props.onClose}
+                    onClick={props.onClose}
                     style={{
                         ...overlayTransitionStyles[state]
                     }}

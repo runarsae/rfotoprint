@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { preloadImages } from '../../constants';
+import { preloadImages, TRANSITION_DURATION } from '../../constants';
 
 const Button = styled.button`
     display: block;
@@ -19,7 +19,7 @@ const Button = styled.button`
     -webkit-appearance: none;
 
     opacity: 1;
-    transition: opacity 130ms ease-in-out;
+    transition: opacity ${TRANSITION_DURATION}ms ease-in-out;
 
     :hover {
         cursor: pointer;
@@ -32,12 +32,12 @@ const Button = styled.button`
 `;
 
 interface Props {
-    onMouseDown: () => void;
+    onClick: () => void;
 }
 
 export default function CloseButton(props: Props) {
     return (
-        <Button onMouseDown={props.onMouseDown}>
+        <Button onClick={props.onClick}>
             <img src={preloadImages.close} alt="Close" />
         </Button>
     );

@@ -78,9 +78,7 @@ const ImageDisplay = styled.div`
     grid-template-columns: auto;
     align-items: center;
     user-select: none;
-    pointer-events: auto;
     gap: 20px;
-    overflow: auto;
 
     @media (min-width: 520px) {
         gap: 40px;
@@ -144,7 +142,7 @@ export default function FotoServices() {
                             </Description>
                             <Button
                                 center
-                                onMouseDown={() => {
+                                onClick={(e) => {
                                     setSidebarOpen(true);
                                 }}
                             >
@@ -189,7 +187,7 @@ export default function FotoServices() {
                             <Description align="center">
                                 Fjerning av bretter, skader, striper og lignende. Se{' '}
                                 <ButtonLink
-                                    onMouseDown={() => {
+                                    onClick={() => {
                                         setPopupOpen(true);
                                     }}
                                     closingCondition={popupOpen}
@@ -224,7 +222,11 @@ export default function FotoServices() {
                         setPopupOpen(false);
                     }}
                 >
-                    <ImageDisplay>
+                    <ImageDisplay
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                    >
                         <ImageContainer>
                             <img src={preloadImages.before} alt="Before edit" />
                             <Label>FØR</Label>
