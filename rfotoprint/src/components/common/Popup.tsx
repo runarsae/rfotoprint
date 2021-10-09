@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
+import { TRANSITION_DURATION } from '../../constants';
 import { disableScroll, enableScroll } from '../../utils/toggleScroll';
 import CloseButton from './CloseButton';
 import Overlay from './Overlay';
@@ -54,12 +55,18 @@ export default function Popup(props: Props) {
     return (
         <>
             <Overlay open={props.open} onClose={props.onClose} />
-            <Transition nodeRef={popupRef} mountOnEnter unmountOnExit in={props.open} timeout={130}>
+            <Transition
+                nodeRef={popupRef}
+                mountOnEnter
+                unmountOnExit
+                in={props.open}
+                timeout={TRANSITION_DURATION}
+            >
                 {(state) => (
                     <Wrapper
                         ref={popupRef}
                         style={{
-                            transition: `opacity 130ms ease-in-out`,
+                            transition: `opacity ${TRANSITION_DURATION}ms ease-in-out`,
                             ...popupTransitionStyles[state]
                         }}
                     >

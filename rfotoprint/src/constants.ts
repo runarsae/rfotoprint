@@ -1,5 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
+export const TRANSITION_DURATION = 130;
+
 export const theme: DefaultTheme = {
     primary: '#AD8226',
     secondary: '#93867F',

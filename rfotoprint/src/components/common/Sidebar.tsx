@@ -5,6 +5,7 @@ import { Transition } from 'react-transition-group';
 import { disableScroll, enableScroll } from '../../utils/toggleScroll';
 import Overlay from './Overlay';
 import CloseButton from './CloseButton';
+import { TRANSITION_DURATION } from '../../constants';
 
 const SidebarWrapper = styled(Section)`
     position: fixed;
@@ -14,7 +15,7 @@ const SidebarWrapper = styled(Section)`
     height: 100%;
     width: 100%;
     max-width: 500px !important;
-    transition: right 130ms ease-in-out;
+    transition: right ${TRANSITION_DURATION}ms ease-in-out;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 11;
@@ -65,7 +66,7 @@ export default function Sidebar(props: Props) {
                 mountOnEnter
                 unmountOnExit
                 in={props.open}
-                timeout={130}
+                timeout={TRANSITION_DURATION}
             >
                 {(state) => (
                     <div ref={sidebarRef}>
