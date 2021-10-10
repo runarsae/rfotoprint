@@ -152,7 +152,7 @@ export default function FotoServices() {
                                 .
                             </Description>
                             <Price>
-                                Fra kr 65,-
+                                Pris etter avtale, fra kr 65,-
                                 {/* <div style={{ marginBottom: 8 }}>Enkel redigering kr 65,-</div>
                                 Ved behov for mye redigering avtales pris på forhånd */}
                             </Price>

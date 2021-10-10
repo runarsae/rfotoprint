@@ -23,7 +23,7 @@ function PriceList(): JSX.Element {
             <Title color="light" margin={0}>
                 Prisliste
             </Title>
-            <Undertitle color="gray">Utskrift av bilder</Undertitle>
+            <Undertitle color="gray">Utskrift og forstørring</Undertitle>
             <TableWrapper>
                 <Table>
                     <thead>
