@@ -8,9 +8,9 @@ import Sidebar from '../components/common/Sidebar';
 import Button from '../components/common/Button';
 import PriceList from '../components/foto-services/PriceList';
 import Popup from '../components/common/Popup';
-import { preloadImages } from '../constants';
 import ButtonLink from '../components/common/ButtonLink';
 import { Fade } from 'react-awesome-reveal';
+import ImageExamples from '../components/foto-services/ImageExamples';
 
 const Grid = styled.div`
     display: grid;
@@ -67,52 +67,7 @@ const Price = styled(Text)`
     color: ${(props) => props.theme.primary};
     display: block;
     font-weight: bold;
-`;
-
-const ImageDisplay = styled.div`
-    display: grid;
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    max-width: 1080px;
-    grid-template-columns: auto;
-    align-items: center;
-    user-select: none;
-    gap: 20px;
-
-    @media (min-width: 520px) {
-        gap: 40px;
-    }
-
-    @media (min-width: 640px) {
-        grid-template-columns: auto auto;
-    }
-`;
-
-const ImageContainer = styled.div`
-    position: relative;
-    border-radius: 2px;
-    overflow: hidden;
-
-    & img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
-    }
-`;
-
-const Label = styled(Text)`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    color: white;
-    background-color: ${(props) => props.theme.background.dark};
-    padding: 12px;
-    font-weight: bold;
-    border-top-left-radius: 2px;
-    overflow: hidden;
+    text-align: center;
 `;
 
 export default function FotoServices() {
@@ -183,7 +138,7 @@ export default function FotoServices() {
                             <IconContainer>
                                 <Icon src="/img/icons/edit-image.svg" alt="Endre bilde" />
                             </IconContainer>
-                            <Undertitle align="center">Forbedring</Undertitle>
+                            <Undertitle align="center">Forbedring/redigering</Undertitle>
                             <Description align="center">
                                 Fjerning av bretter, skader, striper og lignende. Se{' '}
                                 <ButtonLink
@@ -196,7 +151,11 @@ export default function FotoServices() {
                                 </ButtonLink>
                                 .
                             </Description>
-                            <Price>Fra kr 65,-</Price>
+                            <Price>
+                                Pris etter avtale, fra kr 65,-
+                                {/* <div style={{ marginBottom: 8 }}>Enkel redigering kr 65,-</div>
+                                Ved behov for mye redigering avtales pris på forhånd */}
+                            </Price>
                         </GridItem>
                         <GridItem>
                             <IconContainer>
@@ -222,20 +181,7 @@ export default function FotoServices() {
                         setPopupOpen(false);
                     }}
                 >
-                    <ImageDisplay
-                        onClick={(e) => {
-                            e.stopPropagation();
-                        }}
-                    >
-                        <ImageContainer>
-                            <img src={preloadImages.before} alt="Before edit" />
-                            <Label>FØR</Label>
-                        </ImageContainer>
-                        <ImageContainer>
-                            <img src={preloadImages.after} alt="After edit" />
-                            <Label>ETTER</Label>
-                        </ImageContainer>
-                    </ImageDisplay>
+                    <ImageExamples />
                 </Popup>
             </>
         </Section>

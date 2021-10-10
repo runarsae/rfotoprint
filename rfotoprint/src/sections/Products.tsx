@@ -467,7 +467,13 @@ export default function Products() {
                         setImagePopupOpen(false);
                     }}
                 >
-                    <FullImage src={'/uploads/products/' + popupImage} alt="Product" />
+                    <FullImage
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                        src={'/uploads/products/' + popupImage}
+                        alt="Product"
+                    />
                 </Popup>
             </>
         </Section>
