@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Chip = styled.button<{ active: boolean }>`
+const Chip = styled.button<{ active: boolean; dark: boolean }>`
     border: none;
     border-radius: 2px;
     font-size: 16px;
@@ -8,14 +8,26 @@ const Chip = styled.button<{ active: boolean }>`
     width: fit-content;
     padding: 8px 16px;
     cursor: ${(props) => (props.active ? 'default' : 'pointer')};
-    color: ${(props) => (props.active ? 'white' : props.theme.text)};
+    color: ${(props) =>
+        props.dark
+            ? props.active // Dark theme
+                ? 'white'
+                : props.theme.text
+            : 'white'};
     background-color: ${(props) =>
-        props.active ? props.theme.background.dark : props.theme.background.main};
+        props.dark
+            ? props.active // Dark theme
+                ? props.theme.background.dark
+                : props.theme.background.main
+            : props.active // Light theme
+            ? props.theme.primary
+            : '#404040'};
     transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
 
     &:hover {
-        ${(props) => !props.active && 'background-color: #d9dbdf;'}
+        ${(props) =>
+            !props.active &&
+            (props.dark ? 'background-color: #d9dbdf;' : 'background-color: #4e4e4e;')}
     }
 `;
 

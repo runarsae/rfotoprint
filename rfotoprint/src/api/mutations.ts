@@ -53,3 +53,12 @@ export const DELETE_PRODUCT = `
         }
     }
 `;
+
+export const EDIT_PRODUCTS_ORDER = `
+    mutation editProductsOrder($category: String!, $order: [ID]!) {
+        editProductsOrder(category: $category, order: $order) {
+            success
+            message
+        }
+    }
+`;

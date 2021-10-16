@@ -7,7 +7,7 @@ import Overlay from './Overlay';
 import CloseButton from './CloseButton';
 import { TRANSITION_DURATION } from '../../constants';
 
-const SidebarWrapper = styled(Section)`
+const SidebarWrapper = styled.div`
     position: fixed;
     top: 0;
     right: -500px;
@@ -19,6 +19,12 @@ const SidebarWrapper = styled(Section)`
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 11;
+
+    padding: 40px 20px;
+
+    @media (min-width: 520px) {
+        padding: 40px 40px;
+    }
 `;
 
 const sidebarTransitionStyles: { [id: string]: React.CSSProperties } = {
@@ -71,7 +77,6 @@ export default function Sidebar(props: Props) {
                 {(state) => (
                     <div ref={sidebarRef}>
                         <SidebarWrapper
-                            size="small"
                             style={{
                                 ...sidebarTransitionStyles[state]
                             }}

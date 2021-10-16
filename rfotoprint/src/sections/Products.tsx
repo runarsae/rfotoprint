@@ -16,12 +16,13 @@ import Sidebar from '../components/common/Sidebar';
 import EditProduct from '../components/panel/EditProduct';
 import AddProduct from '../components/panel/AddProduct';
 import RoundButton from '../components/common/RoundButton';
-import { AddIcon, NextIcon, PreviousIcon } from '../components/common/Icons';
+import { AddIcon, NextIcon, PreviousIcon, SortIcon } from '../components/common/Icons';
 import Chip from '../components/common/form/Chip';
 import Popup from '../components/common/Popup';
 import { Fade } from 'react-awesome-reveal';
 import Error from '../components/common/form/Error';
 import { scroller } from 'react-scroll';
+import OrderProducts from '../components/panel/OrderProducts';
 
 const Supplier = styled.div`
     display: grid;
@@ -50,12 +51,12 @@ const ProductsHeader = styled.div`
 
 const UndertitleGrid = styled.div`
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto auto 1fr;
     gap: 8px;
     align-items: center;
 `;
 
-const Categories = styled.div`
+export const Categories = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
@@ -70,7 +71,7 @@ const Categories = styled.div`
     }
 `;
 
-const ChipContainer = styled.div`
+export const ChipContainer = styled.div`
     display: grid;
     grid-template-columns: min-content min-content;
     gap: 8px;
@@ -161,6 +162,7 @@ export default function Products() {
     const [editProductId, setEditProductId] = useState<string>();
     const [editProductSidebarOpen, setEditProductSidebarOpen] = useState<boolean>(false);
     const [addProductSidebarOpen, setAddProductSidebarOpen] = useState<boolean>(false);
+    const [orderProductsSidebarOpen, setOrderProductsSidebarOpen] = useState<boolean>(false);
 
     const { width } = useWindowDimensions();
 
@@ -343,14 +345,25 @@ export default function Products() {
                     <UndertitleGrid>
                         <Undertitle>Lagervarer</Undertitle>
                         {auth ? (
-                            <RoundButton
-                                title="Ny vare"
-                                onClick={() => {
-                                    setAddProductSidebarOpen(true);
-                                }}
-                            >
-                                <AddIcon fill="#FFFFFF" />
-                            </RoundButton>
+                            <>
+                                <RoundButton
+                                    title="Ny vare"
+                                    onClick={() => {
+                                        setAddProductSidebarOpen(true);
+                                    }}
+                                >
+                                    <AddIcon fill="#FFFFFF" />
+                                </RoundButton>
+
+                                <RoundButton
+                                    title="Sorter varer"
+                                    onClick={() => {
+                                        setOrderProductsSidebarOpen(true);
+                                    }}
+                                >
+                                    <SortIcon fill="#FFFFFF" />
+                                </RoundButton>
+                            </>
                         ) : (
                             <div></div>
                         )}
@@ -362,12 +375,14 @@ export default function Products() {
                         <ChipContainer>
                             <Chip
                                 active={category === 'office-supplies'}
+                                dark={true}
                                 onClick={() => handleCategoryChange('office-supplies')}
                             >
                                 Kontorrekvisita
                             </Chip>
                             <Chip
                                 active={category === 'frames'}
+                                dark={true}
                                 onClick={() => handleCategoryChange('frames')}
                             >
                                 Rammer
@@ -438,7 +453,9 @@ export default function Products() {
                             closeSidebar={() => setAddProductSidebarOpen(false)}
                         >
                             <AddProduct
-                                refreshProducts={() => fetchProductsCallback(currentPage, false)}
+                                refreshProducts={() =>
+                                    fetchProductsCallback(currentPage, false, false)
+                                }
                             />
                         </Sidebar>
 
@@ -451,12 +468,24 @@ export default function Products() {
                                     productId={editProductId}
                                     onClose={() => setEditProductSidebarOpen(false)}
                                     refreshProducts={() =>
-                                        fetchProductsCallback(currentPage, false)
+                                        fetchProductsCallback(currentPage, false, false)
                                     }
                                 />
                             ) : (
                                 <></>
                             )}
+                        </Sidebar>
+
+                        <Sidebar
+                            open={orderProductsSidebarOpen}
+                            closeSidebar={() => setOrderProductsSidebarOpen(false)}
+                        >
+                            <OrderProducts
+                                onClose={() => setOrderProductsSidebarOpen(false)}
+                                refreshProducts={() =>
+                                    fetchProductsCallback(currentPage, false, false)
+                                }
+                            />
                         </Sidebar>
                     </>
                 )}
