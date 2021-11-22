@@ -193,7 +193,7 @@ function EditProduct(props: Props) {
                                 } else {
                                     setImage('');
                                 }
-                            } catch (error) {
+                            } catch (error: any) {
                                 setErrorMessage(error);
                             }
                         }}
