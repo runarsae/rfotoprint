@@ -1,4 +1,44 @@
+/* Poppins */
+@font-face {
+    font-family: 'PoppinsMedium';
+    src: local('PoppinsMedium'), url('./fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: local('PoppinsRegular'), url('./fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PoppinsSemiBold';
+    src: local('PoppinsSemiBold'), url('./fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+}
+
+/* Raleway */
+@font-face {
+    font-family: 'RalewayMedium';
+    src: local('RalewayMedium'), url('./fonts/Raleway/Raleway-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RalewayRegular';
+    src: local('RalewayRegular'), url('./fonts/Raleway/Raleway-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RalewaySemiBold';
+    src: local('RalewaySemiBold'), url('./fonts/Raleway/Raleway-SemiBold.ttf') format('truetype');
+}
+
+/* Sacramento */
+@font-face {
+    font-family: 'SacramentoRegular';
+    src: local('SacramentoRegular'),
+        url('./fonts/Sacramento/Sacramento-Regular.ttf') format('truetype');
+}
+
 * {
+    font-family: PoppinsRegular;
     box-sizing: border-box;
 }
 
