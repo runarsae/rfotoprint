@@ -81,5 +81,6 @@ export const schema = buildSchema(`
         editProduct(_id: ID!, product: ProductInput!): IdResult!
         editProductInventory(_id: ID!, inventory: Int!): IdResult!
         deleteProduct(_id: ID!): IdResult!
+        editProductsOrder(category: String!, order: [ID]!): DefaultResult!
     }
 `);

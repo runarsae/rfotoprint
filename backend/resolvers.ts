@@ -153,10 +153,15 @@ export const resolvers = {
             const count = await query.countDocuments(
                 queryFilter.length === 0 ? {} : { $and: queryFilter }
             );
-            let pageCount = Math.floor(count / pageSize);
 
-            if (count % pageSize > 0) {
-                pageCount++;
+            let pageCount = 0;
+
+            if (pageSize > 0) {
+                pageCount = Math.floor(count / pageSize);
+
+                if (count % pageSize > 0) {
+                    pageCount++;
+                }
             }
 
             return {
@@ -352,6 +357,53 @@ export const resolvers = {
                 success: true,
                 message: 'Product successully deleted.',
                 data: _id
+            };
+        } catch (error: any) {
+            return {
+                success: false,
+                message: error.message
+            };
+        }
+    },
+
+    editProductsOrder: async (input: { category: string; order: string[] }, context: Context) => {
+        try {
+            if (!db) throw new Error('Could not connect to database.');
+
+            if (!context.auth) throw new Error('You must be logged in to edit products order.');
+
+            const { category, order } = input;
+
+            const pipeline = [
+                // Convert ObjectIds to string representation
+                { $set: { _id: { $toString: '$_id' } } },
+
+                // Sort products based on order array
+                { $match: { _id: { $in: order } } },
+                { $set: { order: { $indexOfArray: [order, '$_id'] } } },
+                { $sort: { order: 1 } },
+                { $unset: 'order' },
+
+                // Convert string representation of ids back to ObjectIds
+                { $set: { _id: { $toObjectId: '$_id' } } },
+
+                // Combine new order of products for the category with products from the other categories
+                {
+                    $unionWith: {
+                        coll: 'products',
+                        pipeline: [{ $match: { category: { $ne: category } } }]
+                    }
+                },
+
+                // Write to database collection
+                { $out: 'products' }
+            ];
+
+            await db.collection('products').aggregate(pipeline).toArray();
+
+            return {
+                success: true,
+                message: 'Products order successfully updated.'
             };
         } catch (error: any) {
             return {

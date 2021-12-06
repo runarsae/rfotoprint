@@ -13,7 +13,6 @@ export const requireAuth = () => {
     }
 };
 
-// BUG: This is called twice when app mounts
 export const verifyAuth = (): [boolean, () => void] => {
     const [authenticated, setAuthenticated] = useState<boolean>(false);
 
