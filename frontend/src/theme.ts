@@ -4,7 +4,7 @@ export const theme: DefaultTheme = {
     palette: {
         primary: {
             main: '#AD8226',
-            dark: '#4E3E20'
+            dark: '#705211'
         },
         common: {
             black: '#0F101D',
@@ -20,5 +20,12 @@ export const theme: DefaultTheme = {
             dark: '#363641',
             light: '#DADADA'
         }
+    },
+    breakpoints: {
+        xs: 0,
+        sm: 520,
+        md: 640,
+        lg: 768,
+        xl: 1080
     }
 };
