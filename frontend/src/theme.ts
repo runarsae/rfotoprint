@@ -7,7 +7,7 @@ export const theme: DefaultTheme = {
             dark: '#705211'
         },
         common: {
-            black: '#0F101D',
+            black: '#141414',
             white: '#FFFFFF',
             gray: '#F5F5F5'
         },
