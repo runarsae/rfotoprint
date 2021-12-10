@@ -2,14 +2,15 @@ import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import Typography from './Typography';
 
-type ButtonVariants = 'contained' | 'outlined';
+type ButtonVariant = 'contained' | 'outlined';
+type Size = 'small' | 'large';
 
-const Container = styled.button<{ variant?: ButtonVariants }>((props) => ({
+const Container = styled.button<{ variant?: ButtonVariant; size?: Size }>((props) => ({
     display: 'block',
     width: 'fit-content',
     cursor: 'pointer',
     userSelect: 'none',
-    padding: '8px 32px',
+    padding: props.size == 'small' ? '4px 24px' : '8px 32px',
     outline: 0,
     border: props.variant == 'outlined' ? '1px solid' + props.theme.palette.primary.main : 'none',
     backgroundColor: props.variant == 'outlined' ? 'transparent' : props.theme.palette.primary.main,
@@ -24,7 +25,8 @@ const Container = styled.button<{ variant?: ButtonVariants }>((props) => ({
 
 interface Props {
     children: React.ReactNode;
-    variant?: ButtonVariants;
+    variant?: ButtonVariant;
+    size?: Size;
     onClick: () => void;
 }
 
