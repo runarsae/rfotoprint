@@ -4,7 +4,7 @@ import Introduction from './introduction';
 import Panel from './panel';
 import PhotoServices from './photo-services';
 import Products from './products';
-import StockItems from './stock-items';
+import StockProducts from './stock-products';
 
 function Home() {
     return (
@@ -13,7 +13,7 @@ function Home() {
             <Introduction />
             <PhotoServices />
             <Products />
-            <StockItems />
+            <StockProducts />
             <Footer />
 
             {/* Replace with auth check */}
