@@ -8,6 +8,7 @@ type Size = 'small' | 'large';
 const Container = styled.button<{ variant?: ButtonVariant; size?: Size }>((props) => ({
     display: 'block',
     width: 'fit-content',
+    height: 'fit-content',
     cursor: 'pointer',
     userSelect: 'none',
     padding: props.size == 'small' ? '4px 24px' : '8px 32px',

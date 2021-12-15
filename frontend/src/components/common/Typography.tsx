@@ -79,11 +79,19 @@ const variantsMapping: {
 
 type Align = 'left' | 'center' | 'right';
 
-const Component = styled.span<{ color?: string; fontSize?: string; align?: Align }>((props) => ({
+const Component = styled.span<{
+    color?: string;
+    fontSize?: string;
+    align?: Align;
+    marginBottom?: boolean;
+}>((props) => ({
     color: props.color ? props.color : props.theme.palette.text.dark,
     textAlign: props.align ? props.align : 'left',
     ...(props.fontSize && {
         fontSize: props.fontSize
+    }),
+    ...(props.marginBottom && {
+        marginBottom: '16px'
     }),
 
     transition: 'color 150ms ease-in-out'
@@ -95,6 +103,7 @@ interface Props {
     color?: string;
     fontSize?: string;
     align?: Align;
+    marginBottom?: boolean;
 }
 
 function Typography(props: Props) {
@@ -104,6 +113,7 @@ function Typography(props: Props) {
             color={props.color}
             fontSize={props.fontSize}
             align={props.align}
+            marginBottom={props.marginBottom}
         >
             {props.children}
         </Component>
