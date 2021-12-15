@@ -1,6 +1,4 @@
 import styled, { useTheme } from 'styled-components';
-import Button from '../../../../common/Button';
-import Typography from '../../../../common/Typography';
 import NavigationItem from './NavigationItem';
 
 const Wrapper = styled.div({
@@ -18,14 +16,7 @@ function Navigation(): JSX.Element {
         <Wrapper>
             <NavigationItem section="Fototjenester" />
             <NavigationItem section="Varer" />
-            <Button
-                variant="outlined"
-                onClick={() => {
-                    return null;
-                }}
-            >
-                Kontakt
-            </Button>
+            <NavigationItem section="Kontakt" variant="button" />
         </Wrapper>
     );
 }
