@@ -42,9 +42,10 @@ function Introduction() {
                 </div>
                 <Information>
                     <Typography variant="body1">
-                        Jeg startet Rossland Fotoprint januar 2020 og kan tilby følgende tjenester:
-                        utskrift av bilder, passfoto, forstørring, skanning, forbedring, salg av
-                        rammer og kontorrekvisita. Ta kontakt for avtale eller kjøp.
+                        Rossland Fotoprint er et enkeltpersonforetak hvor jeg tilbyr en rekke
+                        tjenester innen foto, deriblant utskrift, passfoto, forstørring, skanning og
+                        retusjering, i tillegg til salg av kontorrekvisita og rammer. Ta kontakt for
+                        avtale eller kjøp.
                     </Typography>
 
                     <div>
