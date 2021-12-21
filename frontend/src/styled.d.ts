@@ -10,6 +10,7 @@ declare module 'styled-components' {
     export interface DefaultTheme {
         palette: {
             primary: IPalette;
+            error: string;
             common: {
                 black: string;
                 white: string;
@@ -32,5 +33,6 @@ declare module 'styled-components' {
             lg: number;
             xl: number;
         };
+        transitionDuration: number;
     }
 }

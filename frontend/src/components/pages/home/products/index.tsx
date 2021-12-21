@@ -117,7 +117,7 @@ function Products() {
 
                 {width >= theme.breakpoints.lg ? (
                     <CardContainer ref={cardRef}>
-                        <Card size="large">
+                        <Card size="large" shadow>
                             <Content />
                         </Card>
                     </CardContainer>

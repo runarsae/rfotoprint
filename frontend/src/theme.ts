@@ -6,6 +6,7 @@ export const theme: DefaultTheme = {
             main: '#AD8226',
             dark: '#705211'
         },
+        error: '#DD1E1E',
         common: {
             black: '#141414',
             white: '#FFFFFF',
@@ -27,5 +28,6 @@ export const theme: DefaultTheme = {
         md: 640,
         lg: 768,
         xl: 1080
-    }
+    },
+    transitionDuration: 150
 };
