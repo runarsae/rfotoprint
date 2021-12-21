@@ -15,7 +15,7 @@ const Container = styled.button<{ variant?: ButtonVariant; size?: Size }>((props
     outline: 0,
     border: props.variant == 'outlined' ? '1px solid' + props.theme.palette.primary.main : 'none',
     backgroundColor: props.variant == 'outlined' ? 'transparent' : props.theme.palette.primary.main,
-    transition: 'background-color 150ms ease-in-out',
+    transition: 'background-color ' + props.theme.transitionDuration + 'ms ease-in-out',
     appearance: 'none',
 
     '&:hover': {

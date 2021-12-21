@@ -94,7 +94,7 @@ const Component = styled.span<{
         marginBottom: '16px'
     }),
 
-    transition: 'color 150ms ease-in-out'
+    transition: 'color ' + props.theme.transitionDuration + 'ms ease-in-out'
 }));
 
 interface Props {
