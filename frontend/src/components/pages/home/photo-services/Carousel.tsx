@@ -57,7 +57,7 @@ const carouselItems: ICarouselItem[] = [
         price: 'Kr 65,- pr. stk'
     },
     {
-        title: 'Retursjering',
+        title: 'Retusjering',
         image: editing,
         description: 'Fjerning av bretter, skader, striper og lignende.',
         price: 'Pris etter avtale, fra kr 65,-'
