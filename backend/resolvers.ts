@@ -4,12 +4,14 @@ import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { existsSync, unlinkSync } from 'fs';
 import path from 'path';
-
-interface Result {
-    success: boolean;
-    message?: string;
-    data?: string | Document[] | Document | ObjectId;
-}
+import {
+    AuthResult,
+    DefaultResult,
+    IdResult,
+    Product,
+    ProductResult,
+    ProductsResult
+} from './types';
 
 interface Context {
     auth: boolean;
@@ -23,7 +25,7 @@ export const resolvers = {
     signUp: async (
         input: { username: string; password: string },
         context: Context
-    ): Promise<Result> => {
+    ): Promise<AuthResult> => {
         try {
             if ((process.env.NODE_ENV as string) == 'production') {
                 throw new Error('User cannot be created in production.');
@@ -75,7 +77,7 @@ export const resolvers = {
     signIn: async (
         input: { username: string; password: string },
         context: Context
-    ): Promise<Result> => {
+    ): Promise<AuthResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
@@ -111,7 +113,7 @@ export const resolvers = {
         }
     },
 
-    verifyAuth: async (_: any, context: Context): Promise<Result> => {
+    verifyAuth: async (_: any, context: Context): Promise<DefaultResult> => {
         if (context.auth) {
             return {
                 success: true
@@ -127,7 +129,7 @@ export const resolvers = {
         filter: { category: string };
         page: number;
         pageSize: number;
-    }): Promise<Result> => {
+    }): Promise<ProductsResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
@@ -141,14 +143,14 @@ export const resolvers = {
 
             const query = db.collection('products');
 
-            const products = await query
+            const products = (await query
                 .find(queryFilter.length === 0 ? {} : { $and: queryFilter })
                 .skip((page - 1) * pageSize)
                 .limit(pageSize)
                 .toArray()
                 .then((result) => {
                     return result;
-                });
+                })) as Product[];
 
             const count = await query.countDocuments(
                 queryFilter.length === 0 ? {} : { $and: queryFilter }
@@ -179,13 +181,13 @@ export const resolvers = {
         }
     },
 
-    product: async (input: { id: string }): Promise<Result> => {
+    product: async (input: { id: string }): Promise<ProductResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
-            const product = await db
+            const product = (await db
                 .collection('products')
-                .findOne({ _id: new ObjectId(input.id) });
+                .findOne({ _id: new ObjectId(input.id) })) as Product;
 
             if (!product) {
                 throw new Error('Produkt med ID ' + input.id + ' eksisterer ikke.');
@@ -215,7 +217,7 @@ export const resolvers = {
             };
         },
         context: Context
-    ): Promise<Result> => {
+    ): Promise<IdResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
@@ -235,7 +237,7 @@ export const resolvers = {
             return {
                 success: true,
                 message: 'Varen ble lagt til.',
-                data: result.insertedId
+                data: result.insertedId.toString()
             };
         } catch (error: any) {
             return {
@@ -258,7 +260,7 @@ export const resolvers = {
             };
         },
         context: Context
-    ): Promise<Result> => {
+    ): Promise<IdResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
@@ -288,7 +290,7 @@ export const resolvers = {
             return {
                 success: true,
                 message: 'Product successully edited.',
-                data: _id
+                data: _id.toString()
             };
         } catch (error: any) {
             return {
@@ -298,7 +300,10 @@ export const resolvers = {
         }
     },
 
-    editProductInventory: async (input: { _id: string; inventory: number }, context: Context) => {
+    editProductInventory: async (
+        input: { _id: string; inventory: number },
+        context: Context
+    ): Promise<IdResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
@@ -317,7 +322,7 @@ export const resolvers = {
             return {
                 success: true,
                 message: 'Product successully edited.',
-                data: _id
+                data: _id.toString()
             };
         } catch (error: any) {
             return {
@@ -327,7 +332,7 @@ export const resolvers = {
         }
     },
 
-    deleteProduct: async (input: { _id: string }, context: Context) => {
+    deleteProduct: async (input: { _id: string }, context: Context): Promise<IdResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
@@ -356,7 +361,7 @@ export const resolvers = {
             return {
                 success: true,
                 message: 'Product successully deleted.',
-                data: _id
+                data: _id.toString()
             };
         } catch (error: any) {
             return {
@@ -366,7 +371,10 @@ export const resolvers = {
         }
     },
 
-    editProductsOrder: async (input: { category: string; order: string[] }, context: Context) => {
+    editProductsOrder: async (
+        input: { category: string; order: string[] },
+        context: Context
+    ): Promise<DefaultResult> => {
         try {
             if (!db) throw new Error('Could not connect to database.');
 
