@@ -97,6 +97,7 @@ const NavigationContainer = styled.div((props) => ({
 }));
 
 const pageSizeMap: { [index: string]: number } = {
+    xxs: 1,
     xs: 1,
     sm: 2,
     md: 2,
@@ -105,6 +106,7 @@ const pageSizeMap: { [index: string]: number } = {
 };
 
 const gapSizeMap: { [index: string]: number } = {
+    xxs: 16,
     xs: 16,
     sm: 16,
     md: 16,

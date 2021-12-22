@@ -23,7 +23,8 @@ export const theme: DefaultTheme = {
         }
     },
     breakpoints: {
-        xs: 0,
+        xxs: 0,
+        xs: 375,
         sm: 520,
         md: 640,
         lg: 768,

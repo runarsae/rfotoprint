@@ -27,6 +27,7 @@ declare module 'styled-components' {
             };
         };
         breakpoints: {
+            xxs: number;
             xs: number;
             sm: number;
             md: number;

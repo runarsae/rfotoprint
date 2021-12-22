@@ -19,8 +19,10 @@ export default function useBreakpoint(): string {
             return 'md';
         } else if (width >= theme.breakpoints.sm) {
             return 'sm';
-        } else {
+        } else if (width >= theme.breakpoints.xs) {
             return 'xs';
+        } else {
+            return 'xxs';
         }
     };
 
