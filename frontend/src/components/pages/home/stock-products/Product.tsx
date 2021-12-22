@@ -11,16 +11,19 @@ const Content = styled.div({
     gridTemplateRows: '1fr auto 50px'
 });
 
-const ProductImage = styled.img({
+const ProductImage = styled.img((props) => ({
     position: 'relative',
     width: '100%',
     height: '100%',
     display: 'block',
     objectFit: 'contain',
     userSelect: 'none',
-    padding: '20px',
-    cursor: 'zoom-in'
-});
+    cursor: 'zoom-in',
+
+    [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
+        padding: '20px'
+    }
+}));
 
 const Title = styled.div({
     paddingTop: '8px',
