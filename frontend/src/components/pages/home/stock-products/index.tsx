@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { useTheme } from 'styled-components';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
+import Filter from './Filter';
 import ProductsGrid from './ProductsGrid';
 
 function StockProducts() {
@@ -12,6 +13,8 @@ function StockProducts() {
             <Typography variant="h2" color={theme.palette.common.black} align="center">
                 Lagervarer
             </Typography>
+
+            <Filter />
 
             <Suspense
                 fallback={

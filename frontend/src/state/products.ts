@@ -1,7 +1,6 @@
-import { useManualQuery } from 'graphql-hooks';
 import { atom, selector } from 'recoil';
 import { PRODUCTS } from '../api/queries';
-import { Product, ProductsQuery, ProductsQueryVariables, ProductsResult } from '../api/types';
+import { Product, ProductsResult } from '../api/types';
 
 type Category = 'office-supplies' | 'frames';
 type PageSize = 8 | 9;
@@ -29,22 +28,24 @@ export const paginationEnabledState = atom<boolean>({
 export const productsQuery = selector<ProductsResult>({
     key: 'productsQuery',
     get: async ({ get }) => {
-        const [fetchProducts] = useManualQuery<ProductsQuery, ProductsQueryVariables>(PRODUCTS);
-
         const category = get(categoryState);
         const currentPage = get(currentPageState);
         const pageSize = get(pageSizeState);
 
-        const response = await fetchProducts({
-            variables: {
-                filter: { category: category },
-                page: currentPage,
-                pageSize: pageSize
-            }
-        })
-            .then((res) => {
-                return res.data?.products;
+        const response = await fetch('http://localhost:4000/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                query: PRODUCTS,
+                variables: {
+                    filter: { category: category },
+                    page: currentPage,
+                    pageSize: pageSize
+                }
             })
+        })
+            .then((res) => res.json())
+            .then((res) => res.data.products as ProductsResult)
             .catch((error) => {
                 return {
                     success: false,
@@ -53,7 +54,7 @@ export const productsQuery = selector<ProductsResult>({
             });
 
         if (response) {
-            return response as ProductsResult;
+            return response;
         } else {
             return {
                 success: false,
