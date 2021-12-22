@@ -18,11 +18,18 @@ const Container = styled.button<{ size?: Size; selected: boolean }>((props) => (
     appearance: 'none',
 
     '&:not(:first-of-type)': {
-        marginLeft: '-1px'
+        marginTop: '-1px'
     },
 
     '&:hover': {
         ...(!props.selected && { backgroundColor: '#f1f1f1' })
+    },
+
+    [`@media (min-width: ${props.theme.breakpoints.xs}px)`]: {
+        '&:not(:first-of-type)': {
+            marginTop: 0,
+            marginLeft: '-1px'
+        }
     }
 }));
 
@@ -45,11 +52,15 @@ export function ToggleButton(props: ToggleButtonProps) {
     );
 }
 
-const ButtonGroup = styled.div({
+const ButtonGroup = styled.div((props) => ({
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    margin: 'auto'
-});
+    gridTemplateColumns: '100%',
+
+    [`@media (min-width: ${props.theme.breakpoints.xs}px)`]: {
+        gridTemplateColumns: '1fr 1fr',
+        margin: 'auto'
+    }
+}));
 
 interface ToggleButtonGroupProps {
     children: React.ReactNode;
