@@ -1,7 +1,7 @@
 import Footer from './footer';
 import Header from './header';
 import Introduction from './introduction';
-import Panel from './panel';
+import Sidebar from './sidebar';
 import PhotoServices from './photo-services';
 import Popup from './popup';
 import Products from './products';
@@ -17,7 +17,7 @@ function Home() {
             <StockProducts />
             <Footer />
 
-            <Panel />
+            <Sidebar />
             <Popup />
         </>
     );
