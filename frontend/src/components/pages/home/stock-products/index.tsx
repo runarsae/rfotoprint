@@ -3,6 +3,7 @@ import { useTheme } from 'styled-components';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
 import Filter from './Filter';
+import Pagination from './Pagination';
 import ProductsGrid from './ProductsGrid';
 
 function StockProducts() {
@@ -24,7 +25,7 @@ function StockProducts() {
                 }
             >
                 <ProductsGrid />
-                {/* <Pagination /> */}
+                <Pagination />
             </Suspense>
         </Section>
     );

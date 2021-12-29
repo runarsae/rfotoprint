@@ -8,7 +8,7 @@ const IconButton = styled.button((props) => ({
     cursor: 'pointer',
     backgroundColor: 'transparent',
     border: '1px solid' + props.theme.palette.primary.main,
-    transition: 'background-color 100ms ease-in-out',
+    transition: 'background-color ' + props.theme.transitionDuration + 'ms ease-in-out',
 
     '&:disabled': {
         cursor: 'default',

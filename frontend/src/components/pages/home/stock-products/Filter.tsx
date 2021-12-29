@@ -1,15 +1,17 @@
-import { useRecoilState } from 'recoil';
-import { categoryState } from '../../../../state/products';
+import { useRecoilState, useResetRecoilState } from 'recoil';
+import { categoryState, currentPageState } from '../../../../state/products';
 import { ToggleButton, ToggleButtonGroup } from '../../../common/ToggleButton';
 
 function Filter() {
     const [category, setCategory] = useRecoilState(categoryState);
+    const resetCurrentPage = useResetRecoilState(currentPageState);
 
     return (
         <ToggleButtonGroup>
             <ToggleButton
                 onClick={() => {
                     setCategory('office-supplies');
+                    resetCurrentPage();
                 }}
                 selected={category == 'office-supplies'}
             >
@@ -18,6 +20,7 @@ function Filter() {
             <ToggleButton
                 onClick={() => {
                     setCategory('frames');
+                    resetCurrentPage();
                 }}
                 selected={category == 'frames'}
             >
