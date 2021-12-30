@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Element } from 'react-scroll';
 
-type Size = 'small' | 'normal' | 'large';
+type Size = 'small' | 'normal';
 type Color = 'black' | 'white' | 'gray';
 
 const Wrapper = styled.section<{ color?: Color }>((props) => ({
@@ -12,8 +12,7 @@ const Wrapper = styled.section<{ color?: Color }>((props) => ({
 }));
 
 const Content = styled.div<{ size?: Size }>((props) => ({
-    padding:
-        props.size == 'small' ? '40px 20px' : props.size == 'large' ? '140px 20px' : '100px 20px',
+    padding: props.size == 'small' ? '40px 20px' : '60px 20px',
     maxWidth: '1340px',
     margin: 'auto',
     display: 'flex',
@@ -21,12 +20,7 @@ const Content = styled.div<{ size?: Size }>((props) => ({
     gap: '40px',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        padding:
-            props.size == 'small'
-                ? '40px 40px'
-                : props.size == 'large'
-                ? '140px 40px'
-                : '100px 40px'
+        padding: props.size == 'small' ? '40px 40px' : '100px 40px'
     }
 }));
 
