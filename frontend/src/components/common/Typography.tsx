@@ -2,7 +2,6 @@ import styled, { DefaultTheme, StyledComponent } from 'styled-components';
 
 const Heading1 = styled.h1({
     fontFamily: 'RalewayMedium',
-    display: 'inline',
     fontSize: 'max(min(8vw, 64px), 28px)',
     whiteSpace: 'nowrap'
 });
@@ -30,9 +29,13 @@ const Heading4 = styled.h4({
     fontSize: '18px'
 });
 
-const Body1 = styled.p({
-    fontSize: '18px'
-});
+const Body1 = styled.p((props) => ({
+    fontSize: '14px',
+
+    [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
+        fontSize: '18px'
+    }
+}));
 
 const Body2 = styled.p({
     fontSize: '16px'
@@ -84,6 +87,8 @@ const Component = styled.span<{
     fontSize?: string;
     align?: Align;
     marginBottom?: boolean;
+    noWrap?: boolean;
+    inline?: boolean;
 }>((props) => ({
     color: props.color ? props.color : props.theme.palette.text.dark,
     textAlign: props.align ? props.align : 'left',
@@ -92,6 +97,12 @@ const Component = styled.span<{
     }),
     ...(props.marginBottom && {
         marginBottom: '16px'
+    }),
+    ...(props.noWrap && {
+        whiteSpace: 'nowrap'
+    }),
+    ...(props.inline && {
+        display: 'inline'
     }),
 
     transition: 'color ' + props.theme.transitionDuration + 'ms ease-in-out'
@@ -104,6 +115,8 @@ interface Props {
     fontSize?: string;
     align?: Align;
     marginBottom?: boolean;
+    noWrap?: boolean;
+    inline?: boolean;
 }
 
 function Typography(props: Props) {
@@ -114,6 +127,8 @@ function Typography(props: Props) {
             fontSize={props.fontSize}
             align={props.align}
             marginBottom={props.marginBottom}
+            noWrap={props.noWrap}
+            inline={props.inline}
         >
             {props.children}
         </Component>

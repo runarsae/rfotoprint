@@ -32,10 +32,10 @@ function Introduction() {
         <Section>
             <Grid>
                 <div>
-                    <Typography variant="h1" color={theme.palette.primary.main}>
+                    <Typography variant="h1" color={theme.palette.primary.main} inline>
                         Bilder
                     </Typography>
-                    <Typography variant="h1" color={theme.palette.common.black}>
+                    <Typography variant="h1" color={theme.palette.common.black} inline>
                         , passfoto &<br />
                         kontorrekvisita
                     </Typography>
@@ -43,9 +43,10 @@ function Introduction() {
                 <Information>
                     <Typography variant="body1">
                         Rossland Fotoprint er et enkeltpersonforetak hvor jeg tilbyr en rekke
-                        tjenester innen foto, deriblant utskrift, passfoto, forstørring, skanning og
-                        retusjering, i tillegg til salg av kontorrekvisita og rammer. Ta kontakt for
-                        avtale eller kjøp.
+                        tjenester innen foto,{' '}
+                        {/* deriblant utskrift, passfoto, forstørring, skanning og retusjering,  */}
+                        i tillegg til salg av kontorrekvisita og rammer. Ta kontakt for avtale eller
+                        kjøp.
                     </Typography>
 
                     <div>

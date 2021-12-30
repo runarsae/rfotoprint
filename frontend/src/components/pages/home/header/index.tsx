@@ -17,10 +17,20 @@ function Header() {
         <Section size="small">
             <Grid>
                 <div>
-                    <Typography variant="h1" fontSize="32px" color={theme.palette.primary.main}>
+                    <Typography
+                        variant="h1"
+                        fontSize="32px"
+                        color={theme.palette.primary.main}
+                        inline
+                    >
                         R{' '}
                     </Typography>
-                    <Typography variant="h1" fontSize="32px" color={theme.palette.common.black}>
+                    <Typography
+                        variant="h1"
+                        fontSize="32px"
+                        color={theme.palette.common.black}
+                        inline
+                    >
                         Fotoprint
                     </Typography>
                 </div>
