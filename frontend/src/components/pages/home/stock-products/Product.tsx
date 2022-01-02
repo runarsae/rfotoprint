@@ -4,12 +4,16 @@ import Card from '../../../common/Card';
 import Line from '../../../common/Line';
 import Typography from '../../../common/Typography';
 
-const Content = styled.div({
+const Content = styled.div((props) => ({
     width: '100%',
     height: '100%',
     display: 'grid',
-    gridTemplateRows: '1fr auto 50px'
-});
+    gridTemplateRows: '200px 17px 44px',
+
+    [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
+        gridTemplateRows: '200px 17px 50px'
+    }
+}));
 
 const ProductImage = styled.img((props) => ({
     position: 'relative',
