@@ -23,42 +23,40 @@ interface Props {
 
 function NavigationItem(props: Props) {
     const theme = useTheme();
-    const { width } = useWindowDimensions();
+    const { width, height } = useWindowDimensions();
 
     const [isHovering, setIsHovering] = useState<boolean>(false);
+
+    const scrollToSection = () => {
+        const root = document.getElementById('root');
+        const section = document.getElementsByName(props.section.valueOf())[0];
+
+        if (root && section) {
+            scroller.scrollTo(props.section.valueOf(), {
+                duration: 1000,
+                smooth: 'easeInOutQuad',
+                ...(section.getBoundingClientRect().top + height > root.scrollHeight && {
+                    offset: -(height - section.clientHeight)
+                })
+            });
+        }
+
+        if (props.onClick) {
+            props.onClick();
+        }
+    };
 
     return (
         <>
             {props.variant == 'button' ? (
-                <Button
-                    variant="outlined"
-                    onClick={() => {
-                        scroller.scrollTo(props.section.valueOf(), {
-                            duration: 1000,
-                            smooth: 'easeInOutQuad'
-                        });
-
-                        if (props.onClick) {
-                            props.onClick();
-                        }
-                    }}
-                >
+                <Button variant="outlined" onClick={scrollToSection}>
                     {props.section}
                 </Button>
             ) : (
                 <TextLink
                     onMouseOver={() => setIsHovering(true)}
                     onMouseOut={() => setIsHovering(false)}
-                    onClick={() => {
-                        scroller.scrollTo(props.section.valueOf(), {
-                            duration: 1000,
-                            smooth: 'easeInOutQuad'
-                        });
-
-                        if (props.onClick) {
-                            props.onClick();
-                        }
-                    }}
+                    onClick={scrollToSection}
                 >
                     <Typography
                         variant={width >= theme.breakpoints.lg ? 'body2' : 'button'}
