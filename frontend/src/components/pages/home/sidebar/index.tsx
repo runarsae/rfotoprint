@@ -7,6 +7,7 @@ import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../sta
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Navigation from './navigation';
 import PriceList from './PriceList';
+import { disableScroll, enableScroll } from '../../../../util/toggleScroll';
 
 const Wrapper = styled.div((props) => ({
     position: 'fixed',
@@ -57,6 +58,14 @@ export default function Sidebar() {
             return () => {
                 document.removeEventListener('keydown', closeOnEsc, false);
             };
+        }
+    }, [sidebarOpen]);
+
+    useEffect(() => {
+        if (sidebarOpen) {
+            disableScroll();
+        } else {
+            enableScroll();
         }
     }, [sidebarOpen]);
 

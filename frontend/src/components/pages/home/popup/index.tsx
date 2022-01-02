@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { useTheme } from 'styled-components';
 import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
+import { disableScroll, enableScroll } from '../../../../util/toggleScroll';
 import CloseButton from '../../../common/CloseButton';
 import Overlay from '../../../common/Overlay';
 import ProductImagePopup from './ProductImagePopup';
@@ -44,6 +45,14 @@ function Popup() {
 
     const [popupOpen, setPopupOpen] = useRecoilState(popupOpenState);
     const popupType = useRecoilValue(popupTypeState);
+
+    useEffect(() => {
+        if (popupOpen) {
+            disableScroll();
+        } else {
+            enableScroll();
+        }
+    }, [popupOpen]);
 
     return (
         <>
