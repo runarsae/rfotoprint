@@ -10,7 +10,7 @@ const Grid = styled.div((props) => ({
     padding: '0 0 40px 0',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        padding: '0 40px 40px 40px'
+        padding: '0 60px 40px 60px'
     },
 
     [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
@@ -18,12 +18,16 @@ const Grid = styled.div((props) => ({
     }
 }));
 
-const Information = styled.div({
+const Information = styled.div((props) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',
-    maxWidth: '510px'
-});
+    maxWidth: '510px',
+
+    [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
+        justifySelf: 'right'
+    }
+}));
 
 function Introduction() {
     const theme = useTheme();
