@@ -8,7 +8,7 @@ import {
     productsState
 } from '../../../../state/products';
 import Typography from '../../../common/Typography';
-import { popupOpenState, popupTypeState } from '../../../../state/popup';
+import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import { useEffect } from 'react';
 
@@ -68,7 +68,7 @@ function ProductsGrid() {
                             product={product}
                             viewImage={() => {
                                 setPopupProductImage(product.image);
-                                setPopupType('product-image');
+                                setPopupType(PopupType.ProductImage);
                                 setPopupOpen(true);
                             }}
                         />

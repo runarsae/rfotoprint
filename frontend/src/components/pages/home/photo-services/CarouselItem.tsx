@@ -68,7 +68,7 @@ interface Props {
     forwardedRef?: React.RefObject<HTMLDivElement>;
     image: string;
     title: string;
-    description: string;
+    description: React.ReactNode;
     price?: string;
     priceOnClick?: () => void;
 }

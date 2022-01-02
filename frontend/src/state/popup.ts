@@ -1,6 +1,9 @@
 import { atom } from 'recoil';
 
-export type PopupType = 'product-image' | 'retouching-examples';
+export enum PopupType {
+    ProductImage = 'product-image',
+    RetouchingExamples = 'retoching-examples'
+}
 
 export const popupOpenState = atom<boolean>({
     key: 'popupOpenState',

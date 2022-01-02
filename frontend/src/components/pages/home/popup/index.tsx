@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { useTheme } from 'styled-components';
-import { popupOpenState, popupTypeState } from '../../../../state/popup';
+import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
 import CloseButton from '../../../common/CloseButton';
 import Overlay from '../../../common/Overlay';
 import ProductImagePopup from './ProductImagePopup';
@@ -78,9 +78,9 @@ function Popup() {
                             }}
                         />
                         <Content>
-                            {popupType == 'product-image' ? (
+                            {popupType == PopupType.ProductImage ? (
                                 <ProductImagePopup />
-                            ) : popupType == 'retouching-examples' ? (
+                            ) : popupType == PopupType.RetouchingExamples ? (
                                 <RetouchingExamplesPopup />
                             ) : (
                                 <></>

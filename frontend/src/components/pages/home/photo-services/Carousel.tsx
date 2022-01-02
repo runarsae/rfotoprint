@@ -14,11 +14,13 @@ import getBreakpoint from '../../../../util/breakpoint';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import { useSetRecoilState } from 'recoil';
 import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/sidebar';
+import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
+import TextButton from '../../../common/TextButton';
 
 interface ICarouselItem {
     title: string;
     image: string;
-    description: string;
+    description: React.ReactNode;
     price?: string;
     priceOnClick?: () => void;
 }
@@ -86,6 +88,9 @@ function Carousel() {
     const setSidebarType = useSetRecoilState(sidebarTypeState);
     const setSidebarOpen = useSetRecoilState(sidebarOpenState);
 
+    const setPopupType = useSetRecoilState(popupTypeState);
+    const setPopupOpen = useSetRecoilState(popupOpenState);
+
     const carouselItems: ICarouselItem[] = [
         {
             title: 'Utskrift',
@@ -127,7 +132,20 @@ function Carousel() {
         {
             title: 'Retusjering',
             image: editing,
-            description: 'Fjerning av bretter, skader, striper og lignende.',
+            description: (
+                <>
+                    Fjerning av bretter, skader, striper og lignende. Se{' '}
+                    <TextButton
+                        onClick={() => {
+                            setPopupType(PopupType.RetouchingExamples);
+                            setPopupOpen(true);
+                        }}
+                    >
+                        eksempler
+                    </TextButton>
+                    .
+                </>
+            ),
             price: 'Pris etter avtale, fra kr 65,-'
         }
     ];
