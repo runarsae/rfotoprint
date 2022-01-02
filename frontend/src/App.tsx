@@ -2,8 +2,11 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
+import Section from './components/common/Section';
+import Typography from './components/common/Typography';
 import Catalog from './components/pages/catalog';
 import Home from './components/pages/home';
+import NotFound from './components/pages/not-found';
 import SignIn from './components/pages/sign-in';
 import { theme } from './theme';
 
@@ -30,7 +33,7 @@ function App() {
                     <Route path="logg-inn" element={<SignIn />} />
                     <Route path="logg-ut" element={<></>} />
                     <Route path="katalog" element={<Catalog />} />
-                    <Route path="*" element={<>Not found</>} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </ThemeProvider>
         </RecoilRoot>
