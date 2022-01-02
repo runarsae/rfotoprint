@@ -12,6 +12,8 @@ import ArrowRight from '../../../icons/ArrowRight';
 import ArrowLeft from '../../../icons/ArrowLeft';
 import getBreakpoint from '../../../../util/breakpoint';
 import useWindowDimensions from '../../../../util/windowDimensions';
+import { useSetRecoilState } from 'recoil';
+import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/sidebar';
 
 interface ICarouselItem {
     title: string;
@@ -20,49 +22,6 @@ interface ICarouselItem {
     price?: string;
     priceOnClick?: () => void;
 }
-
-const carouselItems: ICarouselItem[] = [
-    {
-        title: 'Utskrift',
-        image: printing,
-        description: 'Bildeutskrift fra e-post, minnebrikke, minnepenn, CD og mobil.',
-        priceOnClick: () => {
-            return null;
-        }
-    },
-    {
-        title: 'Passfoto',
-        image: passport_photo,
-        description: 'Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.',
-        price: 'Kr 250,-'
-    },
-    {
-        title: 'Lysbilder og negativer',
-        image: negatives,
-        description: 'Overføring av lysbilder og negativer til digitale bilder i høy oppløsning.',
-        price: 'Pris etter avtale'
-    },
-    {
-        title: 'Forstørring',
-        image: resize,
-        description: 'Forstørring av bilder opp til A3-størrelse.',
-        priceOnClick: () => {
-            return null;
-        }
-    },
-    {
-        title: 'Skanning',
-        image: scanning,
-        description: 'Skanning av gamle og nye bilder til digitalt format.',
-        price: 'Kr 65,- pr. stk'
-    },
-    {
-        title: 'Retusjering',
-        image: editing,
-        description: 'Fjerning av bretter, skader, striper og lignende.',
-        price: 'Pris etter avtale, fra kr 65,-'
-    }
-];
 
 const Container = styled.div((props) => ({
     position: 'relative',
@@ -123,6 +82,55 @@ function Carousel() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const cardRef = useRef<HTMLDivElement>(null);
+
+    const setSidebarType = useSetRecoilState(sidebarTypeState);
+    const setSidebarOpen = useSetRecoilState(sidebarOpenState);
+
+    const carouselItems: ICarouselItem[] = [
+        {
+            title: 'Utskrift',
+            image: printing,
+            description: 'Bildeutskrift fra e-post, minnebrikke, minnepenn, CD og mobil.',
+            priceOnClick: () => {
+                setSidebarType(SidebarType.PriceList);
+                setSidebarOpen(true);
+            }
+        },
+        {
+            title: 'Passfoto',
+            image: passport_photo,
+            description: 'Passfoto tas til nødpass, visum, ledsagerbevis, bankkort etc.',
+            price: 'Kr 250,-'
+        },
+        {
+            title: 'Lysbilder og negativer',
+            image: negatives,
+            description:
+                'Overføring av lysbilder og negativer til digitale bilder i høy oppløsning.',
+            price: 'Pris etter avtale'
+        },
+        {
+            title: 'Forstørring',
+            image: resize,
+            description: 'Forstørring av bilder opp til A3-størrelse.',
+            priceOnClick: () => {
+                setSidebarType(SidebarType.PriceList);
+                setSidebarOpen(true);
+            }
+        },
+        {
+            title: 'Skanning',
+            image: scanning,
+            description: 'Skanning av gamle og nye bilder til digitalt format.',
+            price: 'Kr 65,- pr. stk'
+        },
+        {
+            title: 'Retusjering',
+            image: editing,
+            description: 'Fjerning av bretter, skader, striper og lignende.',
+            price: 'Pris etter avtale, fra kr 65,-'
+        }
+    ];
 
     /*
      *  Scroll positions for pages (cards)

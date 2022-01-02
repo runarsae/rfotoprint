@@ -6,6 +6,7 @@ import CloseButton from '../../../common/CloseButton';
 import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/sidebar';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Navigation from './navigation';
+import PriceList from './PriceList';
 
 const Wrapper = styled.div((props) => ({
     position: 'fixed',
@@ -13,7 +14,7 @@ const Wrapper = styled.div((props) => ({
     right: '-500px',
     backgroundColor: props.theme.palette.common.black,
     height: '100%',
-    width: 'calc(100% - 40px)',
+    width: '100%',
     maxWidth: '500px !important',
     transition: 'right ' + props.theme.transitionDuration + 'ms ease',
     overflowY: 'auto',
@@ -79,8 +80,8 @@ export default function Sidebar() {
                             <CloseButton onClick={close} />
                             {sidebarType == SidebarType.Navigation ? (
                                 <Navigation />
-                            ) : sidebarType == SidebarType.PriceListPrinting ? (
-                                <></>
+                            ) : sidebarType == SidebarType.PriceList ? (
+                                <PriceList />
                             ) : (
                                 <></>
                             )}

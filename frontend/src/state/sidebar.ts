@@ -2,8 +2,7 @@ import { atom } from 'recoil';
 
 export enum SidebarType {
     Navigation,
-    PriceListPrinting,
-    PriceListResizing
+    PriceList
 }
 
 export const sidebarOpenState = atom<boolean>({
