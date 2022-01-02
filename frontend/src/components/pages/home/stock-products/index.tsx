@@ -11,11 +11,13 @@ function StockProducts() {
 
     return (
         <Section name="Lagervarer" color="gray">
-            <Typography variant="h2" color={theme.palette.common.black} align="center">
-                Lagervarer
-            </Typography>
+            <div>
+                <Typography variant="h2" color={theme.palette.common.black} align="center">
+                    Lagervarer
+                </Typography>
 
-            <div id="products-in-stock"></div>
+                <div id="products-in-stock"></div>
+            </div>
 
             <Filter />
 
