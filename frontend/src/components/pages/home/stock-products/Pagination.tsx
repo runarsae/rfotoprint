@@ -5,6 +5,7 @@ import Typography from '../../../common/Typography';
 import IconButton from '../../../common/IconButton';
 import ArrowLeft from '../../../icons/ArrowLeft';
 import ArrowRight from '../../../icons/ArrowRight';
+import { scroller } from 'react-scroll';
 
 const Wrapper = styled.div({
     display: 'grid',
@@ -19,7 +20,16 @@ function Pagination() {
     const pageCount = useRecoilValue(pageCountState);
     const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
 
+    const scroll = () => {
+        scroller.scrollTo('products-in-stock', {
+            duration: 300,
+            smooth: 'easeInOut'
+        });
+    };
+
     const previousPage = () => {
+        scroll();
+
         setCurrentPage((prevPage) => {
             if (prevPage > 1) {
                 return prevPage - 1;
@@ -30,6 +40,8 @@ function Pagination() {
     };
 
     const nextPage = () => {
+        scroll();
+
         setCurrentPage((prevPage) => {
             if (prevPage < pageCount) {
                 return prevPage + 1;

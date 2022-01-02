@@ -1,28 +1,37 @@
+import { scroller } from 'react-scroll';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import { categoryState, currentPageState } from '../../../../state/products';
+import { Category, categoryState, currentPageState } from '../../../../state/products';
 import { ToggleButton, ToggleButtonGroup } from '../../../common/ToggleButton';
 
 function Filter() {
     const [category, setCategory] = useRecoilState(categoryState);
     const resetCurrentPage = useResetRecoilState(currentPageState);
 
+    const changeCategory = (category: Category) => {
+        scroller.scrollTo('products-in-stock', {
+            duration: 300,
+            smooth: 'easeInOut'
+        });
+
+        setCategory(category);
+        resetCurrentPage();
+    };
+
     return (
         <ToggleButtonGroup>
             <ToggleButton
                 onClick={() => {
-                    setCategory('office-supplies');
-                    resetCurrentPage();
+                    changeCategory(Category.OfficeSupplies);
                 }}
-                selected={category == 'office-supplies'}
+                selected={category == Category.OfficeSupplies}
             >
                 Kontorrekvisita
             </ToggleButton>
             <ToggleButton
                 onClick={() => {
-                    setCategory('frames');
-                    resetCurrentPage();
+                    changeCategory(Category.Frames);
                 }}
-                selected={category == 'frames'}
+                selected={category == Category.Frames}
             >
                 Rammer
             </ToggleButton>

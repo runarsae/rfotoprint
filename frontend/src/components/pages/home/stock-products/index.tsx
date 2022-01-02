@@ -15,6 +15,8 @@ function StockProducts() {
                 Lagervarer
             </Typography>
 
+            <div id="products-in-stock"></div>
+
             <Filter />
 
             <Suspense

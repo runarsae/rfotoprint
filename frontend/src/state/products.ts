@@ -2,12 +2,16 @@ import { atom, selector } from 'recoil';
 import { PRODUCTS } from '../api/queries';
 import { Product, ProductsResult } from '../api/types';
 
-type Category = 'office-supplies' | 'frames';
+export enum Category {
+    OfficeSupplies = 'office-supplies',
+    Frames = 'frames'
+}
+
 type PageSize = 8 | 9;
 
 export const categoryState = atom<Category>({
     key: 'categoryState',
-    default: 'office-supplies'
+    default: Category.OfficeSupplies
 });
 
 export const currentPageState = atom<number>({
