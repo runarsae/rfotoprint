@@ -13,7 +13,8 @@ const Line = styled.hr<{ color?: Color }>((props) => ({
         props.color == 'dark'
             ? props.theme.palette.horizontalLine.dark
             : props.theme.palette.horizontalLine.light,
-    boxShadow: 'none'
+    boxShadow: 'none',
+    backgroundColor: 'transparent'
 }));
 
 export default Line;
