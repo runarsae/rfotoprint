@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { currentPageState, pageCountState } from '../../../../state/products';
+import { currentPageState, pageCountState, productsErrorState } from '../../../../state/products';
 import Typography from '../../../common/Typography';
 import IconButton from '../../../common/IconButton';
 import ArrowLeft from '../../../icons/ArrowLeft';
@@ -18,6 +18,8 @@ const Wrapper = styled.div({
 
 function Pagination() {
     const pageCount = useRecoilValue(pageCountState);
+    const productsError = useRecoilValue(productsErrorState);
+
     const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
 
     const scroll = () => {
@@ -52,17 +54,29 @@ function Pagination() {
     };
 
     return (
-        <Wrapper>
-            <IconButton disabled={currentPage == 1} onClick={previousPage} title="Forrige side">
-                <ArrowLeft />
-            </IconButton>
-            <Typography variant="body2">
-                {currentPage} / {pageCount}
-            </Typography>
-            <IconButton disabled={currentPage == pageCount} onClick={nextPage} title="Neste side">
-                <ArrowRight />
-            </IconButton>
-        </Wrapper>
+        <>
+            {!productsError && pageCount != 0 && (
+                <Wrapper>
+                    <IconButton
+                        disabled={currentPage == 1}
+                        onClick={previousPage}
+                        title="Forrige side"
+                    >
+                        <ArrowLeft />
+                    </IconButton>
+                    <Typography variant="body2">
+                        {currentPage} / {pageCount}
+                    </Typography>
+                    <IconButton
+                        disabled={currentPage == pageCount}
+                        onClick={nextPage}
+                        title="Neste side"
+                    >
+                        <ArrowRight />
+                    </IconButton>
+                </Wrapper>
+            )}
+        </>
     );
 }
 
