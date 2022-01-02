@@ -10,10 +10,11 @@ const Grid = styled.div((props) => ({
     padding: '0 0 40px 0',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        padding: '0 60px 40px 60px'
+        padding: '0 40px 40px 40px'
     },
 
     [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
+        padding: '0 60px 40px 60px',
         gridTemplateColumns: '1fr 1fr'
     }
 }));
