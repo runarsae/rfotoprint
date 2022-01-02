@@ -81,6 +81,8 @@ p {
     border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background-color: #aaaaaa;
+@media (hover: hover) {
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #aaaaaa;
+    }
 }

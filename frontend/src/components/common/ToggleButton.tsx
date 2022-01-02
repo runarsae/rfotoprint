@@ -17,16 +17,18 @@ const Container = styled.button<{ size?: Size; selected: boolean }>((props) => (
     transition: 'background-color ' + props.theme.transitionDuration + 'ms ease-in-out',
     appearance: 'none',
 
-    '&:not(:first-of-type)': {
+    ':not(:first-of-type)': {
         marginTop: '-1px'
     },
 
-    '&:hover': {
-        ...(!props.selected && { backgroundColor: '#f1f1f1' })
+    '@media (hover: hover)': {
+        ':hover': {
+            ...(!props.selected && { backgroundColor: '#f1f1f1' })
+        }
     },
 
     [`@media (min-width: ${props.theme.breakpoints.xs}px)`]: {
-        '&:not(:first-of-type)': {
+        ':not(:first-of-type)': {
             marginTop: 0,
             marginLeft: '-1px'
         }

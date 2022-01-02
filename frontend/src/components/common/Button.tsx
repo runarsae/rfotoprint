@@ -18,9 +18,11 @@ const Container = styled.button<{ variant?: ButtonVariant; size?: Size }>((props
     transition: 'background-color ' + props.theme.transitionDuration + 'ms ease-in-out',
     appearance: 'none',
 
-    '&:hover': {
-        backgroundColor:
-            props.variant == 'outlined' ? '#ad82261f' : props.theme.palette.primary.dark
+    '@media (hover: hover)': {
+        ':hover': {
+            backgroundColor:
+                props.variant == 'outlined' ? '#ad82261f' : props.theme.palette.primary.dark
+        }
     }
 }));
 

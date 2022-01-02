@@ -5,8 +5,10 @@ const Link = styled.a((props) => ({
     textDecoration: 'none',
     transition: 'color ' + props.theme.transitionDuration + 'ms ease-in-out',
 
-    ':hover': {
-        color: props.theme.palette.primary.main
+    '@media (hover: hover)': {
+        ':hover': {
+            color: props.theme.palette.primary.main
+        }
     }
 }));
 

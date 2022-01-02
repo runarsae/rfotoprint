@@ -17,8 +17,10 @@ const IconButton = styled.button<{ color?: string }>((props) => ({
         opacity: '30%'
     },
 
-    ':hover:not(:disabled)': {
-        backgroundColor: props.color ? '#cdcdcd1f' : '#ad82261f'
+    '@media (hover: hover)': {
+        ':hover:not(:disabled)': {
+            backgroundColor: props.color ? '#cdcdcd1f' : '#ad82261f'
+        }
     },
 
     '> svg': {

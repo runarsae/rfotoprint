@@ -25,9 +25,11 @@ const Button = styled.button((props) => ({
         fill: props.theme.palette.common.white
     },
 
-    '&:hover': {
-        cursor: 'pointer',
-        opacity: 0.5
+    '@media (hover: hover)': {
+        ':hover': {
+            cursor: 'pointer',
+            opacity: 0.5
+        }
     },
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {

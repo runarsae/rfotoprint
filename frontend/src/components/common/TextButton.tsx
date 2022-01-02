@@ -14,8 +14,10 @@ const TextButton = styled.button((props) => ({
     margin: 0,
     transition: 'color ' + props.theme.transitionDuration + 'ms ease-in-out',
 
-    ':hover': {
-        color: props.theme.palette.primary.main
+    '@media (hover: hover)': {
+        ':hover': {
+            color: props.theme.palette.primary.main
+        }
     }
 }));
 

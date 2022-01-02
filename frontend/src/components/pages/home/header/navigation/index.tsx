@@ -31,8 +31,10 @@ const MenuButton = styled.button((props) => ({
         fill: props.theme.palette.common.black,
         transition: 'fill ' + props.theme.transitionDuration + 'ms ease-in-out',
 
-        ':hover': {
-            fill: '#858585'
+        '@media (hover: hover)': {
+            ':hover': {
+                fill: '#858585'
+            }
         }
     }
 }));
