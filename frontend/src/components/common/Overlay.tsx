@@ -10,7 +10,7 @@ const Backdrop = styled.div((props) => ({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    backgroundColor: props.theme.palette.overlay,
     transition: 'opacity ' + props.theme.transitionDuration + 'ms ease-in-out',
     zIndex: 10
 }));

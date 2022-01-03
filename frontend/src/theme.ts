@@ -4,7 +4,8 @@ export const theme: DefaultTheme = {
     palette: {
         primary: {
             main: '#AD8226',
-            dark: '#705211'
+            dark: '#705211',
+            light: '#c79835'
         },
         error: '#DD1E1E',
         common: {
@@ -16,7 +17,7 @@ export const theme: DefaultTheme = {
             dark: '#555555',
             light: '#CDCDCD'
         },
-        overlay: 'rgba(0, 0, 0, 0.8)',
+        overlay: 'rgba(0, 0, 0, 0.85)',
         horizontalLine: {
             dark: '#363641',
             light: '#DADADA'
