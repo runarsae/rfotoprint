@@ -96,9 +96,8 @@ function Footer() {
                             </Typography>
                         </div>
                         <Typography variant="body3" color={theme.palette.text.light}>
-                            Hvis du ønsker å benytte deg av fototjenestene jeg tilbyr eller ønsker å
-                            kjøpe eller bestille varer, så er det bare å ta kontakt for et
-                            uforpliktende tilbud.
+                            Hvis du ønsker å benytte deg av fototjenestene jeg tilbyr, kjøpe eller
+                            bestille varer, er det bare å ta kontakt.
                         </Typography>
                     </ContentItem>
 
