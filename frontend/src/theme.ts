@@ -20,6 +20,10 @@ export const theme: DefaultTheme = {
         horizontalLine: {
             dark: '#363641',
             light: '#DADADA'
+        },
+        inputBackground: {
+            dark: '#000000',
+            light: '#e3e3e3'
         }
     },
     breakpoints: {

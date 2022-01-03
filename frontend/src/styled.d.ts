@@ -25,6 +25,10 @@ declare module 'styled-components' {
                 dark: string;
                 light: string;
             };
+            inputBackground: {
+                dark: string;
+                light: string;
+            };
         };
         breakpoints: {
             xxs: number;
