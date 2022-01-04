@@ -1,13 +1,13 @@
 import useSize from '@react-hook/size';
 import { useCallback, useRef, useState } from 'react';
-import { Fade, Flip, Slide } from 'react-awesome-reveal';
+import { Fade, Slide } from 'react-awesome-reveal';
 import styled, { useTheme } from 'styled-components';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import Button from '../../../common/Button';
 import Card from '../../../common/Card';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
-import products from './img/products.jpg';
+import products from '../../../../img/products.jpg';
 
 const Container = styled.div<{ imageHeight?: number; cardHeight?: number }>((props) => ({
     position: 'relative',

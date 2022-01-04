@@ -1,9 +1,9 @@
-import printing from './img/printing.jpg';
-import passport_photo from './img/passport_photo.jpg';
-import editing from './img/editing.jpg';
-import negatives from './img/negatives.jpg';
-import resize from './img/resize.jpg';
-import scanning from './img/scanning.png';
+import printing from '../../../../img/photo-services/printing.jpg';
+import passport_photo from '../../../../img/photo-services/passport_photo.jpg';
+import editing from '../../../../img/photo-services/editing.jpg';
+import negatives from '../../../../img/photo-services/negatives.jpg';
+import resize from '../../../../img/photo-services/resize.jpg';
+import scanning from '../../../../img/photo-services/scanning.png';
 import { useSetRecoilState } from 'recoil';
 import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/sidebar';
 import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';

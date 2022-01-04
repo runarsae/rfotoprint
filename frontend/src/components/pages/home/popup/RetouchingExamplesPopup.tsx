@@ -1,7 +1,7 @@
 import styled, { useTheme } from 'styled-components';
 import Typography from '../../../common/Typography';
-import before1 from '../photo-services/img/retouching-examples/before-1.jpg';
-import after1 from '../photo-services/img/retouching-examples/after-1.jpg';
+import before1 from '../../../../img/retouching-examples/before-1.jpg';
+import after1 from '../../../../img/retouching-examples/after-1.jpg';
 
 const Wrapper = styled.div((props) => ({
     display: 'flex',
