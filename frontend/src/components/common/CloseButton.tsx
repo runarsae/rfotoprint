@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Close from '../icons/Close';
+import { ReactComponent as Close } from '../../icons/close.svg';
 
 const Button = styled.button((props) => ({
     display: 'block',

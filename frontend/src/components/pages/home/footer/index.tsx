@@ -4,11 +4,11 @@ import Line from '../../../common/Line';
 import Link from '../../../common/Link';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
-import AuraAvis from '../../../icons/AuraAvis';
-import Facebook from '../../../icons/Facebook';
-import Mail from '../../../icons/Mail';
-import Phone from '../../../icons/Phone';
-import Pin from '../../../icons/Pin';
+import { ReactComponent as AuraAvis } from '../../../../icons/aura-avis.svg';
+import { ReactComponent as Facebook } from '../../../../icons/facebook.svg';
+import { ReactComponent as Mail } from '../../../../icons/mail.svg';
+import { ReactComponent as Phone } from '../../../../icons/phone.svg';
+import { ReactComponent as Pin } from '../../../../icons/pin.svg';
 import logo from '../../../../logo/logo-light.svg';
 
 const Wrapper = styled.div((props) => ({
@@ -56,11 +56,15 @@ const ContactGrid = styled.div({
     alignItems: 'center'
 });
 
-const ContactIcon = styled.div({
+const ContactIcon = styled.div((props) => ({
     width: '20px',
     height: '20px',
-    justifySelf: 'center'
-});
+    justifySelf: 'center',
+
+    svg: {
+        fill: props.theme.palette.primary.main
+    }
+}));
 
 const MediaWrapper = styled.div({
     display: 'flex',

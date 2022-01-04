@@ -1,6 +1,6 @@
 import styled, { useTheme } from 'styled-components';
 import NavigationItem from './NavigationItem';
-import Menu from '../../../../icons/Menu';
+import { ReactComponent as Menu } from '../../../../../icons/menu.svg';
 import useWindowDimensions from '../../../../../util/windowDimensions';
 import { useSetRecoilState } from 'recoil';
 import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../../state/sidebar';
