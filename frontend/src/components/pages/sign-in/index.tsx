@@ -89,7 +89,7 @@ function SignIn() {
     return (
         <Section>
             <Content>
-                <Logo src={logo} alt="" />
+                <Logo src={logo} alt="Rossland Fotoprint" />
                 <Form onSubmit={handleSubmit}>
                     <div>
                         <Label htmlFor="username">Brukernavn</Label>
