@@ -22,7 +22,7 @@ const Wrapper = styled.div((props) => ({
     },
 
     [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
-        padding: '0 140px'
+        padding: '0 80px'
     }
 }));
 
@@ -36,7 +36,7 @@ const Content = styled.div((props) => ({
     },
 
     [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
-        gap: '80px'
+        gap: '140px'
     }
 }));
 
