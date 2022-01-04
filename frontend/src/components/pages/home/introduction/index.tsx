@@ -1,3 +1,4 @@
+import { Fade } from 'react-awesome-reveal';
 import styled, { useTheme } from 'styled-components';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
@@ -36,25 +37,29 @@ function Introduction() {
     return (
         <Section>
             <Grid>
-                <div>
-                    <Typography variant="h1" color={theme.palette.primary.main} inline>
-                        Bilder
-                    </Typography>
-                    <Typography variant="h1" color={theme.palette.common.black} inline>
-                        , passfoto &<br />
-                        kontorrekvisita
-                    </Typography>
-                </div>
-                <Information>
-                    <Typography variant="body1">
-                        Rossland Fotoprint er et enkeltpersonforetak hvor jeg tilbyr en rekke
-                        tjenester innen foto,{' '}
-                        {/* deriblant utskrift, passfoto, forstørring, skanning og retusjering,  */}
-                        i tillegg til salg av kontorrekvisita og rammer. Ta kontakt for avtale eller
-                        kjøp.
-                    </Typography>
-
+                <Fade triggerOnce>
                     <div>
+                        <Typography variant="h1" color={theme.palette.primary.main} inline>
+                            Bilder
+                        </Typography>
+                        <Typography variant="h1" color={theme.palette.common.black} inline>
+                            , passfoto &<br />
+                            kontorrekvisita
+                        </Typography>
+                    </div>
+                </Fade>
+                <Information>
+                    <Fade direction="up" triggerOnce>
+                        <Typography variant="body1">
+                            Rossland Fotoprint er et enkeltpersonforetak hvor jeg tilbyr en rekke
+                            tjenester innen foto,{' '}
+                            {/* deriblant utskrift, passfoto, forstørring, skanning og retusjering,  */}
+                            i tillegg til salg av kontorrekvisita og rammer. Ta kontakt for avtale
+                            eller kjøp.
+                        </Typography>
+                    </Fade>
+
+                    <Fade direction="up" triggerOnce cascade damping={0.3} delay={500}>
                         <Typography
                             variant="body1"
                             color={theme.palette.primary.main}
@@ -66,7 +71,7 @@ function Introduction() {
                         <Typography variant="signature" color={theme.palette.common.black}>
                             Ann Elin
                         </Typography>
-                    </div>
+                    </Fade>
                 </Information>
             </Grid>
         </Section>

@@ -1,5 +1,6 @@
 import useSize from '@react-hook/size';
 import { useCallback, useRef, useState } from 'react';
+import { Fade, Flip, Slide } from 'react-awesome-reveal';
 import styled, { useTheme } from 'styled-components';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import Button from '../../../common/Button';
@@ -71,26 +72,42 @@ const ContentContainer = styled.div((props) => ({
 
 function Content() {
     const theme = useTheme();
+    const { width } = useWindowDimensions();
 
     return (
         <ContentContainer>
             <div>
-                <Typography variant="h2" color={theme.palette.common.black} marginBottom>
-                    Varer
-                </Typography>
-                <Typography variant="body1" color={theme.palette.text.dark}>
-                    Kontorpapir, skriveredskap, skrivebøker, datatilbehør og diverse kontorutstyr
-                    kan skaffes ved behov. Gå til kontorkatalogen for å se hvilke varer jeg kan
-                    skaffe.
-                </Typography>
+                <Fade
+                    triggerOnce
+                    cascade
+                    direction="up"
+                    damping={0.2}
+                    duration={width >= theme.breakpoints.lg ? 0 : 1000}
+                >
+                    <Typography variant="h2" color={theme.palette.common.black} marginBottom>
+                        Varer
+                    </Typography>
+                    <Typography variant="body1" color={theme.palette.text.dark}>
+                        Kontorpapir, skriveredskap, skrivebøker, datatilbehør og diverse
+                        kontorutstyr kan skaffes ved behov. Gå til kontorkatalogen for å se hvilke
+                        varer jeg kan skaffe.
+                    </Typography>
+                </Fade>
             </div>
-            <Button
-                onClick={() => {
-                    window.open('/katalog', '_blank');
-                }}
+            <Fade
+                triggerOnce
+                direction="up"
+                delay={width >= theme.breakpoints.lg ? 0 : 400}
+                duration={width >= theme.breakpoints.lg ? 0 : 1000}
             >
-                Kontorkatalogen
-            </Button>
+                <Button
+                    onClick={() => {
+                        window.open('/katalog', '_blank');
+                    }}
+                >
+                    Kontorkatalogen
+                </Button>
+            </Fade>
         </ContentContainer>
     );
 }
@@ -117,9 +134,11 @@ function Products() {
 
                 {width >= theme.breakpoints.lg ? (
                     <CardContainer ref={cardRef}>
-                        <Card size="large" shadow>
-                            <Content />
-                        </Card>
+                        <Slide triggerOnce direction="up">
+                            <Card size="large" shadow>
+                                <Content />
+                            </Card>
+                        </Slide>
                     </CardContainer>
                 ) : (
                     <Content />

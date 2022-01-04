@@ -10,7 +10,8 @@ import {
 import Typography from '../../../common/Typography';
 import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
 import useWindowDimensions from '../../../../util/windowDimensions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Fade } from 'react-awesome-reveal';
 
 const Grid = styled.div((props) => ({
     display: 'grid',
@@ -54,6 +55,13 @@ function ProductsGrid() {
         }
     }, [width]);
 
+    // Count number of loads to trigger fade transition once
+    const [loadCount, setLoadCount] = useState<number>(0);
+
+    useEffect(() => {
+        setLoadCount((prevCount) => prevCount + 1);
+    }, [products]);
+
     return (
         <>
             {productsError ? (
@@ -62,17 +70,19 @@ function ProductsGrid() {
                 </Typography>
             ) : products && products.length > 0 ? (
                 <Grid>
-                    {products.map((product, index) => (
-                        <Product
-                            key={index}
-                            product={product}
-                            viewImage={() => {
-                                setPopupProductImage(product.image);
-                                setPopupType(PopupType.ProductImage);
-                                setPopupOpen(true);
-                            }}
-                        />
-                    ))}
+                    <Fade triggerOnce cascade damping={0.05} duration={loadCount == 1 ? 1000 : 0}>
+                        {products.map((product, index) => (
+                            <Product
+                                key={index}
+                                product={product}
+                                viewImage={() => {
+                                    setPopupProductImage(product.image);
+                                    setPopupType(PopupType.ProductImage);
+                                    setPopupOpen(true);
+                                }}
+                            />
+                        ))}
+                    </Fade>
                 </Grid>
             ) : (
                 <Typography variant="body1" align="center">

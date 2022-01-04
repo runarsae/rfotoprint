@@ -1,3 +1,4 @@
+import { Fade } from 'react-awesome-reveal';
 import styled from 'styled-components';
 import GridItem from './GridItem';
 import getPhotoServices from './PhotoServices';
@@ -28,16 +29,18 @@ function Grid() {
     return (
         <>
             <Container>
-                {photoServices.map((item, index) => (
-                    <GridItem
-                        key={index}
-                        title={item.title}
-                        image={item.image}
-                        description={item.description}
-                        price={item.price}
-                        priceOnClick={item.priceOnClick}
-                    />
-                ))}
+                <Fade triggerOnce cascade damping={0.1}>
+                    {photoServices.map((item, index) => (
+                        <GridItem
+                            key={index}
+                            title={item.title}
+                            image={item.image}
+                            description={item.description}
+                            price={item.price}
+                            priceOnClick={item.priceOnClick}
+                        />
+                    ))}
+                </Fade>
             </Container>
         </>
     );
