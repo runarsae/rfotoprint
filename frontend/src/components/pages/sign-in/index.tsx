@@ -9,12 +9,22 @@ import Label from '../../common/form/Label';
 import TextInput from '../../common/form/TextInput';
 import Typography from '../../common/Typography';
 import SubmitButton from '../../common/form/SubmitButton';
+import logo from '../../../logo/logo-2-dark.svg';
 
 const Content = styled.div({
+    alignSelf: 'center',
+    maxWidth: '300px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    gap: '40px'
+});
+
+const Logo = styled.img({
+    display: 'block',
+    width: '200px'
 });
 
 function SignIn() {
@@ -79,42 +89,41 @@ function SignIn() {
     return (
         <Section>
             <Content>
-                <div style={{ maxWidth: '300px', width: '100%' }}>
-                    <Form onSubmit={handleSubmit}>
-                        <div>
-                            <Label htmlFor="username">Brukernavn</Label>
-                            <TextInput
-                                type="text"
-                                id="username"
-                                name="username"
-                                autoComplete="username"
-                                onChange={(e) => {
-                                    setErrorMessage(null);
-                                    setUsername(e.target.value);
-                                }}
-                            />
-                        </div>
-                        <div>
-                            <Label htmlFor="password">Passord</Label>
-                            <TextInput
-                                type="password"
-                                id="password"
-                                name="password"
-                                autoComplete="current-password"
-                                onChange={(e) => {
-                                    setErrorMessage(null);
-                                    setPassword(e.target.value);
-                                }}
-                            />
-                        </div>
-                        {errorMessage && (
-                            <Typography variant="body3" color={theme.palette.error}>
-                                {errorMessage}
-                            </Typography>
-                        )}
-                        <SubmitButton value="Logg inn" />
-                    </Form>
-                </div>
+                <Logo src={logo} alt="" />
+                <Form onSubmit={handleSubmit}>
+                    <div>
+                        <Label htmlFor="username">Brukernavn</Label>
+                        <TextInput
+                            type="text"
+                            id="username"
+                            name="username"
+                            autoComplete="username"
+                            onChange={(e) => {
+                                setErrorMessage(null);
+                                setUsername(e.target.value);
+                            }}
+                        />
+                    </div>
+                    <div>
+                        <Label htmlFor="password">Passord</Label>
+                        <TextInput
+                            type="password"
+                            id="password"
+                            name="password"
+                            autoComplete="current-password"
+                            onChange={(e) => {
+                                setErrorMessage(null);
+                                setPassword(e.target.value);
+                            }}
+                        />
+                    </div>
+                    {errorMessage && (
+                        <Typography variant="body3" color={theme.palette.error}>
+                            {errorMessage}
+                        </Typography>
+                    )}
+                    <SubmitButton value="Logg inn" />
+                </Form>
             </Content>
         </Section>
     );

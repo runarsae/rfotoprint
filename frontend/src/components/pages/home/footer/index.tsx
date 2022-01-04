@@ -9,6 +9,7 @@ import Facebook from '../../../icons/Facebook';
 import Mail from '../../../icons/Mail';
 import Phone from '../../../icons/Phone';
 import Pin from '../../../icons/Pin';
+import logo from '../../../../logo/logo-light.svg';
 
 const Wrapper = styled.div((props) => ({
     display: 'flex',
@@ -70,6 +71,10 @@ const Copyright = styled.div({
     margin: '0 auto'
 });
 
+const Logo = styled.img({
+    height: '80px'
+});
+
 function Footer() {
     const theme = useTheme();
     return (
@@ -77,24 +82,7 @@ function Footer() {
             <Wrapper>
                 <Content>
                     <ContentItem>
-                        <div>
-                            <Typography
-                                variant="h2"
-                                color={theme.palette.primary.main}
-                                fontSize="28px"
-                                inline
-                            >
-                                R{' '}
-                            </Typography>
-                            <Typography
-                                variant="h2"
-                                color={theme.palette.common.white}
-                                fontSize="28px"
-                                inline
-                            >
-                                Fotoprint
-                            </Typography>
-                        </div>
+                        <Logo src={logo} alt="Rossland Fotoprint" />
                         <Typography variant="body3" color={theme.palette.text.light}>
                             Hvis du ønsker å benytte deg av fototjenestene jeg tilbyr, kjøpe eller
                             bestille varer, er det bare å ta kontakt.

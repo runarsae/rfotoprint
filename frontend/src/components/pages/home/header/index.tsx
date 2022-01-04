@@ -1,7 +1,7 @@
 import styled, { useTheme } from 'styled-components';
 import Section from '../../../common/Section';
-import Typography from '../../../common/Typography';
 import Navigation from './navigation';
+import logo from '../../../../logo/logo-dark.svg';
 
 const Grid = styled.div({
     display: 'grid',
@@ -10,30 +10,17 @@ const Grid = styled.div({
     alignItems: 'center'
 });
 
+const Logo = styled.img({
+    height: '80px'
+});
+
 function Header() {
     const theme = useTheme();
 
     return (
         <Section size="small">
             <Grid>
-                <div>
-                    <Typography
-                        variant="h1"
-                        fontSize="32px"
-                        color={theme.palette.primary.main}
-                        inline
-                    >
-                        R{' '}
-                    </Typography>
-                    <Typography
-                        variant="h1"
-                        fontSize="32px"
-                        color={theme.palette.common.black}
-                        inline
-                    >
-                        Fotoprint
-                    </Typography>
-                </div>
+                <Logo src={logo} alt="Rossland Fotoprint" />
                 <Navigation />
             </Grid>
         </Section>
