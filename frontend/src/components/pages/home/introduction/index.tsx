@@ -37,7 +37,7 @@ function Introduction() {
     return (
         <Section>
             <Grid>
-                <Fade triggerOnce>
+                <Fade triggerOnce duration={2000}>
                     <div>
                         <Typography variant="h1" color={theme.palette.primary.main} inline>
                             Bilder
@@ -52,26 +52,26 @@ function Introduction() {
                     <Fade direction="up" triggerOnce>
                         <Typography variant="body1">
                             Rossland Fotoprint er et enkeltpersonforetak hvor jeg tilbyr en rekke
-                            tjenester innen foto,{' '}
-                            {/* deriblant utskrift, passfoto, forstørring, skanning og retusjering,  */}
-                            i tillegg til salg av kontorrekvisita og rammer. Ta kontakt for avtale
-                            eller kjøp.
+                            tjenester innen foto, i tillegg til salg av kontorrekvisita og rammer.
+                            Ta kontakt for avtale eller kjøp.
                         </Typography>
                     </Fade>
 
-                    <Fade direction="up" triggerOnce cascade damping={0.3} delay={500}>
-                        <Typography
-                            variant="body1"
-                            color={theme.palette.primary.main}
-                            fontSize="20px"
-                        >
-                            Velkommen!
-                        </Typography>
+                    <div>
+                        <Fade direction="up" triggerOnce cascade damping={0.3} delay={350}>
+                            <Typography
+                                variant="body1"
+                                color={theme.palette.primary.main}
+                                fontSize="20px"
+                            >
+                                Velkommen!
+                            </Typography>
 
-                        <Typography variant="signature" color={theme.palette.common.black}>
-                            Ann Elin
-                        </Typography>
-                    </Fade>
+                            <Typography variant="signature" color={theme.palette.common.black}>
+                                Ann Elin
+                            </Typography>
+                        </Fade>
+                    </div>
                 </Information>
             </Grid>
         </Section>
