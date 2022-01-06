@@ -1,13 +1,13 @@
 import styled, { DefaultTheme, StyledComponent } from 'styled-components';
 
 const Heading1 = styled.h1({
-    fontFamily: 'RalewayMedium',
+    fontFamily: 'RalewayRegular',
     fontSize: 'max(min(8vw, 64px), 28px)',
     whiteSpace: 'nowrap'
 });
 
 const Heading2 = styled.h2((props) => ({
-    fontFamily: 'RalewayMedium',
+    fontFamily: 'RalewayRegular',
     fontSize: '26px',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
@@ -16,7 +16,7 @@ const Heading2 = styled.h2((props) => ({
 }));
 
 const Heading3 = styled.h3((props) => ({
-    fontFamily: 'RalewaySemiBold',
+    fontFamily: 'RalewayRegular',
     fontSize: '16px',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
@@ -25,7 +25,7 @@ const Heading3 = styled.h3((props) => ({
 }));
 
 const Heading4 = styled.h4({
-    fontFamily: 'RalewaySemiBold',
+    fontFamily: 'RalewayRegular',
     fontSize: '18px'
 });
 
