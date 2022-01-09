@@ -9,7 +9,7 @@ import { ReactComponent as Facebook } from '../../../../icons/facebook.svg';
 import { ReactComponent as Mail } from '../../../../icons/mail.svg';
 import { ReactComponent as Phone } from '../../../../icons/phone.svg';
 import { ReactComponent as Pin } from '../../../../icons/pin.svg';
-import logo from '../../../../logo/logo-light.svg';
+import logo from '../../../../logo/logo_1_light.svg';
 
 const Wrapper = styled.div((props) => ({
     display: 'flex',
