@@ -1,13 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { Transition } from 'react-transition-group';
-import Overlay from '../../../common/Overlay';
-import CloseButton from '../../../common/CloseButton';
-import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/sidebar';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import Navigation from './navigation';
-import PriceList from './PriceList';
-import { disableScroll, enableScroll } from '../../../../util/toggleScroll';
+import Overlay from './Overlay';
+import CloseButton from './CloseButton';
+import { disableScroll, enableScroll } from '../../util/toggleScroll';
 
 const Wrapper = styled.div((props) => ({
     position: 'fixed',
@@ -33,16 +29,19 @@ const sidebarTransitionStyles: { [id: string]: React.CSSProperties } = {
     entered: { right: 0 }
 };
 
-export default function Sidebar() {
-    const theme = useTheme();
+interface Props {
+    children: React.ReactNode;
+    open: boolean;
+    setOpen: (open: boolean) => void;
+}
 
-    const [sidebarOpen, setSidebarOpen] = useRecoilState(sidebarOpenState);
-    const sidebarType = useRecoilValue(sidebarTypeState);
+export default function Sidebar(props: Props) {
+    const theme = useTheme();
 
     const sidebarRef = useRef(null);
 
     const close = () => {
-        setSidebarOpen(false);
+        props.setOpen(false);
     };
 
     const closeOnEsc = (e: KeyboardEvent) => {
@@ -52,31 +51,31 @@ export default function Sidebar() {
     };
 
     useEffect(() => {
-        if (sidebarOpen) {
+        if (props.open) {
             document.addEventListener('keydown', closeOnEsc, false);
 
             return () => {
                 document.removeEventListener('keydown', closeOnEsc, false);
             };
         }
-    }, [sidebarOpen]);
+    }, [props.open]);
 
     useEffect(() => {
-        if (sidebarOpen) {
+        if (props.open) {
             disableScroll();
         } else {
             enableScroll();
         }
-    }, [sidebarOpen]);
+    }, [props.open]);
 
     return (
         <>
-            <Overlay open={sidebarOpen} onClose={close} />
+            <Overlay open={props.open} onClose={close} />
             <Transition
                 nodeRef={sidebarRef}
                 mountOnEnter
                 unmountOnExit
-                in={sidebarOpen}
+                in={props.open}
                 timeout={theme.transitionDuration}
             >
                 {(state) => (
@@ -87,13 +86,7 @@ export default function Sidebar() {
                             }}
                         >
                             <CloseButton onClick={close} />
-                            {sidebarType == SidebarType.Navigation ? (
-                                <Navigation />
-                            ) : sidebarType == SidebarType.PriceList ? (
-                                <PriceList />
-                            ) : (
-                                <></>
-                            )}
+                            {props.children}
                         </Wrapper>
                     </div>
                 )}
