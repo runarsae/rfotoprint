@@ -6,11 +6,11 @@ export enum SidebarType {
 }
 
 export const sidebarOpenState = atom<boolean>({
-    key: 'sidebarOpenState',
+    key: 'panelSidebarOpenState',
     default: false
 });
 
 export const sidebarTypeState = atom<SidebarType | null>({
-    key: 'sidebarTypeState',
+    key: 'panelSidebarTypeState',
     default: null
 });

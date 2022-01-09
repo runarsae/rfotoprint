@@ -1,6 +1,9 @@
+import { Suspense } from 'react';
 import { useAuth } from '../../../util/auth';
 import Section from '../../common/Section';
 import Typography from '../../common/Typography';
+import Filter from './Filter';
+import ProductList from './ProductList';
 
 function Panel() {
     const auth = useAuth();
@@ -8,9 +11,19 @@ function Panel() {
     return (
         <Section>
             {auth && (
-                <div>
-                    <Typography>Panel</Typography>
-                </div>
+                <>
+                    <Filter />
+
+                    <Suspense
+                        fallback={
+                            <Typography variant="body1" align="center">
+                                Laster..
+                            </Typography>
+                        }
+                    >
+                        <ProductList />
+                    </Suspense>
+                </>
             )}
         </Section>
     );
