@@ -7,7 +7,7 @@ import Popup from './popup';
 import Products from './products';
 import StockProducts from './stock-products';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../state/sidebar';
+import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../state/home/sidebar';
 import PriceList from './sidebar/PriceList';
 import Navigation from './sidebar/Navigation';
 

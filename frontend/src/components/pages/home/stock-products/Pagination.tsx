@@ -1,6 +1,10 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { currentPageState, pageCountState, productsErrorState } from '../../../../state/products';
+import {
+    currentPageState,
+    pageCountState,
+    productsErrorState
+} from '../../../../state/home/products';
 import Typography from '../../../common/Typography';
 import IconButton from '../../../common/IconButton';
 import { ReactComponent as ArrowLeft } from '../../../../icons/arrow-left.svg';

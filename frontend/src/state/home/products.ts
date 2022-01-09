@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
-import { PRODUCTS } from '../api/queries';
-import { Product, ProductsResult } from '../api/types';
+import { PRODUCTS } from '../../api/queries';
+import { Product, ProductsResult } from '../../api/types';
 
 export enum Category {
     OfficeSupplies = 'office-supplies',

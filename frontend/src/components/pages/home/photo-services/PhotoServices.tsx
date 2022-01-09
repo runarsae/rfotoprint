@@ -5,8 +5,8 @@ import negatives from '../../../../img/photo-services/negatives.jpg';
 import resize from '../../../../img/photo-services/resize.jpg';
 import scanning from '../../../../img/photo-services/scanning.png';
 import { useSetRecoilState } from 'recoil';
-import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/sidebar';
-import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
+import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/home/sidebar';
+import { popupOpenState, PopupType, popupTypeState } from '../../../../state/home/popup';
 import TextButton from '../../../common/TextButton';
 
 interface PhotoService {

@@ -3,7 +3,7 @@ import NavigationItem from './NavigationItem';
 import { ReactComponent as Menu } from '../../../../../icons/menu.svg';
 import useWindowDimensions from '../../../../../util/windowDimensions';
 import { useSetRecoilState } from 'recoil';
-import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../../state/sidebar';
+import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../../state/home/sidebar';
 
 const Wrapper = styled.div({
     display: 'flex',

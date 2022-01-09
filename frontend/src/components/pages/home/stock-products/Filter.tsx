@@ -1,6 +1,6 @@
 import { scroller } from 'react-scroll';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import { Category, categoryState, currentPageState } from '../../../../state/products';
+import { Category, categoryState, currentPageState } from '../../../../state/home/products';
 import { ToggleButton, ToggleButtonGroup } from '../../../common/ToggleButton';
 
 function Filter() {

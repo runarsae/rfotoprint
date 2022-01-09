@@ -6,9 +6,9 @@ import {
     popupProductImageState,
     productsErrorState,
     productsState
-} from '../../../../state/products';
+} from '../../../../state/home/products';
 import Typography from '../../../common/Typography';
-import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
+import { popupOpenState, PopupType, popupTypeState } from '../../../../state/home/popup';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import { useEffect, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';

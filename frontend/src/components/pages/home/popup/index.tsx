@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { useTheme } from 'styled-components';
-import { popupOpenState, PopupType, popupTypeState } from '../../../../state/popup';
+import { popupOpenState, PopupType, popupTypeState } from '../../../../state/home/popup';
 import { disableScroll, enableScroll } from '../../../../util/toggleScroll';
 import CloseButton from '../../../common/CloseButton';
 import Overlay from '../../../common/Overlay';

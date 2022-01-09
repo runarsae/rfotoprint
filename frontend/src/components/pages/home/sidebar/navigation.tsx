@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled, { useTheme } from 'styled-components';
-import { sidebarOpenState } from '../../../../state/sidebar';
+import { sidebarOpenState } from '../../../../state/home/sidebar';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import NavigationItem from '../header/navigation/NavigationItem';
 

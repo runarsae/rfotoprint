@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { popupProductImageState } from '../../../../state/products';
+import { popupProductImageState } from '../../../../state/home/products';
 
 const FullImage = styled.img((props) => ({
     display: 'block',
