@@ -92,7 +92,9 @@ function SignIn() {
                 <Logo src={logo} alt="Rossland Fotoprint" />
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Label htmlFor="username">Brukernavn</Label>
+                        <Label htmlFor="username" color={theme.palette.text.dark}>
+                            Brukernavn
+                        </Label>
                         <TextInput
                             type="text"
                             id="username"
@@ -105,7 +107,9 @@ function SignIn() {
                         />
                     </div>
                     <div>
-                        <Label htmlFor="password">Passord</Label>
+                        <Label htmlFor="password" color={theme.palette.text.dark}>
+                            Passord
+                        </Label>
                         <TextInput
                             type="password"
                             id="password"
