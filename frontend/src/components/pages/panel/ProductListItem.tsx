@@ -4,6 +4,7 @@ import { Product } from '../../../api/types';
 import Typography from '../../common/Typography';
 import { ReactComponent as Delete } from '../../../icons/delete.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
+import { useState } from 'react';
 
 const ItemWrapper = styled.div((props) => ({
     width: '100%',
@@ -65,6 +66,7 @@ const IconButton = styled.button<{ hover?: boolean }>((props) => ({
 interface ProductListItemProps {
     product: Product;
     index: number;
+    editProduct: (id: string) => void;
     deleteProduct: (id: string) => void;
 }
 
@@ -72,8 +74,10 @@ function ProductListItem(props: ProductListItemProps): JSX.Element {
     const theme = useTheme();
     const { product, index } = props;
 
+    const [dragDisabled, setDragDisabled] = useState(false);
+
     return (
-        <Draggable draggableId={product._id} index={index}>
+        <Draggable draggableId={product._id} index={index} isDragDisabled={dragDisabled}>
             {(provided) => (
                 <div
                     ref={provided.innerRef}
@@ -81,24 +85,47 @@ function ProductListItem(props: ProductListItemProps): JSX.Element {
                     {...provided.dragHandleProps}
                 >
                     <ItemWrapper>
-                        <ItemImage src={'uploads/products/' + product.image} alt={product.name} />
+                        <ItemImage
+                            src={'uploads/products/' + product.image}
+                            alt={product.name}
+                            onMouseOver={() => setDragDisabled(true)}
+                            onMouseOut={() => setDragDisabled(false)}
+                        />
                         <Typography fontSize="14px">{product.name}</Typography>
-                        {/* {peops.hidden ? (
-                            <IconButton hover title="Vis produkt">
+                        {/* {props.hidden ? (
+                            <IconButton
+                                hover
+                                title="Vis vare"
+                                onMouseOver={() => setDragDisabled(true)}
+                                onMouseOut={() => setDragDisabled(false)}
+                            >
                                 <VisibilityOff fill={theme.palette.text.dark} />
                             </IconButton>
                         ) : (
-                            <IconButton hover title="Skjul produkt">
+                            <IconButton
+                                hover
+                                title="Skjul vare"
+                                onMouseOver={() => setDragDisabled(true)}
+                                onMouseOut={() => setDragDisabled(false)}
+                            >
                                 <Visibility fill={theme.palette.text.dark} />
                             </IconButton>
                         )} */}
                         <IconsGrid>
-                            <IconButton hover title="Endre produkt">
+                            <IconButton
+                                onMouseOver={() => setDragDisabled(true)}
+                                onMouseOut={() => setDragDisabled(false)}
+                                hover
+                                title="Endre vare"
+                                onClick={() => props.editProduct(props.product._id)}
+                            >
                                 <Edit fill={theme.palette.text.dark} />
                             </IconButton>
                             <IconButton
+                                onMouseOver={() => setDragDisabled(true)}
+                                onMouseOut={() => setDragDisabled(false)}
                                 hover
-                                title="Slett produkt"
+                                title="Slett vare"
                                 onClick={() => props.deleteProduct(props.product._id)}
                             >
                                 <Delete fill={theme.palette.text.dark} />

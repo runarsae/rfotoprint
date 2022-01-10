@@ -10,6 +10,7 @@ import Typography from '../../common/Typography';
 import Filter from './Filter';
 import ProductList from './ProductList';
 import AddProduct from './sidebar/AddProduct';
+import EditProduct from './sidebar/EditProduct';
 
 const Menu = styled.div({
     display: 'grid',
@@ -65,8 +66,7 @@ function Panel() {
                 {sidebarType == SidebarType.AddProduct ? (
                     <AddProduct />
                 ) : sidebarType == SidebarType.EditProduct ? (
-                    // <EditProduct />
-                    <></>
+                    <EditProduct />
                 ) : (
                     <></>
                 )}

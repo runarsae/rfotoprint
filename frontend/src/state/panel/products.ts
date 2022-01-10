@@ -84,3 +84,8 @@ export const productsErrorState = selector<string | undefined>({
         }
     }
 });
+
+export const editProductIdState = atom<string | undefined>({
+    key: 'editProductIdState',
+    default: undefined
+});

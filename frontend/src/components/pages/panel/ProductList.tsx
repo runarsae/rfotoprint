@@ -5,17 +5,20 @@ import {
     useRecoilRefresher_UNSTABLE,
     useRecoilState,
     useRecoilValue,
-    useResetRecoilState
+    useResetRecoilState,
+    useSetRecoilState
 } from 'recoil';
 import styled, { useTheme } from 'styled-components';
 import { DELETE_PRODUCT, EDIT_PRODUCTS_ORDER } from '../../../api/mutations';
 import { DefaultResult, MutationEditProductsOrderArgs, Product } from '../../../api/types';
 import {
     categoryState,
+    editProductIdState,
     productsOrderErrorState,
     productsQueryState,
     productsState
 } from '../../../state/panel/products';
+import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../state/panel/sidebar';
 import Typography from '../../common/Typography';
 import ProductListItem from './ProductListItem';
 
@@ -48,6 +51,11 @@ function ProductList() {
         { editProductsOrder: DefaultResult },
         MutationEditProductsOrderArgs
     >(EDIT_PRODUCTS_ORDER);
+
+    const setEditProductId = useSetRecoilState(editProductIdState);
+
+    const setSidebarType = useSetRecoilState(sidebarTypeState);
+    const setSidebarOpen = useSetRecoilState(sidebarOpenState);
 
     const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
@@ -91,6 +99,12 @@ function ProductList() {
         }
     };
 
+    const editProductCallback = (id: string) => {
+        setEditProductId(id);
+        setSidebarType(SidebarType.EditProduct);
+        setSidebarOpen(true);
+    };
+
     const deleteProductCallback = (id: string) => {
         deleteProduct({ variables: { _id: id } }).then(() => {
             refreshProductsQuery();
@@ -105,6 +119,7 @@ function ProductList() {
                     key={product._id}
                     product={product}
                     index={index}
+                    editProduct={editProductCallback}
                     deleteProduct={deleteProductCallback}
                 />
             ))
