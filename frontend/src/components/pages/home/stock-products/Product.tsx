@@ -8,7 +8,7 @@ const Content = styled.div((props) => ({
     width: '100%',
     height: '100%',
     display: 'grid',
-    gridTemplateRows: '200px 17px 44px',
+    gridTemplateRows: '120px 17px 44px',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
         gridTemplateRows: '200px 17px 50px'

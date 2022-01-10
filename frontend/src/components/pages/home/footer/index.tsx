@@ -75,9 +75,13 @@ const Copyright = styled.div({
     margin: '0 auto'
 });
 
-const Logo = styled.img({
-    height: '80px'
-});
+const Logo = styled.img((props) => ({
+    height: '72px',
+
+    [`@media (min-width: ${props.theme.breakpoints.xs}px)`]: {
+        height: '80px'
+    }
+}));
 
 function Footer() {
     const theme = useTheme();

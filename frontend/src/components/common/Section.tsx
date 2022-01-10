@@ -29,13 +29,16 @@ interface Props {
     name?: string;
     color?: Color;
     size?: Size;
+    className?: string;
 }
 
 function Section(props: Props) {
     return (
         <Element name={props.name ? props.name : ''}>
             <Wrapper color={props.color}>
-                <Content size={props.size}>{props.children}</Content>
+                <Content size={props.size} className={props.className}>
+                    {props.children}
+                </Content>
             </Wrapper>
         </Element>
     );
