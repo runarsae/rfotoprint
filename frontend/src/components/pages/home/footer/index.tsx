@@ -72,7 +72,9 @@ const MediaWrapper = styled.div({
 });
 
 const Copyright = styled.div({
-    margin: '0 auto'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
 });
 
 const Logo = styled.img((props) => ({
@@ -162,10 +164,7 @@ function Footer() {
 
                 <Copyright>
                     <Typography color={theme.palette.common.white} variant="body3" inline>
-                        Copyright &copy; {new Date().getFullYear()},{' '}
-                    </Typography>
-                    <Typography color={theme.palette.primary.main} variant="body3" inline>
-                        R Fotoprint
+                        Copyright &copy; {new Date().getFullYear()}
                     </Typography>
                 </Copyright>
             </Wrapper>
