@@ -4,12 +4,12 @@ import Line from '../../../common/Line';
 import Link from '../../../common/Link';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
-import { ReactComponent as AuraAvis } from '../../../../icons/aura-avis.svg';
-import { ReactComponent as Facebook } from '../../../../icons/facebook.svg';
-import { ReactComponent as Mail } from '../../../../icons/mail.svg';
-import { ReactComponent as Phone } from '../../../../icons/phone.svg';
-import { ReactComponent as Pin } from '../../../../icons/pin.svg';
-import logo from '../../../../logo/logo_1_light.svg';
+import { ReactComponent as AuraAvis } from '../../../../img/icons/aura-avis.svg';
+import { ReactComponent as Facebook } from '../../../../img/icons/facebook.svg';
+import { ReactComponent as Mail } from '../../../../img/icons/mail.svg';
+import { ReactComponent as Phone } from '../../../../img/icons/phone.svg';
+import { ReactComponent as Pin } from '../../../../img/icons/pin.svg';
+import logo from '../../../../img/logo/logo_1_light.svg';
 
 const Wrapper = styled.div((props) => ({
     display: 'flex',

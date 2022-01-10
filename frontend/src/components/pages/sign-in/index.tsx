@@ -9,7 +9,7 @@ import Label from '../../common/form/Label';
 import TextInput from '../../common/form/TextInput';
 import Typography from '../../common/Typography';
 import SubmitButton from '../../common/form/SubmitButton';
-import logo from '../../../logo/logo_2_dark.svg';
+import logo from '../../../img/logo/logo_2_dark.svg';
 
 const Content = styled.div({
     alignSelf: 'center',

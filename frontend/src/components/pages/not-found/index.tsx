@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Section from '../../common/Section';
 import Typography from '../../common/Typography';
-import logo from '../../../logo/logo_2_dark.svg';
+import logo from '../../../img/logo/logo_2_dark.svg';
 
 const Logo = styled.img({
     display: 'block',

@@ -7,8 +7,8 @@ import {
 } from '../../../../state/home/products';
 import Typography from '../../../common/Typography';
 import IconButton from '../../../common/IconButton';
-import { ReactComponent as ArrowLeft } from '../../../../icons/arrow-left.svg';
-import { ReactComponent as ArrowRight } from '../../../../icons/arrow-right.svg';
+import { ReactComponent as ArrowLeft } from '../../../../img/icons/arrow-left.svg';
+import { ReactComponent as ArrowRight } from '../../../../img/icons/arrow-right.svg';
 import { scroller } from 'react-scroll';
 
 const Wrapper = styled.div({

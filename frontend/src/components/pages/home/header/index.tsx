@@ -1,7 +1,7 @@
 import styled, { useTheme } from 'styled-components';
 import Section from '../../../common/Section';
 import Navigation from './navigation';
-import logo from '../../../../logo/logo_1_dark.svg';
+import logo from '../../../../img/logo/logo_1_dark.svg';
 
 const Grid = styled.div({
     display: 'grid',
