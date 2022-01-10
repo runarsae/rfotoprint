@@ -8,6 +8,7 @@ export const theme: DefaultTheme = {
             light: '#c79835'
         },
         error: '#DD1E1E',
+        success: '#18A813',
         common: {
             black: '#141414',
             white: '#FFFFFF',

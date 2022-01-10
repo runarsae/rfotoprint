@@ -11,6 +11,7 @@ declare module 'styled-components' {
         palette: {
             primary: IPalette;
             error: string;
+            success: string;
             common: {
                 black: string;
                 white: string;

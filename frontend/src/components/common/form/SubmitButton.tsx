@@ -10,14 +10,21 @@ const Input = styled.input((props) => ({
     outline: 0,
     padding: '8px 32px',
     margin: '0 auto',
-    transition: 'background-color ' + props.theme.transitionDuration + 'ms ease-in-out',
+    transition:
+        'background-color ' +
+        props.theme.transitionDuration +
+        'ms ease-in-out, ' +
+        'border-color ' +
+        props.theme.transitionDuration +
+        'ms ease-in-out',
     appearance: 'none',
     fontFamily: 'PoppinsMedium',
     fontSize: '14px',
 
     '@media (hover: hover)': {
         ':hover': {
-            backgroundColor: props.theme.palette.primary.dark
+            backgroundColor: props.theme.palette.primary.dark,
+            borderColor: props.theme.palette.primary.dark
         }
     }
 }));

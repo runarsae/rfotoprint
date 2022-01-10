@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 
 export enum SidebarType {
-    Navigation,
-    PriceList
+    AddProduct,
+    EditProduct
 }
 
 export const sidebarOpenState = atom<boolean>({

@@ -10,7 +10,7 @@ const Container = styled.button<{ size?: Size; selected: boolean }>((props) => (
     height: 'fit-content',
     ...(!props.selected && { cursor: 'pointer' }),
     userSelect: 'none',
-    padding: props.size == 'small' ? '4px 24px' : '8px 32px',
+    padding: props.size == 'small' ? '3px 23px' : '7px 31px',
     outline: 0,
     border: '1px solid ' + props.theme.palette.primary.main,
     backgroundColor: props.selected ? '#ad82261f' : 'transparent',
@@ -46,7 +46,7 @@ export function ToggleButton(props: ToggleButtonProps) {
     const theme = useTheme();
 
     return (
-        <Container selected={props.selected} onClick={props.onClick}>
+        <Container selected={props.selected} onClick={props.onClick} size={props.size}>
             <Typography variant="button" color={theme.palette.primary.main} align="center">
                 {props.children}
             </Typography>
