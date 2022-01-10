@@ -163,7 +163,7 @@ function Footer() {
                 <Line color="dark" />
 
                 <Copyright>
-                    <Typography color={theme.palette.common.white} variant="body3" inline>
+                    <Typography color={theme.palette.text.light} variant="body3">
                         Copyright &copy; {new Date().getFullYear()}
                     </Typography>
                 </Copyright>
