@@ -1,6 +1,6 @@
 import useSize from '@react-hook/size';
 import { useCallback, useRef, useState } from 'react';
-import { Fade, Slide } from 'react-awesome-reveal';
+import { Fade } from 'react-awesome-reveal';
 import styled, { useTheme } from 'styled-components';
 import useWindowDimensions from '../../../../util/windowDimensions';
 import Button from '../../../common/Button';
@@ -134,11 +134,11 @@ function Products() {
 
                 {width >= theme.breakpoints.lg ? (
                     <CardContainer ref={cardRef}>
-                        <Slide triggerOnce direction="up">
+                        <Fade triggerOnce>
                             <Card size="large" shadow>
                                 <Content />
                             </Card>
-                        </Slide>
+                        </Fade>
                     </CardContainer>
                 ) : (
                     <Content />
