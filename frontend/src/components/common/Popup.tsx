@@ -1,13 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { Transition } from 'react-transition-group';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { useTheme } from 'styled-components';
-import { popupOpenState, PopupType, popupTypeState } from '../../../../state/home/popup';
-import { disableScroll, enableScroll } from '../../../../util/toggleScroll';
-import CloseButton from '../../../common/CloseButton';
-import Overlay from '../../../common/Overlay';
-import ProductImagePopup from './ProductImagePopup';
-import RetouchingExamplesPopup from './RetouchingExamplesPopup';
+import { disableScroll, enableScroll } from '../../util/toggleScroll';
+import CloseButton from './CloseButton';
+import Overlay from './Overlay';
 
 const Wrapper = styled.div((props) => ({
     position: 'fixed',
@@ -38,35 +34,38 @@ const popupTransitionStyles: { [id: string]: React.CSSProperties } = {
     entered: { opacity: 1 }
 };
 
-function Popup() {
+interface Props {
+    children: React.ReactNode;
+    open: boolean;
+    setOpen: (open: boolean) => void;
+}
+
+function Popup(props: Props) {
     const theme = useTheme();
 
     const popupRef = useRef(null);
 
-    const [popupOpen, setPopupOpen] = useRecoilState(popupOpenState);
-    const popupType = useRecoilValue(popupTypeState);
-
     useEffect(() => {
-        if (popupOpen) {
+        if (props.open) {
             disableScroll();
         } else {
             enableScroll();
         }
-    }, [popupOpen]);
+    }, [props.open]);
 
     return (
         <>
             <Overlay
-                open={popupOpen}
+                open={props.open}
                 onClose={() => {
-                    setPopupOpen(false);
+                    props.setOpen(false);
                 }}
             />
             <Transition
                 nodeRef={popupRef}
                 mountOnEnter
                 unmountOnExit
-                in={popupOpen}
+                in={props.open}
                 timeout={theme.transitionDuration}
             >
                 {(state) => (
@@ -78,23 +77,15 @@ function Popup() {
                         }}
                         onClick={(e) => {
                             e.stopPropagation();
-                            setPopupOpen(false);
+                            props.setOpen(false);
                         }}
                     >
                         <CloseButton
                             onClick={() => {
-                                setPopupOpen(false);
+                                props.setOpen(false);
                             }}
                         />
-                        <Content>
-                            {popupType == PopupType.ProductImage ? (
-                                <ProductImagePopup />
-                            ) : popupType == PopupType.RetouchingExamples ? (
-                                <RetouchingExamplesPopup />
-                            ) : (
-                                <></>
-                            )}
-                        </Content>
+                        <Content>{props.children}</Content>
                     </Wrapper>
                 )}
             </Transition>
