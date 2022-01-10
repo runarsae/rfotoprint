@@ -65,6 +65,7 @@ const IconButton = styled.button<{ hover?: boolean }>((props) => ({
 interface ProductListItemProps {
     product: Product;
     index: number;
+    deleteProduct: (id: string) => void;
 }
 
 function ProductListItem(props: ProductListItemProps): JSX.Element {
@@ -95,7 +96,11 @@ function ProductListItem(props: ProductListItemProps): JSX.Element {
                             <IconButton hover title="Endre produkt">
                                 <Edit fill={theme.palette.text.dark} />
                             </IconButton>
-                            <IconButton hover title="Slett produkt">
+                            <IconButton
+                                hover
+                                title="Slett produkt"
+                                onClick={() => props.deleteProduct(props.product._id)}
+                            >
                                 <Delete fill={theme.palette.text.dark} />
                             </IconButton>
                         </IconsGrid>

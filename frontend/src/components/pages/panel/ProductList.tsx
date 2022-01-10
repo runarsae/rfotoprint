@@ -1,9 +1,14 @@
 import { useMutation } from 'graphql-hooks';
 import { useEffect, useMemo } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import {
+    useRecoilRefresher_UNSTABLE,
+    useRecoilState,
+    useRecoilValue,
+    useResetRecoilState
+} from 'recoil';
 import styled, { useTheme } from 'styled-components';
-import { EDIT_PRODUCTS_ORDER } from '../../../api/mutations';
+import { DELETE_PRODUCT, EDIT_PRODUCTS_ORDER } from '../../../api/mutations';
 import { DefaultResult, MutationEditProductsOrderArgs, Product } from '../../../api/types';
 import {
     categoryState,
@@ -37,11 +42,14 @@ function ProductList() {
     const resetProductsOrderError = useResetRecoilState(productsOrderErrorState);
 
     const productsQuery = useRecoilValue(productsQueryState);
+    const refreshProductsQuery = useRecoilRefresher_UNSTABLE(productsQueryState);
 
     const [editProductsOrder] = useMutation<
         { editProductsOrder: DefaultResult },
         MutationEditProductsOrderArgs
     >(EDIT_PRODUCTS_ORDER);
+
+    const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
     // On query refresh, update local products state
     useEffect(() => {
@@ -83,11 +91,22 @@ function ProductList() {
         }
     };
 
+    const deleteProductCallback = (id: string) => {
+        deleteProduct({ variables: { _id: id } }).then(() => {
+            refreshProductsQuery();
+        });
+    };
+
     const productList = useMemo(() => {
         return (
             products[category] &&
             products[category].map((product: Product, index: number) => (
-                <ProductListItem key={product._id} product={product} index={index} />
+                <ProductListItem
+                    key={product._id}
+                    product={product}
+                    index={index}
+                    deleteProduct={deleteProductCallback}
+                />
             ))
         );
     }, [products[category]]);
