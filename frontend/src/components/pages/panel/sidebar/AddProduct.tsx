@@ -46,6 +46,13 @@ function AddProduct() {
 
         setConfirmMessage(undefined);
 
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            setErrorMessage('Error: Kunne ikke finne bruker.');
+            return;
+        }
+
         if (!name) {
             setErrorMessage('Vennligst fyll inn varenavn.');
             return;
@@ -53,13 +60,6 @@ function AddProduct() {
 
         if (!image) {
             setErrorMessage('Vennligst last opp bilde.');
-            return;
-        }
-
-        const token = localStorage.getItem('token');
-
-        if (!token) {
-            setErrorMessage('Error: Kunne ikke finne bruker.');
             return;
         }
 
@@ -120,7 +120,7 @@ function AddProduct() {
     return (
         <Wrapper>
             <Typography variant="h2" color={theme.palette.common.white}>
-                Prisliste
+                Ny vare
             </Typography>
 
             <Form onSubmit={handleSubmit}>
