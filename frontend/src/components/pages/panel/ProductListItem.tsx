@@ -5,6 +5,9 @@ import Typography from '../../common/Typography';
 import { ReactComponent as Delete } from '../../../icons/delete.svg';
 import { ReactComponent as Edit } from '../../../icons/edit.svg';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { popupProductImageState } from '../../../state/panel/products';
+import { popupOpenState, PopupType, popupTypeState } from '../../../state/panel/popup';
 
 const ItemWrapper = styled.div((props) => ({
     width: '100%',
@@ -33,7 +36,8 @@ const ItemImage = styled.img({
     width: '40px',
     height: '40px',
     backgroundColor: 'white',
-    objectFit: 'contain'
+    objectFit: 'contain',
+    cursor: 'pointer'
 });
 
 const IconsGrid = styled.div({
@@ -76,6 +80,10 @@ function ProductListItem(props: ProductListItemProps): JSX.Element {
 
     const [dragDisabled, setDragDisabled] = useState(false);
 
+    const setPopupProductImage = useSetRecoilState(popupProductImageState);
+    const setPopupType = useSetRecoilState(popupTypeState);
+    const setPopupOpen = useSetRecoilState(popupOpenState);
+
     return (
         <Draggable draggableId={product._id} index={index} isDragDisabled={dragDisabled}>
             {(provided) => (
@@ -90,6 +98,11 @@ function ProductListItem(props: ProductListItemProps): JSX.Element {
                             alt={product.name}
                             onMouseOver={() => setDragDisabled(true)}
                             onMouseOut={() => setDragDisabled(false)}
+                            onClick={() => {
+                                setPopupProductImage(product.image);
+                                setPopupType(PopupType.ProductImage);
+                                setPopupOpen(true);
+                            }}
                         />
                         <Typography fontSize="14px">{product.name}</Typography>
                         {/* {props.hidden ? (

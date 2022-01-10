@@ -11,8 +11,9 @@ import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../state/
 import PriceList from './sidebar/PriceList';
 import Navigation from './sidebar/Navigation';
 import { popupOpenState, PopupType, popupTypeState } from '../../../state/home/popup';
-import ProductImagePopup from './popup/ProductImagePopup';
+import ProductImagePopup from '../../common/ProductImagePopup';
 import RetouchingExamplesPopup from './popup/RetouchingExamplesPopup';
+import { popupProductImageState } from '../../../state/home/products';
 
 function Home() {
     const [sidebarOpen, setSidebarOpen] = useRecoilState(sidebarOpenState);
@@ -20,6 +21,8 @@ function Home() {
 
     const [popupOpen, setPopupOpen] = useRecoilState(popupOpenState);
     const popupType = useRecoilValue(popupTypeState);
+
+    const popupProductImage = useRecoilValue(popupProductImageState);
 
     return (
         <>
@@ -42,7 +45,7 @@ function Home() {
 
             <Popup open={popupOpen} setOpen={setPopupOpen}>
                 {popupType == PopupType.ProductImage ? (
-                    <ProductImagePopup />
+                    <ProductImagePopup image={popupProductImage} />
                 ) : popupType == PopupType.RetouchingExamples ? (
                     <RetouchingExamplesPopup />
                 ) : (

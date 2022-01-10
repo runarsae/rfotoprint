@@ -89,3 +89,8 @@ export const editProductIdState = atom<string | undefined>({
     key: 'editProductIdState',
     default: undefined
 });
+
+export const popupProductImageState = atom<string | null>({
+    key: 'panelPopupProductImageState',
+    default: null
+});

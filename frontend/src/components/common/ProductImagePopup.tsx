@@ -1,6 +1,4 @@
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { popupProductImageState } from '../../../../state/home/products';
 
 const FullImage = styled.img((props) => ({
     display: 'block',
@@ -13,15 +11,17 @@ const FullImage = styled.img((props) => ({
     boxShadow: 'rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px'
 }));
 
-function ProductImagePopup() {
-    const popupProductImage = useRecoilValue(popupProductImageState);
+interface Props {
+    image: string | null;
+}
 
+function ProductImagePopup(props: Props) {
     return (
         <FullImage
             onClick={(e) => {
                 e.stopPropagation();
             }}
-            src={'/uploads/products/' + popupProductImage}
+            src={'/uploads/products/' + props.image}
             alt="Product"
         />
     );

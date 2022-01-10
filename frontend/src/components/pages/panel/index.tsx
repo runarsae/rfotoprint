@@ -1,9 +1,13 @@
 import { Suspense } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { popupOpenState, PopupType, popupTypeState } from '../../../state/panel/popup';
+import { popupProductImageState } from '../../../state/panel/products';
 import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../state/panel/sidebar';
 import { useAuth } from '../../../util/auth';
 import Button from '../../common/Button';
+import Popup from '../../common/Popup';
+import ProductImagePopup from '../../common/ProductImagePopup';
 import Section from '../../common/Section';
 import Sidebar from '../../common/Sidebar';
 import Typography from '../../common/Typography';
@@ -26,8 +30,12 @@ function Panel() {
 
     const [sidebarOpen, setSidebarOpen] = useRecoilState(sidebarOpenState);
     const sidebarType = useRecoilValue(sidebarTypeState);
-
     const setSidebarType = useSetRecoilState(sidebarTypeState);
+
+    const [popupOpen, setPopupOpen] = useRecoilState(popupOpenState);
+    const popupType = useRecoilValue(popupTypeState);
+
+    const popupProductImage = useRecoilValue(popupProductImageState);
 
     return (
         <>
@@ -71,6 +79,14 @@ function Panel() {
                     <></>
                 )}
             </Sidebar>
+
+            <Popup open={popupOpen} setOpen={setPopupOpen}>
+                {popupType == PopupType.ProductImage ? (
+                    <ProductImagePopup image={popupProductImage} />
+                ) : (
+                    <></>
+                )}
+            </Popup>
         </>
     );
 }
