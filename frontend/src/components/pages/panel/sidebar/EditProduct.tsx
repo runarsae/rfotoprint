@@ -159,7 +159,6 @@ function EditProduct() {
                 setOldImage('');
                 setPrevImage('');
                 setImage(undefined);
-                imageInputRef!.current!.value = '';
                 setCategory(Category.OfficeSupplies);
                 // setInventory('');
             }, theme.transitionDuration);
@@ -195,7 +194,7 @@ function EditProduct() {
                                 <ImageDisplay
                                     src={
                                         prevImage
-                                            ? '/uploads/products/' + prevImage
+                                            ? '/uploads/products/original/' + prevImage
                                             : URL.createObjectURL(image!)
                                     }
                                     alt="Product"

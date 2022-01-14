@@ -46,7 +46,7 @@ function Product(props: Props) {
             <Card containerFill>
                 <Content>
                     <ProductImage
-                        src={'/uploads/products/' + props.product.image}
+                        src={'/uploads/products/272x180/' + props.product.image}
                         alt={props.product.name}
                         onClick={props.viewImage}
                     />

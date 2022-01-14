@@ -9,8 +9,9 @@ import path from 'path';
 import { resolvers } from './resolvers';
 import { schema } from './schema';
 import { AuthRequest, isAuthenticated, requireAuth } from './auth';
-import { existsSync, unlinkSync } from 'fs';
 import { config } from 'dotenv';
+import sharp from 'sharp';
+import { deleteFiles } from './util';
 
 config();
 
@@ -65,34 +66,52 @@ app.use(
 // Endpoint to access files stored at 'uploads/products/'
 app.use('/uploads/products', express.static(path.join(__dirname, 'uploads/products/')));
 
-// Set up storage of files at 'uploads/products/'
-const storage = multer.diskStorage({
-    destination: function (_req, _file, cb) {
-        cb(null, 'uploads/products/');
-    },
-    filename: function (req, _file, cb) {
-        cb(null, req.body.imageId);
-    }
-});
-
+// Set up storage of files
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Endpoint for uploading an image
-app.post('/upload', requireAuth, upload.single('image'), function (_req, res, _next) {
-    res.end();
-});
-
-// Endpoint for deleting an image
-app.delete('/uploads/products/:imageId', requireAuth, function (req, res, _next) {
-    const file = path.join(__dirname, 'uploads/products/' + req.params.imageId);
-
-    if (existsSync(file)) {
-        unlinkSync(file);
-    } else {
-        throw new Error(file + ' does not exist.');
+// Endpoint for uploading an image (three sizes)
+app.post('/upload', requireAuth, upload.single('image'), async function (req, res, _next) {
+    if (req.file) {
+        await sharp(req.file.buffer).toFile(`./uploads/products/original/${req.body.imageId}`);
+        await sharp(req.file.buffer)
+            .resize(40, 40, {
+                fit: 'contain',
+                background: {
+                    r: 255,
+                    g: 255,
+                    b: 255
+                }
+            })
+            .toFile(`./uploads/products/40x40/${req.body.imageId}`);
+        await sharp(req.file.buffer)
+            .resize(272, 180, {
+                fit: 'contain',
+                background: {
+                    r: 255,
+                    g: 255,
+                    b: 255
+                }
+            })
+            .toFile(`./uploads/products/272x180/${req.body.imageId}`);
     }
 
     res.end();
+});
+
+// Endpoint for deleting an image (all sizes)
+app.delete('/uploads/products/:imageId', requireAuth, function (req, _res, _next) {
+    const files = [
+        path.join(__dirname, 'uploads/products/original/' + req.params.imageId),
+        path.join(__dirname, 'uploads/products/40x40/' + req.params.imageId),
+        path.join(__dirname, 'uploads/products/272x180/' + req.params.imageId)
+    ];
+
+    deleteFiles(files, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
 });
 
 // Serve application located in /www folder

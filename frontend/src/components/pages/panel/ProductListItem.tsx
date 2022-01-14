@@ -94,7 +94,7 @@ function ProductListItem(props: ProductListItemProps): JSX.Element {
                 >
                     <ItemWrapper>
                         <ItemImage
-                            src={'uploads/products/' + product.image}
+                            src={'uploads/products/40x40/' + product.image}
                             alt={product.name}
                             onMouseOver={() => setDragDisabled(true)}
                             onMouseOut={() => setDragDisabled(false)}

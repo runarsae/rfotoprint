@@ -104,7 +104,6 @@ function AddProduct() {
                 // Reset values
                 setName('');
                 setImage(undefined);
-                imageInputRef!.current!.value = '';
                 setCategory(Category.OfficeSupplies);
                 // setInventory(undefined);
 

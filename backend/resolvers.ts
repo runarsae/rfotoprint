@@ -1,8 +1,7 @@
 import { db } from './server';
-import { Document, ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { existsSync, unlinkSync } from 'fs';
 import path from 'path';
 import {
     AuthResult,
@@ -12,6 +11,7 @@ import {
     ProductResult,
     ProductsResult
 } from './types';
+import { deleteFiles } from './util';
 
 interface Context {
     auth: boolean;
@@ -346,14 +346,18 @@ export const resolvers = {
                 // Delete from database
                 await db.collection('products').deleteOne({ _id: _id });
 
-                // Delete image
-                const file = path.join(__dirname, 'uploads/products/' + product.image);
+                // Delete images
+                const files = [
+                    path.join(__dirname, 'uploads/products/original/' + product.image),
+                    path.join(__dirname, 'uploads/products/40x40/' + product.image),
+                    path.join(__dirname, 'uploads/products/272x180/' + product.image)
+                ];
 
-                if (existsSync(file)) {
-                    unlinkSync(file);
-                } else {
-                    throw new Error(file + ' does not exist.');
-                }
+                deleteFiles(files, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                });
             } else {
                 throw new Error('Product does not exist.');
             }

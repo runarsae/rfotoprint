@@ -21,7 +21,7 @@ function ProductImagePopup(props: Props) {
             onClick={(e) => {
                 e.stopPropagation();
             }}
-            src={'/uploads/products/' + props.image}
+            src={'/uploads/products/original/' + props.image}
             alt="Product"
         />
     );
