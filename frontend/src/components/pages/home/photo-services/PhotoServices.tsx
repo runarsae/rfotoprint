@@ -1,9 +1,9 @@
 import printing from '../../../../img/photo-services/printing.jpg';
 import passport_photo from '../../../../img/photo-services/passport_photo.jpg';
-import editing from '../../../../img/photo-services/editing.jpg';
+import retouching from '../../../../img/photo-services/retouching.jpg';
 import negatives from '../../../../img/photo-services/negatives.jpg';
 import resize from '../../../../img/photo-services/resize.jpg';
-import scanning from '../../../../img/photo-services/scanning.png';
+import scanning from '../../../../img/photo-services/scanning.jpg';
 import { useSetRecoilState } from 'recoil';
 import { sidebarOpenState, SidebarType, sidebarTypeState } from '../../../../state/home/sidebar';
 import { popupOpenState, PopupType, popupTypeState } from '../../../../state/home/popup';
@@ -64,7 +64,7 @@ function getPhotoServices(): PhotoService[] {
         },
         {
             title: 'Retusjering',
-            image: editing,
+            image: retouching,
             description: (
                 <>
                     Fjerning av bretter, skader, striper og lignende. Se{' '}

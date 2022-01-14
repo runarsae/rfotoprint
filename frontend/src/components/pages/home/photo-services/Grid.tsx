@@ -8,17 +8,14 @@ const Container = styled.div((props) => ({
     display: 'grid',
     gridTemplateColumns: '1fr',
     width: '100%',
-    gap: '24px',
+    gap: '32px',
+    justifyItems: 'center',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        gridTemplateColumns: '1fr 1fr'
+        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))'
     },
 
     [`@media (min-width: ${props.theme.breakpoints.lg}px)`]: {
-        gridTemplateColumns: '1fr 1fr 1fr'
-    },
-
-    [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
         gap: '64px'
     }
 }));

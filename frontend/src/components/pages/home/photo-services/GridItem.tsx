@@ -5,12 +5,13 @@ import Typography from '../../../common/Typography';
 
 const Card = styled.div((props) => ({
     display: 'block',
-    width: '100%',
     position: 'relative',
+    width: '100%',
     height: '380px',
     backgroundColor: 'white',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
+        width: '360px',
         height: '410px'
     }
 }));
