@@ -24,7 +24,7 @@ const Logo = styled.img((props) => ({
     height: '52px',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        height: '80px'
+        height: '90px'
     }
 }));
 
