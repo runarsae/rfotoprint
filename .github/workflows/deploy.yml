@@ -1,8 +1,6 @@
 name: Deploy
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -15,7 +13,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "14.x"
+          node-version: "16.x"
 
       - name: Install yarn
         run: npm install --global yarn
@@ -24,7 +22,7 @@ jobs:
         run: cd backend && yarn install && yarn build
 
       - name: Build frontend
-        run: cd rfotoprint && yarn install && yarn build-linux
+        run: cd frontend && yarn install && yarn build-linux
 
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@3.1.1

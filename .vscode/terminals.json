@@ -12,7 +12,7 @@
       "name": "frontend",
       "focus": true,
       "icon": "device-desktop",
-      "cwd": "[workspaceFolder]/rfotoprint",
+      "cwd": "[workspaceFolder]/frontend",
       "command": "yarn start"
     }
   ]
