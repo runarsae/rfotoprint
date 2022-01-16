@@ -34,7 +34,7 @@ export const productsQuery = selector<ProductsResult>({
     get: async ({ get }) => {
         const category = get(categoryState);
 
-        const response = await fetch('http://localhost:4000/graphql', {
+        const response = await fetch('/graphql', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
