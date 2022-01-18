@@ -21,19 +21,19 @@ function Filter() {
         <ToggleButtonGroup>
             <ToggleButton
                 onClick={() => {
-                    changeCategory(Category.OfficeSupplies);
-                }}
-                selected={category == Category.OfficeSupplies}
-            >
-                Kontorrekvisita
-            </ToggleButton>
-            <ToggleButton
-                onClick={() => {
                     changeCategory(Category.Frames);
                 }}
                 selected={category == Category.Frames}
             >
                 Rammer
+            </ToggleButton>
+            <ToggleButton
+                onClick={() => {
+                    changeCategory(Category.OfficeSupplies);
+                }}
+                selected={category == Category.OfficeSupplies}
+            >
+                Kontorrekvisita
             </ToggleButton>
         </ToggleButtonGroup>
     );

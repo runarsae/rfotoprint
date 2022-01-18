@@ -11,7 +11,7 @@ type PageSize = 8 | 9;
 
 export const categoryState = atom<Category>({
     key: 'categoryState',
-    default: Category.OfficeSupplies
+    default: Category.Frames
 });
 
 export const currentPageState = atom<number>({

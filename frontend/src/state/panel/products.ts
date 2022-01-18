@@ -9,7 +9,7 @@ export enum Category {
 
 export const categoryState = atom<Category>({
     key: 'panelCategoryState',
-    default: Category.OfficeSupplies
+    default: Category.Frames
 });
 
 export type ProductsPerCategory = {
