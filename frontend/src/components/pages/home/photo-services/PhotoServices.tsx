@@ -44,7 +44,7 @@ function getPhotoServices(): PhotoService[] {
             title: 'Lysbilder, negativer og glassplater',
             image: negatives,
             description:
-                'Overføring av lysbilder og negativer til digitale bilder i høy oppløsning.',
+                'Overføring av lysbilder, negativer og glassplater til digitale bilder i høy oppløsning.',
             price: 'Pris etter avtale'
         },
         {
