@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+const Content = styled.div({
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+});
+
 const FullImage = styled.img((props) => ({
     display: 'block',
     backgroundColor: props.theme.palette.common.white,
@@ -17,13 +25,15 @@ interface Props {
 
 function ProductImagePopup(props: Props) {
     return (
-        <FullImage
-            onClick={(e) => {
-                e.stopPropagation();
-            }}
-            src={'/uploads/products/original/' + props.image}
-            alt="Product"
-        />
+        <Content>
+            <FullImage
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+                src={'/uploads/products/original/' + props.image}
+                alt="Product"
+            />
+        </Content>
     );
 }
 

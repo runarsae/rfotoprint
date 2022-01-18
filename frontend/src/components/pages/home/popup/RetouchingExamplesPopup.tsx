@@ -5,9 +5,13 @@ import after1 from '../../../../img/retouching-examples/after-1.jpg';
 
 const Wrapper = styled.div((props) => ({
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    minHeight: '100%',
+    height: 'auto',
     maxWidth: '1080px',
+    margin: '0 auto',
     flexDirection: 'column',
     userSelect: 'none',
     gap: '20px',
