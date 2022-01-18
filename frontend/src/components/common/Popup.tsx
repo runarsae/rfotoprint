@@ -21,15 +21,6 @@ const Wrapper = styled.div((props) => ({
     }
 }));
 
-const Content = styled.div({
-    width: '100%',
-    minHeight: '100%',
-    height: 'auto',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-});
-
 const popupTransitionStyles: { [id: string]: React.CSSProperties } = {
     entered: { opacity: 1 }
 };
@@ -85,7 +76,7 @@ function Popup(props: Props) {
                                 props.setOpen(false);
                             }}
                         />
-                        <Content>{props.children}</Content>
+                        {props.children}
                     </Wrapper>
                 )}
             </Transition>
