@@ -48,7 +48,7 @@ function Navigation(): JSX.Element {
 
     return (
         <>
-            {width >= theme.breakpoints.lg ? (
+            {width >= theme.breakpoints.xl ? (
                 <Wrapper>
                     <NavigationItem section="Fototjenester" />
                     <NavigationItem section="Varer" />
