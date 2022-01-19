@@ -25,7 +25,7 @@ function Navigation() {
     const [sidebarOpen, setSidebarOpen] = useRecoilState(sidebarOpenState);
 
     useEffect(() => {
-        if (sidebarOpen && width >= theme.breakpoints.lg) {
+        if (sidebarOpen && width >= theme.breakpoints.xl) {
             setSidebarOpen(false);
         }
     }, [width]);
