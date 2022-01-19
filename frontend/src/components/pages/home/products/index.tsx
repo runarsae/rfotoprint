@@ -28,7 +28,7 @@ const Container = styled.div<{ imageHeight?: number; cardHeight?: number }>((pro
 const Image = styled.img((props) => ({
     display: 'block',
     width: '100%',
-    height: '100%',
+    height: 'auto',
     objectFit: 'cover',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
 
