@@ -8,10 +8,10 @@ const Content = styled.div((props) => ({
     width: '100%',
     height: '100%',
     display: 'grid',
-    gridTemplateRows: '120px 17px 44px',
+    gridTemplateRows: '120px 17px minmax(43px, auto)',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        gridTemplateRows: '200px 17px 50px'
+        gridTemplateRows: '200px 17px minmax(50px, auto)'
     }
 }));
 
@@ -31,7 +31,7 @@ const ProductImage = styled.img((props) => ({
 
 const Title = styled.div({
     paddingTop: '8px',
-    overflow: 'hidden'
+    alignSelf: 'center'
 });
 
 interface Props {
@@ -42,25 +42,23 @@ interface Props {
 function Product(props: Props) {
     const theme = useTheme();
     return (
-        <div>
-            <Card containerFill>
-                <Content>
-                    <ProductImage
-                        src={'/uploads/products/272x180/' + props.product.image}
-                        alt={props.product.name}
-                        onClick={props.viewImage}
-                    />
+        <Card containerFill>
+            <Content>
+                <ProductImage
+                    src={'/uploads/products/272x180/' + props.product.image}
+                    alt={props.product.name}
+                    onClick={props.viewImage}
+                />
 
-                    <Line />
+                <Line />
 
-                    <Title>
-                        <Typography variant="body3" align="center" color={theme.palette.text.dark}>
-                            {props.product.name}
-                        </Typography>
-                    </Title>
-                </Content>
-            </Card>
-        </div>
+                <Title>
+                    <Typography variant="body3" align="center" color={theme.palette.text.dark}>
+                        {props.product.name}
+                    </Typography>
+                </Title>
+            </Content>
+        </Card>
     );
 }
 
