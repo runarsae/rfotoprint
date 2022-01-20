@@ -12,10 +12,14 @@ const Container = styled.div((props) => ({
     justifyItems: 'center',
 
     [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
-        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))'
+        gridTemplateColumns: '1fr 1fr'
     },
 
     [`@media (min-width: ${props.theme.breakpoints.lg}px)`]: {
+        gridTemplateColumns: '1fr 1fr 1fr'
+    },
+
+    [`@media (min-width: ${props.theme.breakpoints.xl}px)`]: {
         gap: '64px'
     }
 }));
