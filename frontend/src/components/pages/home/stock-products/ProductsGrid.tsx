@@ -16,6 +16,7 @@ import { Fade } from 'react-awesome-reveal';
 const Grid = styled.div((props) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
+    gridAutoRows: 'minmax(min-content, max-content)',
     gap: '24px',
     width: '100%',
 
