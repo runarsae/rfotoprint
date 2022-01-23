@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const Content = styled.div({
@@ -8,8 +9,8 @@ const Content = styled.div({
     justifyContent: 'center'
 });
 
-const FullImage = styled.img((props) => ({
-    display: 'block',
+const FullImage = styled.img<{ loaded: boolean }>((props) => ({
+    display: props.loaded ? 'block' : 'none',
     backgroundColor: props.theme.palette.common.white,
     padding: '20px',
     maxWidth: '100%',
@@ -24,14 +25,20 @@ interface Props {
 }
 
 function ProductImagePopup(props: Props) {
+    const [loaded, setLoaded] = useState<boolean>(false);
+
     return (
         <Content>
             <FullImage
+                loaded={loaded}
                 onClick={(e) => {
                     e.stopPropagation();
                 }}
                 src={'/uploads/products/original/' + props.image}
                 alt="Product"
+                onLoad={() => {
+                    setLoaded(true);
+                }}
             />
         </Content>
     );
