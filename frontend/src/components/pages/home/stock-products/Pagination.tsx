@@ -1,10 +1,6 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValueLoadable } from 'recoil';
 import styled from 'styled-components';
-import {
-    currentPageState,
-    pageCountState,
-    productsErrorState
-} from '../../../../state/home/products';
+import { currentPageState, pageCountState } from '../../../../state/home/products';
 import Typography from '../../../common/Typography';
 import IconButton from '../../../common/IconButton';
 import { ReactComponent as ArrowLeft } from '../../../../img/icons/arrow-left.svg';
@@ -21,8 +17,7 @@ const Wrapper = styled.div({
 });
 
 function Pagination() {
-    const pageCount = useRecoilValue(pageCountState);
-    const productsError = useRecoilValue(productsErrorState);
+    const pageCountLoadable = useRecoilValueLoadable(pageCountState);
 
     const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
 
@@ -49,7 +44,7 @@ function Pagination() {
         scroll();
 
         setCurrentPage((prevPage) => {
-            if (prevPage < pageCount) {
+            if (prevPage < pageCountLoadable.contents) {
                 return prevPage + 1;
             }
 
@@ -59,7 +54,7 @@ function Pagination() {
 
     return (
         <>
-            {!productsError && pageCount != 0 && (
+            {pageCountLoadable.state == 'hasValue' && pageCountLoadable.contents != 0 && (
                 <Wrapper>
                     <IconButton
                         disabled={currentPage == 1}
@@ -69,10 +64,10 @@ function Pagination() {
                         <ArrowLeft />
                     </IconButton>
                     <Typography variant="body2">
-                        {currentPage} / {pageCount}
+                        {currentPage} / {pageCountLoadable.contents}
                     </Typography>
                     <IconButton
-                        disabled={currentPage == pageCount}
+                        disabled={currentPage == pageCountLoadable.contents}
                         onClick={nextPage}
                         title="Neste side"
                     >

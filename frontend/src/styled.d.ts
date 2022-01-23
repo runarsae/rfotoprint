@@ -30,6 +30,10 @@ declare module 'styled-components' {
                 dark: string;
                 light: string;
             };
+            skeleton: {
+                background: string;
+                highlight: string;
+            };
         };
         breakpoints: {
             xxs: number;
