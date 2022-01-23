@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { useTheme } from 'styled-components';
 import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
@@ -20,17 +19,8 @@ function StockProducts() {
             </div>
 
             <Filter />
-
-            <Suspense
-                fallback={
-                    <Typography variant="body1" align="center">
-                        Laster..
-                    </Typography>
-                }
-            >
-                <ProductsGrid />
-                <Pagination />
-            </Suspense>
+            <ProductsGrid />
+            <Pagination />
         </Section>
     );
 }

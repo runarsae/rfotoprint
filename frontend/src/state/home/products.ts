@@ -70,8 +70,14 @@ export const productsQuery = selector<ProductsResult>({
 
 export const productsState = selector<Product[]>({
     key: 'productsState',
-    get: ({ get }) => {
-        const products = get(productsQuery).data?.products;
+    get: async ({ get }) => {
+        const query = get(productsQuery);
+
+        if (!query.success) {
+            throw new Error(query.message as string);
+        }
+
+        const products = query.data?.products;
         return products ? (products as Product[]) : [];
     }
 });
@@ -79,19 +85,14 @@ export const productsState = selector<Product[]>({
 export const pageCountState = selector<number>({
     key: 'pageCountState',
     get: ({ get }) => {
-        const pageCount = get(productsQuery).data?.pageCount;
-        return pageCount ? pageCount : 0;
-    }
-});
-
-export const productsErrorState = selector<string | undefined>({
-    key: 'productsErrorState',
-    get: ({ get }) => {
         const query = get(productsQuery);
 
         if (!query.success) {
-            return query.message as string;
+            throw new Error(query.message as string);
         }
+
+        const pageCount = query.data?.pageCount;
+        return pageCount ? pageCount : 0;
     }
 });
 

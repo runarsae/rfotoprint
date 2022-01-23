@@ -1,17 +1,17 @@
 import styled, { useTheme } from 'styled-components';
 import Product from './Product';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import {
     pageSizeState,
     popupProductImageState,
-    productsErrorState,
     productsState
 } from '../../../../state/home/products';
 import Typography from '../../../common/Typography';
 import { popupOpenState, PopupType, popupTypeState } from '../../../../state/home/popup';
 import useWindowDimensions from '../../../../util/windowDimensions';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
+import Skeleton from 'react-loading-skeleton';
 
 const Grid = styled.div((props) => ({
     display: 'grid',
@@ -38,10 +38,9 @@ function ProductsGrid() {
 
     const { width } = useWindowDimensions();
 
-    const products = useRecoilValue(productsState);
-    const productsError = useRecoilValue(productsErrorState);
+    const productsLoadable = useRecoilValueLoadable(productsState);
 
-    const setPageSize = useSetRecoilState(pageSizeState);
+    const [pageSize, setPageSize] = useRecoilState(pageSizeState);
 
     const setPopupProductImage = useSetRecoilState(popupProductImageState);
     const setPopupType = useSetRecoilState(popupTypeState);
@@ -60,19 +59,38 @@ function ProductsGrid() {
     const [loadCount, setLoadCount] = useState<number>(0);
 
     useEffect(() => {
-        setLoadCount((prevCount) => prevCount + 1);
-    }, [products]);
+        if (productsLoadable.state == 'hasValue') setLoadCount((prevCount) => prevCount + 1);
+    }, [productsLoadable.state]);
+
+    const loader = useMemo(
+        () =>
+            Array(pageSize)
+                .fill(undefined)
+                .map((_, i) => (
+                    <Skeleton
+                        key={i}
+                        width="100%"
+                        height={width >= theme.breakpoints.sm ? '307px' : '220px'}
+                        baseColor={theme.palette.skeleton.background}
+                        highlightColor={theme.palette.skeleton.highlight}
+                        borderRadius={0}
+                    />
+                )),
+        [width, pageSize]
+    );
 
     return (
         <>
-            {productsError ? (
+            {productsLoadable.state == 'loading' ? (
+                <Grid>{loader}</Grid>
+            ) : productsLoadable.state == 'hasError' ? (
                 <Typography align="center" color={theme.palette.error}>
-                    {productsError}
+                    {productsLoadable.contents.message}
                 </Typography>
-            ) : products && products.length > 0 ? (
+            ) : productsLoadable.state == 'hasValue' && productsLoadable.contents.length > 0 ? (
                 <Grid>
                     <Fade triggerOnce cascade damping={0.05} duration={loadCount == 1 ? 1000 : 0}>
-                        {products.map((product, index) => (
+                        {productsLoadable.contents.map((product, index) => (
                             <Product
                                 key={index}
                                 product={product}

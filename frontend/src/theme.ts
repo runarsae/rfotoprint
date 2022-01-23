@@ -26,6 +26,10 @@ export const theme: DefaultTheme = {
         inputBackground: {
             dark: '#000000',
             light: '#e3e3e3'
+        },
+        skeleton: {
+            background: '#EEEEEE',
+            highlight: '#dddddd'
         }
     },
     breakpoints: {
