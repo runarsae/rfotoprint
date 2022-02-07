@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 const IconButton = styled.button<{ color?: string }>((props) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '48px',
     height: '48px',
-    padding: '11px',
     borderRadius: '50%',
     cursor: 'pointer',
     backgroundColor: 'transparent',

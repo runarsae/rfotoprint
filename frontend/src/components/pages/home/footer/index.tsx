@@ -6,6 +6,7 @@ import Section from '../../../common/Section';
 import Typography from '../../../common/Typography';
 import { ReactComponent as AuraAvis } from '../../../../img/icons/aura-avis.svg';
 import { ReactComponent as Facebook } from '../../../../img/icons/facebook.svg';
+import { ReactComponent as TikTok } from '../../../../img/icons/tiktok.svg';
 import { ReactComponent as Mail } from '../../../../img/icons/mail.svg';
 import { ReactComponent as Phone } from '../../../../img/icons/phone.svg';
 import { ReactComponent as Pin } from '../../../../img/icons/pin.svg';
@@ -141,7 +142,16 @@ function Footer() {
                                     );
                                 }}
                             >
-                                <Facebook />
+                                <Facebook width={24} height={24} />
+                            </IconButton>
+                            <IconButton
+                                title="TikTok"
+                                color={theme.palette.common.white}
+                                onClick={() => {
+                                    window.open('https://www.tiktok.com/@rosslandfotoprint');
+                                }}
+                            >
+                                <TikTok width={18} height={18} />
                             </IconButton>
                             <IconButton
                                 title="Aura Avis"
@@ -150,7 +160,7 @@ function Footer() {
                                     window.open('https://www.auraavis.no/5-5-276059');
                                 }}
                             >
-                                <AuraAvis />
+                                <AuraAvis width={24} height={24} />
                             </IconButton>
                         </MediaWrapper>
                     </ContentItem>
