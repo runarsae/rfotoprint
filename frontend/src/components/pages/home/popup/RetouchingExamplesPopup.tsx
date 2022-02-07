@@ -2,6 +2,8 @@ import styled, { useTheme } from 'styled-components';
 import Typography from '../../../common/Typography';
 import before1 from '../../../../img/retouching-examples/before-1.jpg';
 import after1 from '../../../../img/retouching-examples/after-1.jpg';
+import before2 from '../../../../img/retouching-examples/before-2.jpg';
+import after2 from '../../../../img/retouching-examples/after-2.jpg';
 
 const Wrapper = styled.div((props) => ({
     display: 'flex',
@@ -60,6 +62,10 @@ const Label = styled.div((props) => ({
 }));
 
 const retouchingExamples: { before: string; after: string }[] = [
+    {
+        before: before2,
+        after: after2
+    },
     {
         before: before1,
         after: after1
