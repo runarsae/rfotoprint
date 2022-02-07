@@ -61,7 +61,7 @@ function Pagination() {
                         onClick={previousPage}
                         title="Forrige side"
                     >
-                        <ArrowLeft />
+                        <ArrowLeft width={24} height={24} />
                     </IconButton>
                     <Typography variant="body2">
                         {currentPage} / {pageCountLoadable.contents}
@@ -71,7 +71,7 @@ function Pagination() {
                         onClick={nextPage}
                         title="Neste side"
                     >
-                        <ArrowRight />
+                        <ArrowRight width={24} height={24} />
                     </IconButton>
                 </Wrapper>
             )}
