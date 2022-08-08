@@ -43,8 +43,7 @@ function getPhotoServices(): PhotoService[] {
         {
             title: 'Lysbilder, negativer og glassplater',
             image: negatives,
-            description:
-                'Overføring av lysbilder, negativer og glassplater til digitale bilder i høy oppløsning.',
+            description: 'Skann av lysbilder, negativer og glassplater.',
             price: 'Pris etter avtale'
         },
         {
@@ -79,7 +78,7 @@ function getPhotoServices(): PhotoService[] {
                     .
                 </>
             ),
-            price: 'Pris etter avtale, fra kr 65,-'
+            price: 'Pris etter avtale, fra kr 75,-'
         }
     ];
 }
