@@ -71,30 +71,30 @@ function PriceList(): JSX.Element {
                             <Td align="left" color={theme.palette.common.white}>
                                 10x13 / 10x15
                             </Td>
+                            <Td>5,-</Td>
+                            <Td>4,50</Td>
                             <Td>4,-</Td>
                             <Td>3,50</Td>
                             <Td>3,-</Td>
-                            <Td>2,50</Td>
-                            <Td>2,-</Td>
                         </tr>
                         <tr>
                             <Td align="left" color={theme.palette.common.white}>
                                 10x20 / 10x21
                             </Td>
+                            <Td>15,-</Td>
                             <Td>12,-</Td>
                             <Td>10,-</Td>
                             <Td>8,-</Td>
                             <Td>6,-</Td>
-                            <Td>5,-</Td>
                         </tr>
                         <tr>
                             <Td align="left" color={theme.palette.common.white}>
                                 13x13 / 15x15
                             </Td>
+                            <Td>25,-</Td>
                             <Td>20,-</Td>
                             <Td>15,-</Td>
                             <Td>10,-</Td>
-                            <Td>9,-</Td>
                             <Td>8,-</Td>
                         </tr>
                     </tbody>
@@ -134,43 +134,43 @@ function PriceList(): JSX.Element {
                             <Td align="left" color={theme.palette.common.white}>
                                 13x18 / 15x20
                             </Td>
-                            <Td>45,-</Td>
+                            <Td>75,-</Td>
+                            <Td>50,-</Td>
                             <Td>40,-</Td>
-                            <Td>35,-</Td>
                             <Td>30,-</Td>
                         </tr>
                         <tr>
                             <Td align="left" color={theme.palette.common.white}>
                                 18x18 / 20x20
                             </Td>
-                            <Td>60,-</Td>
+                            <Td>95,-</Td>
+                            <Td>75,-</Td>
+                            <Td>65,-</Td>
                             <Td>55,-</Td>
-                            <Td>50,-</Td>
-                            <Td>45,-</Td>
                         </tr>
                         <tr>
                             <Td align="left" color={theme.palette.common.white}>
                                 18x24
                             </Td>
+                            <Td>150,-</Td>
+                            <Td>125,-</Td>
+                            <Td>100,-</Td>
                             <Td>75,-</Td>
-                            <Td>70,-</Td>
-                            <Td>65,-</Td>
-                            <Td>60,-</Td>
                         </tr>
                         <tr>
                             <Td align="left" color={theme.palette.common.white}>
                                 20x25 / 20x30
                             </Td>
-                            <Td>95,-</Td>
-                            <Td>90,-</Td>
-                            <Td>85,-</Td>
-                            <Td>80,-</Td>
+                            <Td>195,-</Td>
+                            <Td>175,-</Td>
+                            <Td>155,-</Td>
+                            <Td>125,-</Td>
                         </tr>
                         <tr>
                             <Td align="left" color={theme.palette.common.white}>
                                 30x40
                             </Td>
-                            <Td>175,-</Td>
+                            <Td>295,-</Td>
                         </tr>
                     </tbody>
                 </Table>
