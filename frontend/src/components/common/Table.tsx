@@ -5,18 +5,29 @@ const TableWrapper = styled.div({
     overflowX: 'auto'
 });
 
-const Table = styled.table((props) => ({
+const Table = styled.table<{ dark?: boolean }>((props) => ({
     width: '100%',
     textAlign: 'center',
     borderCollapse: 'collapse',
     whiteSpace: 'nowrap',
 
-    'th, td': {
-        padding: '8px'
+    th: {
+        padding: '8px',
+        borderBottom: `1px solid ${
+            props.dark
+                ? props.theme.palette.horizontalLine.dark
+                : props.theme.palette.horizontalLine.light
+        }`,
+        color: props.dark ? props.theme.palette.common.white : props.theme.palette.common.black
+    },
+
+    td: {
+        padding: '8px',
+        color: props.dark ? props.theme.palette.text.light : props.theme.palette.text.dark
     },
 
     'tr:nth-child(even)': {
-        backgroundColor: '#1b1b1b'
+        backgroundColor: props.dark ? '#1b1b1b' : 'none'
     }
 }));
 
@@ -25,8 +36,6 @@ const Th = styled.th<{
     fitContent?: boolean;
 }>((props) => ({
     fontWeight: 'normal',
-    color: props.theme.palette.common.white,
-    borderBottom: '1px solid' + props.theme.palette.horizontalLine.dark,
     textAlign: props.align ? props.align : 'center',
     width: props.fitContent ? '1%' : 'auto'
 }));
@@ -38,7 +47,7 @@ const Td = styled.td<{
 }>((props) => ({
     textAlign: props.align ? props.align : 'center',
     width: props.fitContent ? '1%' : 'auto',
-    color: props.color ? props.color : props.theme.palette.text.light
+    ...(props.color && { color: props.color + ' !important' })
 }));
 
 export { TableWrapper, Table, Th, Td };

@@ -37,9 +37,13 @@ const Body1 = styled.p((props) => ({
     }
 }));
 
-const Body2 = styled.p({
-    fontSize: '16px'
-});
+const Body2 = styled.p((props) => ({
+    fontSize: '14px',
+
+    [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
+        fontSize: '16px'
+    }
+}));
 
 const Body3 = styled.p((props) => ({
     fontSize: '12px',
@@ -49,10 +53,14 @@ const Body3 = styled.p((props) => ({
     }
 }));
 
-const Button = styled.p({
+const Button = styled.p((props) => ({
     fontFamily: 'PoppinsMedium',
-    fontSize: '16px'
-});
+    fontSize: '14px',
+
+    [`@media (min-width: ${props.theme.breakpoints.sm}px)`]: {
+        fontSize: '16px'
+    }
+}));
 
 const Signature = styled.p({
     fontFamily: 'SacramentoRegular',

@@ -33,7 +33,7 @@ function PriceList(): JSX.Element {
             </Typography>
 
             <TableWrapper>
-                <Table>
+                <Table dark>
                     <thead>
                         <tr>
                             <Th align="left" fitContent>
@@ -101,7 +101,7 @@ function PriceList(): JSX.Element {
                 </Table>
             </TableWrapper>
             <TableWrapper>
-                <Table>
+                <Table dark>
                     <thead>
                         <tr>
                             <Th align="left" fitContent>
