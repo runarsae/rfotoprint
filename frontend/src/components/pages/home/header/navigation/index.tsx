@@ -50,7 +50,7 @@ function Navigation(): JSX.Element {
         <>
             {width >= theme.breakpoints.xl ? (
                 <Wrapper>
-                    <NavigationItem section="Fototjenester" />
+                    <NavigationItem section="Tjenester" />
                     <NavigationItem section="Varer" />
                     <NavigationItem section="Kontakt" variant="button" />
                 </Wrapper>

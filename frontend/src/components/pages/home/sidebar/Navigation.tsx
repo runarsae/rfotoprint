@@ -33,7 +33,7 @@ function Navigation() {
     return (
         <Wrapper>
             <NavigationItem
-                section="Fototjenester"
+                section="Tjenester"
                 color="light"
                 onClick={() => {
                     setSidebarOpen(false);

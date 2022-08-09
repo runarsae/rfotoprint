@@ -2,7 +2,7 @@ import Footer from './footer';
 import Header from './header';
 import Introduction from './introduction';
 import Sidebar from '../../common/Sidebar';
-import PhotoServices from './photo-services';
+import Services from './services';
 import Popup from '../../common/Popup';
 import Products from './products';
 import StockProducts from './stock-products';
@@ -28,7 +28,7 @@ function Home() {
         <>
             <Header />
             <Introduction />
-            <PhotoServices />
+            <Services />
             <Products />
             <StockProducts />
             <Footer />
