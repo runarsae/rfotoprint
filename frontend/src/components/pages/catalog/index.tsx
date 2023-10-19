@@ -10,7 +10,7 @@ const IFrame = styled.iframe`
 function Catalog() {
     return (
         <IFrame
-            src="https://ekstranett.emo.no/kataloger/katalog1/"
+            src="https://publikasjon.emo.no/kontorkatalogen-201819/"
             title="Kontorkatalogen"
             referrerPolicy="no-referrer"
         />
